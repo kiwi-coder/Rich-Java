@@ -17,4 +17,14 @@ repositories {
 
 dependencies {
 	testCompile 'junit:junit:4.10'
+	testCompile 'com.github.stefanbirkner:system-rules:1.2.0'
+}
+
+tasks.withType(Compile) {
+	options.encoding = "UTF-8"
+}
+
+task rich(dependsOn: 'jar', type: JavaExec) {
+	main = 'Rich'
+	classpath = files(new File(libsDir, archivesBaseName + ".jar"))
 }

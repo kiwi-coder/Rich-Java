@@ -2,6 +2,7 @@ public class Player {
     private int position;
     private String name;
     private Map map;
+    private int money;
 
     public Player(Map map) {
         this.map = map;
@@ -32,4 +33,11 @@ public class Player {
         return String.valueOf(name.charAt(0)).toUpperCase();
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
+    }
 }

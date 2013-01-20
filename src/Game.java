@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Game {
@@ -7,12 +8,11 @@ public class Game {
     private final int MAX_INIT_MONEY = 50000;
     private int initPlayerMoney = DEFAULT_INIT_MONEY;
     private Scanner scanner;
-    private ArrayList<Player> players;
+    private List<Player> players = new ArrayList();;
     private Map map;
 
     public Game(Map map) {
         scanner = new Scanner(System.in);
-        players = new ArrayList();
         this.map = map;
     }
 
@@ -93,7 +93,7 @@ public class Game {
         player.setName(name);
     }
 
-    public ArrayList<Player> getPlayers() {
+    public List<Player> getPlayers() {
         return players;
     }
 }

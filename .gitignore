@@ -2,4 +2,6 @@
 out
 build
 lib
-Rich-Java.iws
+*.iws
+Rich-Java.ipr
+Rich-Java.iml

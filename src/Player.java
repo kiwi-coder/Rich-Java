@@ -6,6 +6,7 @@ public class Player {
 
     public Player(Map map) {
         this.map = map;
+        map.addPlayer(this);
     }
 
     public void move(int steps) {

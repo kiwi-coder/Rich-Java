@@ -23,7 +23,8 @@ public class GameTest {
 
     @Before
     public void setUp() throws Exception {
-        game = new Game();
+        Map DUMMY_MAP = new Map(10, 10);
+        game = new Game(DUMMY_MAP);
     }
 
     @Test

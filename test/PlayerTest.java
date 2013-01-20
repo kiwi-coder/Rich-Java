@@ -5,14 +5,16 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class PlayerTest {
-    private final int START_POSITION = 0;
     private Player player;
-    private final int MAP_SIZE = 70;
+    private Map map;
+    private final int MAP_SIZE = TestHelper.simpleMap().size();
+    private final int START_POSITION = 0;
     private final int LAST_POSITION = MAP_SIZE - 1;
 
     @Before
     public void setUp() {
-        player = new Player(new Map(MAP_SIZE));
+        map = TestHelper.simpleMap();
+        player = new Player(map);
     }
 
     @Test

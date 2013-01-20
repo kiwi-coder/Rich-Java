@@ -10,10 +10,10 @@ public class Game {
     private ArrayList<Player> players;
     private Map map;
 
-    public Game() {
+    public Game(Map map) {
         scanner = new Scanner(System.in);
-        players = new ArrayList<>();
-        map = new Map(70);
+        players = new ArrayList();
+        this.map = map;
     }
 
     public void initPlayerMoney() {

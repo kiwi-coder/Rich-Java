@@ -1,5 +1,5 @@
 public class Player {
-    private int position;
+    private int siteIndex;
     private String name;
     private Map map;
     private int money;
@@ -9,17 +9,17 @@ public class Player {
         map.addPlayer(this);
     }
 
-    public void move(int steps) {
-        position += steps;
-        position %= map.size();
+    public void forward(int steps) {
+        siteIndex += steps;
+        siteIndex %= map.size();
     }
 
-    public int getPosition() {
-        return position;
+    public int getSiteIndex() {
+        return siteIndex;
     }
 
-    public void setPosition(int position) {
-        this.position = position;
+    public void setSiteIndex(int siteIndex) {
+        this.siteIndex = siteIndex;
     }
 
     public void setName(String name) {

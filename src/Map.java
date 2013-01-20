@@ -3,43 +3,43 @@ import java.util.*;
 public class Map {
     private int width;
     private int height;
-    private ArrayList<String> positions = new ArrayList();
+    private ArrayList<Site> sites = new ArrayList();
     private ArrayList<Player> players = new ArrayList();
 
     public Map(int width, int height) {
         this.width = width;
         this.height = height;
-        for (int i = 0; i < size(); i++) positions.add(" ");
+        for (int i = 0; i < size(); i++) sites.add(new Site(" "));
     }
 
     public int size() {
         return 2 * (width + height) - 4;
     }
 
-    public void setPositionDisplay(int index, String display) {
-        positions.set(index, display);
+    public void setSite(int index, Site site) {
+        sites.set(index, site);
     }
 
     public String display() {
         StringBuilder[] lines = initEmptyDisplayMap();
-        displayPositions(lines);
+        displaySites(lines);
         displayPlayers(lines);
         return concatenate(lines);
     }
 
     private void displayPlayers(StringBuilder[] lines) {
         for (Player player : players) {
-            setPositionDisplay(lines, player.getPosition(), player.display());
+            setSiteDisplay(lines, player.getSiteIndex(), player.display());
         }
     }
 
-    private void setPositionDisplay(StringBuilder[] lines, int position, String display) {
-        lines[getHeight(position)].setCharAt(getWidth(position), display.charAt(0));
+    private void setSiteDisplay(StringBuilder[] lines, int siteIndex, String display) {
+        lines[getHeight(siteIndex)].setCharAt(getWidth(siteIndex), display.charAt(0));
     }
 
-    private void displayPositions(StringBuilder[] lines) {
+    private void displaySites(StringBuilder[] lines) {
         for (int index = 0; index < size(); index++) {
-            setPositionDisplay(lines, index, positions.get(index));
+            setSiteDisplay(lines, index, sites.get(index).toString());
         }
     }
 
@@ -83,7 +83,7 @@ public class Map {
 
     private String createSpacesLine() {
         StringBuilder result = new StringBuilder();
-        for (int i = 0; isTop(i); i++) result.append(" ");
+        for (int i = 0; i < width; i++) result.append(" ");
         result.append("\n");
         return result.toString();
     }

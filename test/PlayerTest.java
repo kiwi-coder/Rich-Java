@@ -8,8 +8,8 @@ public class PlayerTest {
     private Player player;
     private Map map;
     private final int MAP_SIZE = TestHelper.simpleMap().size();
-    private final int START_POSITION = 0;
-    private final int LAST_POSITION = MAP_SIZE - 1;
+    private final int FIRST_SITE_INDEX = 0;
+    private final int LAST_SITE_INDEX = MAP_SIZE - 1;
 
     @Before
     public void setUp() {
@@ -19,16 +19,16 @@ public class PlayerTest {
 
     @Test
     public void should_return_3_after_player_move_3_steps_from_0() {
-        player.setPosition(0);
-        player.move(3);
-        assertThat(player.getPosition(), is(3));
+        player.setSiteIndex(0);
+        player.forward(3);
+        assertThat(player.getSiteIndex(), is(3));
     }
 
     @Test
-    public void should_player_go_back_to_starting_position_from_last_position() {
-        player.setPosition(LAST_POSITION);
-        player.move(1);
-        assertThat(player.getPosition(), is(START_POSITION));
+    public void should_player_go_back_to_starting_site_from_last_site() {
+        player.setSiteIndex(LAST_SITE_INDEX);
+        player.forward(1);
+        assertThat(player.getSiteIndex(), is(FIRST_SITE_INDEX));
     }
 
     @Test

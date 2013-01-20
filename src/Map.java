@@ -29,13 +29,17 @@ public class Map {
 
     private void displayPlayers(StringBuilder[] lines) {
         for (Player player : players) {
-            lines[getHeight(player.getPosition())].setCharAt(getWidth(player.getPosition()), player.display().charAt(0));
+            setPositionDisplay(lines, player.getPosition(), player.display());
         }
+    }
+
+    private void setPositionDisplay(StringBuilder[] lines, int position, String display) {
+        lines[getHeight(position)].setCharAt(getWidth(position), display.charAt(0));
     }
 
     private void displayPositions(StringBuilder[] lines) {
         for (int index = 0; index < size(); index++) {
-            lines[getHeight(index)].setCharAt(getWidth(index), positions.get(index).charAt(0));
+            setPositionDisplay(lines, index, positions.get(index));
         }
     }
 

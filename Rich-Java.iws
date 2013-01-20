@@ -16,7 +16,7 @@
     <file path="/Dummy.txt" changelist="73a48af0-90e6-4d9e-bec3-0913811c95ea" time="1358598328538" ignored="false" />
     <file path="/IllegalUserInputException.java" changelist="73a48af0-90e6-4d9e-bec3-0913811c95ea" time="1358598915959" ignored="false" />
     <file path="/MapTest.java" changelist="73a48af0-90e6-4d9e-bec3-0913811c95ea" time="1358674725623" ignored="false" />
-    <file path="/Map.java" changelist="73a48af0-90e6-4d9e-bec3-0913811c95ea" time="1358675130666" ignored="false" />
+    <file path="/Map.java" changelist="73a48af0-90e6-4d9e-bec3-0913811c95ea" time="1358682719901" ignored="false" />
     <file path="/PlayerTest.java" changelist="73a48af0-90e6-4d9e-bec3-0913811c95ea" time="1358674234887" ignored="false" />
     <file path="/Player.java" changelist="73a48af0-90e6-4d9e-bec3-0913811c95ea" time="1358674482677" ignored="false" />
     <file path="/Rich-Java.ipr" changelist="73a48af0-90e6-4d9e-bec3-0913811c95ea" time="1358680948295" ignored="false" />
@@ -102,10 +102,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Map.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Map.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Map.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="86" column="61" selection-start="2711" selection-end="2711" vertical-scroll-proportion="0.0">
+            <state line="93" column="1" selection-start="2860" selection-end="2860" vertical-scroll-proportion="0.6298701">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Rich-Java.iws" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Rich-Java.iws">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="58" column="21" selection-start="3713" selection-end="3713" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -129,10 +138,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MapTest.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="MapTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/MapTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="75" selection-start="916" selection-end="916" vertical-scroll-proportion="0.8149351">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -190,9 +199,9 @@
         <option value="$PROJECT_DIR$/test/PlayerTest.java" />
         <option value="$PROJECT_DIR$/src/Player.java" />
         <option value="$PROJECT_DIR$/test/MapTest.java" />
-        <option value="$PROJECT_DIR$/src/Map.java" />
         <option value="$PROJECT_DIR$/Rich-Java.ipr" />
         <option value="$PROJECT_DIR$/src/Game.java" />
+        <option value="$PROJECT_DIR$/src/Map.java" />
       </list>
     </option>
   </component>
@@ -317,7 +326,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.PlayerTest">
+  <component name="RunManager" selected="JUnit.MapTest">
     <configuration default="false" name="GameTest" type="JUnit" factoryName="JUnit" temporary="true">
       <extension name="coverage" enabled="false" merge="false" />
       <module name="Rich-Java" />
@@ -556,8 +565,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.PlayerTest" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.MapTest" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.MapTest" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.PlayerTest" />
         <item index="2" class="java.lang.String" itemvalue="JUnit.MapTest.test_display_ATuBo_at_starting_position" />
         <item index="3" class="java.lang.String" itemvalue="JUnit.GameTest" />
         <item index="4" class="java.lang.String" itemvalue="JUnit.MapTest.test_map_layout" />
@@ -681,13 +690,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/IllegalUserInputException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="63" selection-start="63" selection-end="63" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/lib/junit-4.11.jar!/org/junit/runners/model/FrameworkMethod.class">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
@@ -769,16 +771,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Map.java">
+    <entry file="file://$PROJECT_DIR$/test/MapTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="86" column="61" selection-start="2711" selection-end="2711" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/MapTest.java">
+    <entry file="file://$PROJECT_DIR$/Rich-Java.iws">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="75" selection-start="916" selection-end="916" vertical-scroll-proportion="0.8149351">
+        <state line="58" column="21" selection-start="3713" selection-end="3713" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Map.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="93" column="1" selection-start="2860" selection-end="2860" vertical-scroll-proportion="0.6298701">
           <folding />
         </state>
       </provider>

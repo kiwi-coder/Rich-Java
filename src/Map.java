@@ -3,8 +3,8 @@ import java.util.*;
 public class Map {
     private int width;
     private int height;
-    private ArrayList<Site> sites = new ArrayList();
-    private ArrayList<Player> players = new ArrayList();
+    private List<Site> sites = new ArrayList();
+    private List<Player> players = new ArrayList();
 
     public Map(int width, int height) {
         this.width = width;

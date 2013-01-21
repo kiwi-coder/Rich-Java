@@ -48,6 +48,7 @@ public class GameTest {
         game.initPlayerMoney();
         assertEquals(2000, game.getInitPlayerMoney());
         assertEquals("输入玩家初始资金错误，请再次输入" + TestHelper.newLine(), systemErrMock.getLog());
+        assertEquals(repeatInitMoneyNotice(), systemOutMock.getLog());
     }
 
     @Test
@@ -56,6 +57,11 @@ public class GameTest {
         game.initPlayerMoney();
         assertEquals(10000, game.getInitPlayerMoney());
         assertEquals("输入玩家初始资金错误，请再次输入" + TestHelper.newLine(), systemErrMock.getLog());
+        assertEquals(repeatInitMoneyNotice(), systemOutMock.getLog());
+    }
+
+    private String repeatInitMoneyNotice() {
+        return repeatNotice("设置玩家初始资金，范围1000～50000（默认10000）");
     }
 
     @Test
@@ -80,31 +86,34 @@ public class GameTest {
 
     @Test
     public void should_has_another_chance_to_select_players_if_player_index_is_invalid() {
-        String expected_notice = "请选择2~4位不重复玩家，输入编号即可。(1.钱夫人; 2.阿土伯; 3.孙小美; 4.金贝贝):" + TestHelper.newLine()
-                + "请选择2~4位不重复玩家，输入编号即可。(1.钱夫人; 2.阿土伯; 3.孙小美; 4.金贝贝):" + TestHelper.newLine();
         systemInMock.provideText("1235" + TestHelper.newLine() + "1234");
         game.selectPlayers();
-        assertEquals(expected_notice, systemOutMock.getLog());
+        assertEquals(repeatSelectUserNotice(), systemOutMock.getLog());
         assertEquals("选择玩家错误，请再次选择" + TestHelper.newLine(), systemErrMock.getLog());
     }
 
     @Test
     public void should_has_another_chance_to_select_players_if_player_size_is_only_one() {
-        String expected_notice = "请选择2~4位不重复玩家，输入编号即可。(1.钱夫人; 2.阿土伯; 3.孙小美; 4.金贝贝):" + TestHelper.newLine()
-                + "请选择2~4位不重复玩家，输入编号即可。(1.钱夫人; 2.阿土伯; 3.孙小美; 4.金贝贝):" + TestHelper.newLine();
         systemInMock.provideText("1" + TestHelper.newLine() + "1234");
         game.selectPlayers();
-        assertEquals(expected_notice, systemOutMock.getLog());
+        assertEquals(repeatSelectUserNotice(), systemOutMock.getLog());
         assertEquals("选择玩家错误，请再次选择" + TestHelper.newLine(), systemErrMock.getLog());
     }
 
     @Test
     public void should_has_another_chance_to_select_players_if_player_is_duplicate() {
-        String expected_notice = "请选择2~4位不重复玩家，输入编号即可。(1.钱夫人; 2.阿土伯; 3.孙小美; 4.金贝贝):" + TestHelper.newLine()
-                + "请选择2~4位不重复玩家，输入编号即可。(1.钱夫人; 2.阿土伯; 3.孙小美; 4.金贝贝):" + TestHelper.newLine();
         systemInMock.provideText("1111" + TestHelper.newLine() + "1234");
         game.selectPlayers();
-        assertEquals(expected_notice, systemOutMock.getLog());
+        assertEquals(repeatSelectUserNotice(), systemOutMock.getLog());
         assertEquals("选择玩家错误，请再次选择" + TestHelper.newLine(), systemErrMock.getLog());
+    }
+
+    private String repeatSelectUserNotice() {
+        return repeatNotice("请选择2~4位不重复玩家，输入编号即可。(1.钱夫人; 2.阿土伯; 3.孙小美; 4.金贝贝):");
+    }
+
+    private String repeatNotice(String notice) {
+        return notice + TestHelper.newLine()
+                + notice + TestHelper.newLine();
     }
 }

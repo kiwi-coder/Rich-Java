@@ -3,30 +3,27 @@ public class Site {
     private Player player;
     private int index;
 
-    public Site(String type) {
-        this.type = type;
-        this.player = null;
-        this.index = 0;
-    }
-
     public Site(String type, int index){
         this.type = type;
         this.index = index;
-    }
-
-    public Site(String type, Player player, int index){
-        this.type = type;
-        this.player = player;
-        this.index = index;
+        this.player = null;
     }
 
     @Override
     public String toString() {
-        if (player != null) return player.display();
+        if (hasPlayer()) return player.display();
         return type;
+    }
+
+    private boolean hasPlayer() {
+        return player != null;
     }
 
     public int getIndex(){
         return index;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 }

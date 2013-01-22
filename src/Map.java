@@ -8,7 +8,7 @@ public class Map {
     public Map(int width, int height) {
         this.width = width;
         this.height = height;
-        for (int i = 0; i < size(); i++) sites.add(new Site(" "));
+        for (int index = 0; index < size(); index++) sites.add(new Site(" ", index));
     }
 
     public int size() {
@@ -78,5 +78,9 @@ public class Map {
         for (int i = 0; i < width; i++) result.append(" ");
         result.append("\n");
         return result.toString();
+    }
+
+    public Site getSite(int index) {
+        return sites.get(index);
     }
 }

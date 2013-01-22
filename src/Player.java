@@ -11,7 +11,7 @@ public class Player {
 
     public void forward(int steps) {
         int newSiteIndex = (site.getIndex() + steps) % map.size();
-        setSite(new Site("0", this, newSiteIndex));
+        setSite(map.getSite(newSiteIndex));
     }
 
     public int getSiteIndex() {
@@ -37,5 +37,6 @@ public class Player {
 
     public void setSite(Site site) {
         this.site = site;
+        site.setPlayer(this);
     }
 }

@@ -8,7 +8,7 @@ public class Map {
     public Map(int width, int height) {
         this.width = width;
         this.height = height;
-        for (int index = 0; index < size(); index++) sites.add(new Site(" ", index));
+        for (int index = 0; index < size(); index++) sites.add(null);
     }
 
     public int size() {
@@ -17,6 +17,7 @@ public class Map {
 
     public void setSite(int index, Site site) {
         sites.set(index, site);
+        site.setMap(this);
     }
 
     public String display() {
@@ -43,7 +44,7 @@ public class Map {
 
     private String concatenate(StringBuilder[] lines) {
         StringBuilder result = new StringBuilder();
-        for (int line = 0; line < lines.length; line++) result.append(lines[line]);
+        for (StringBuilder line : lines) result.append(line);
         return result.toString();
     }
 

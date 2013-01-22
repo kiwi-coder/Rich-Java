@@ -14,7 +14,7 @@ public class PlayerTest {
     @Before
     public void setUp() {
         map = TestHelper.simpleMap();
-        player = new Player(map, "ATuBo");
+        player = new Player(map.getSite(0), "ATuBo");
     }
 
     @Test

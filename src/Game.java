@@ -9,7 +9,6 @@ public class Game {
     private int initPlayerMoney = DEFAULT_INIT_MONEY;
     private Scanner scanner;
     private List<Player> players = new ArrayList();
-    ;
     private Map map;
 
     public Game(Map map) {
@@ -60,9 +59,13 @@ public class Game {
     }
 
     private Player selectPlayer(char playerChar) {
-        Player player = new Player(map, getPlayerNameByIndex(playerChar));
+        Player player = new Player(firstSite(), getPlayerNameByIndex(playerChar));
         player.setMoney(initPlayerMoney);
         return player;
+    }
+
+    private Site firstSite() {
+        return map.getSite(0);
     }
 
     private boolean hasPlayerNumberError(String playerString) {

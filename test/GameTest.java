@@ -8,8 +8,6 @@ import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 public class GameTest {
 
@@ -25,8 +23,7 @@ public class GameTest {
 
     @Before
     public void setUp() throws Exception {
-        Map DUMMY_MAP = new Map(10, 10);
-        game = new Game(DUMMY_MAP);
+        game = new Game(TestHelper.simpleMap());
     }
 
     @Test

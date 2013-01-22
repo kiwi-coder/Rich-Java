@@ -32,8 +32,7 @@ public class MapTest {
         String expected = "A00\n"
                 + "0 0\n"
                 + "000\n";
-        Player player = new Player(map, "ATuBo");
-        player.setSite(map.getSite(0));
+        Player player = new Player(map.getSite(0), "ATuBo");
         assertThat(map.display(), is(expected));
     }
 }

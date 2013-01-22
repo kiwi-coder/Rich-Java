@@ -4,8 +4,9 @@ public class Player {
     private int money;
     private Site site;
 
-    public Player(Map map) {
+    public Player(Map map, String name) {
         this.map = map;
+        this.name = name;
     }
 
     public void forward(int steps) {
@@ -16,10 +17,6 @@ public class Player {
     public int getSiteIndex() {
         if (site == null) throw new IllegalPlayerException();
         return site.getIndex();
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String display() {

@@ -8,7 +8,8 @@ public class Game {
     private final int MAX_INIT_MONEY = 50000;
     private int initPlayerMoney = DEFAULT_INIT_MONEY;
     private Scanner scanner;
-    private List<Player> players = new ArrayList();;
+    private List<Player> players = new ArrayList();
+    ;
     private Map map;
 
     public Game(Map map) {
@@ -59,8 +60,7 @@ public class Game {
     }
 
     private Player selectPlayer(char playerChar) {
-        Player player = new Player(map);
-        setPlayerName(player, playerChar);
+        Player player = new Player(map, getPlayerNameByIndex(playerChar));
         player.setMoney(initPlayerMoney);
         return player;
     }
@@ -77,7 +77,7 @@ public class Game {
         return false;
     }
 
-    private void setPlayerName(Player player, char playerChar) {
+    private String getPlayerNameByIndex(char playerChar) {
         String name = "";
         if (playerChar == '1') {
             name = "QianFuRen";
@@ -90,7 +90,7 @@ public class Game {
         } else {
             throw new IllegalUserInputException();
         }
-        player.setName(name);
+        return name;
     }
 
     public List<Player> getPlayers() {

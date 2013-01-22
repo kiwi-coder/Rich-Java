@@ -14,7 +14,7 @@ public class PlayerTest {
     @Before
     public void setUp() {
         map = TestHelper.simpleMap();
-        player = new Player(map);
+        player = new Player(map, "ATuBo");
     }
 
     @Test
@@ -33,7 +33,6 @@ public class PlayerTest {
 
     @Test
     public void should_return_A_for_player_name_is_ATuBo() {
-        player.setName("AToBo");
         assertThat(player.display(), is("A"));
     }
 }

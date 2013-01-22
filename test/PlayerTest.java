@@ -19,14 +19,14 @@ public class PlayerTest {
 
     @Test
     public void should_return_3_after_player_move_3_steps_from_0() {
-        player.setSiteIndex(0);
+        player.setSite(new Site("0", player, 0));
         player.forward(3);
         assertThat(player.getSiteIndex(), is(3));
     }
 
     @Test
     public void should_player_go_back_to_starting_site_from_last_site() {
-        player.setSiteIndex(LAST_SITE_INDEX);
+        player.setSite(new Site("0", player, LAST_SITE_INDEX));
         player.forward(1);
         assertThat(player.getSiteIndex(), is(FIRST_SITE_INDEX));
     }

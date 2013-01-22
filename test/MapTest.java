@@ -34,7 +34,9 @@ public class MapTest {
                 + "000\n";
         Player player = new Player(map);
         player.setName("ATuBo");
-        player.setSiteIndex(0);
+        Site site = new Site("0", player, 0);
+        player.setSite(site);
+        map.setSite(0, site);
         assertEquals(expected, map.display());
     }
 }

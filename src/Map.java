@@ -4,7 +4,6 @@ public class Map {
     private int width;
     private int height;
     private List<Site> sites = new ArrayList();
-    private List<Player> players = new ArrayList();
 
     public Map(int width, int height) {
         this.width = width;
@@ -23,14 +22,7 @@ public class Map {
     public String display() {
         StringBuilder[] lines = initEmptyDisplayMap();
         displaySites(lines);
-        displayPlayers(lines);
         return concatenate(lines);
-    }
-
-    private void displayPlayers(StringBuilder[] lines) {
-        for (Player player : players) {
-            setSiteDisplay(lines, player.getSiteIndex(), player.display());
-        }
     }
 
     private void setSiteDisplay(StringBuilder[] lines, int siteIndex, String display) {
@@ -86,9 +78,5 @@ public class Map {
         for (int i = 0; i < width; i++) result.append(" ");
         result.append("\n");
         return result.toString();
-    }
-
-    public void addPlayer(Player player) {
-        players.add(player);
     }
 }

@@ -1,25 +1,21 @@
 public class Player {
-    private int siteIndex;
     private String name;
     private Map map;
     private int money;
+    private Site site;
 
     public Player(Map map) {
         this.map = map;
-        map.addPlayer(this);
     }
 
     public void forward(int steps) {
-        siteIndex += steps;
-        siteIndex %= map.size();
+        int newSiteIndex = (site.getIndex() + steps) % map.size();
+        setSite(new Site("0", this, newSiteIndex));
     }
 
     public int getSiteIndex() {
-        return siteIndex;
-    }
-
-    public void setSiteIndex(int siteIndex) {
-        this.siteIndex = siteIndex;
+        if (site == null) throw new IllegalPlayerException();
+        return site.getIndex();
     }
 
     public void setName(String name) {
@@ -40,5 +36,9 @@ public class Player {
 
     public void setMoney(int money) {
         this.money = money;
+    }
+
+    public void setSite(Site site) {
+        this.site = site;
     }
 }

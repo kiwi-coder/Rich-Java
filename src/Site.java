@@ -10,12 +10,6 @@ public class Site {
         this.player = null;
     }
 
-    @Override
-    public String toString() {
-        if (hasPlayer()) return player.display();
-        return type;
-    }
-
     private boolean hasPlayer() {
         return player != null;
     }
@@ -44,7 +38,12 @@ public class Site {
         return (index + 1) % map.size();
     }
 
-    public void removePlayer() {
+    public void resetPlayer() {
         player = null;
+    }
+
+    public String display() {
+        if (hasPlayer()) return player.display();
+        return type;
     }
 }

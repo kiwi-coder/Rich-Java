@@ -26,13 +26,15 @@ public class Map {
         return concatenate(lines);
     }
 
-    private void setSiteDisplay(StringBuilder[] lines, int siteIndex, String display) {
-        lines[getHeight(siteIndex)].setCharAt(getWidth(siteIndex), display.charAt(0));
+    private void setSiteDisplay(StringBuilder[] lines, Site site) {
+        int siteIndex = site.getIndex();
+        char displayIcon = site.display().charAt(0);
+        lines[getHeight(siteIndex)].setCharAt(getWidth(siteIndex), displayIcon);
     }
 
     private void displaySites(StringBuilder[] lines) {
-        for (int index = 0; index < size(); index++) {
-            setSiteDisplay(lines, index, sites.get(index).toString());
+        for (Site site : sites) {
+            setSiteDisplay(lines, site);
         }
     }
 

@@ -21,14 +21,14 @@ public class PlayerTest {
     public void should_return_3_after_player_move_3_steps_from_0() {
         player.setSite(map.getSite(0));
         player.forward(3);
-        assertThat(player.getSiteIndex(), is(3));
+        assertThat(player.getSite(), is(map.getSite(3)));
     }
 
     @Test
     public void should_player_go_back_to_starting_site_from_last_site() {
         player.setSite(map.getSite(LAST_SITE_INDEX));
         player.forward(1);
-        assertThat(player.getSiteIndex(), is(FIRST_SITE_INDEX));
+        assertThat(player.getSite(), is(map.getSite(FIRST_SITE_INDEX)));
     }
 
     @Test

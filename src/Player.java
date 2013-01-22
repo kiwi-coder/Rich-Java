@@ -20,11 +20,6 @@ public class Player {
         setSite(nextSite);
     }
 
-    public int getSiteIndex() {
-        if (site == null) throw new IllegalPlayerException();
-        return site.getIndex();
-    }
-
     public String display() {
         return getFirstCharacterOfName();
     }
@@ -42,8 +37,12 @@ public class Player {
     }
 
     public void setSite(Site site) {
-        if (this.site != null) this.site.removePlayer();
+        if (this.site != null) this.site.resetPlayer();
         this.site = site;
         site.setPlayer(this);
+    }
+
+    public Site getSite() {
+        return site;
     }
 }

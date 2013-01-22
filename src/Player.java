@@ -4,7 +4,7 @@ public class Player {
     private Site site;
 
     public Player(Site site, String name) {
-        setSite(site);
+        setPlayerOnSite(site);
         this.name = name;
     }
 
@@ -36,10 +36,14 @@ public class Player {
         this.money = money;
     }
 
-    public void setSite(Site site) {
-        if (this.site != null) this.site.resetPlayer();
-        this.site = site;
-        site.setPlayer(this);
+    public void setSite(Site newSite) {
+        site.resetPlayer();
+        setPlayerOnSite(newSite);
+    }
+
+    private void setPlayerOnSite(Site newSite) {
+        site = newSite;
+        newSite.setPlayer(this);
     }
 
     public Site getSite() {

@@ -22,10 +22,6 @@ public class Site {
         this.player = player;
     }
 
-    public Map getMap() {
-        return map;
-    }
-
     public void setMap(Map map) {
         this.map = map;
     }

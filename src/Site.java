@@ -1,9 +1,9 @@
 public class Site {
-    private String type;
-    private Player player;
-    private int index;
-    private Map map;
-    private int price;
+    protected String type;
+    protected Player player;
+    protected int index;
+    protected Map map;
+    protected int price;
 
     public Site(String type) {
         this.type = type;

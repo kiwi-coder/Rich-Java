@@ -50,18 +50,12 @@ public class Game {
             if (hasPlayerNumberError(playerString)) throw new IllegalUserInputException();
             if (hasDuplicatePlayers(playerString)) throw new IllegalUserInputException();
             for (char playerChar : playerString.toCharArray()) {
-                players.add(selectPlayer(playerChar));
+                players.add(Player.createPlayer(playerChar, firstSite(), initPlayerMoney));
             }
         } catch (Exception exception) {
             System.err.println("选择玩家错误，请再次选择");
             selectPlayers();
         }
-    }
-
-    private Player selectPlayer(char playerChar) {
-        Player player = new Player(firstSite(), getPlayerNameByIndex(playerChar));
-        player.setMoney(initPlayerMoney);
-        return player;
     }
 
     private Site firstSite() {
@@ -78,22 +72,6 @@ public class Game {
             if (playerString.indexOf(playChar) != playerString.lastIndexOf(playChar)) return true;
         }
         return false;
-    }
-
-    private String getPlayerNameByIndex(char playerChar) {
-        String name;
-        if (playerChar == '1') {
-            name = "QianFuRen";
-        } else if (playerChar == '2') {
-            name = "ATuBo";
-        } else if (playerChar == '3') {
-            name = "SunXiaoMei";
-        } else if (playerChar == '4') {
-            name = "JinBeiBei";
-        } else {
-            throw new IllegalUserInputException();
-        }
-        return name;
     }
 
     public List<Player> getPlayers() {

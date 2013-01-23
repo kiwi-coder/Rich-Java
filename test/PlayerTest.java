@@ -5,6 +5,8 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class PlayerTest {
+    private final Site DUMMY_SITE = null;
+    private static final int DUMMY_MONEY = 0;
     private Player player;
     private Map map;
     private final int MAP_SIZE = TestHelper.simpleMap().size();
@@ -14,7 +16,7 @@ public class PlayerTest {
     @Before
     public void setUp() {
         map = TestHelper.simpleMap();
-        player = new Player(map.getSite(0), "ATuBo");
+        player = new Player("ATuBo", DUMMY_SITE, DUMMY_MONEY);
     }
 
     @Test

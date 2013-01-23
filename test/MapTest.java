@@ -6,7 +6,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 public class MapTest {
-
+    private static final int DUMMY_MONEY = 0;
     private Map map;
 
     @Before
@@ -32,7 +32,7 @@ public class MapTest {
         String expected = "A00\n"
                 + "0 0\n"
                 + "000\n";
-        Player player = new Player(map.getSite(0), "ATuBo");
+        Player player = new Player("ATuBo", map.getSite(0), DUMMY_MONEY);
         assertThat(map.display(), is(expected));
     }
 }

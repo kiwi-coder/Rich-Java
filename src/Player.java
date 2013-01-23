@@ -3,9 +3,16 @@ public class Player {
     private int money;
     private Site site;
 
-    public Player(Site site, String name) {
-        setPlayerOnSite(site);
+    public Player(String name, Site site, int money) {
+        if (site != null) setPlayerOnSite(site);
         this.name = name;
+        this.money = money;
+    }
+
+    public static Player createPlayer(char playerChar, Site site, int money) {
+        int index = Integer.valueOf(String.valueOf(playerChar));
+        String[] names = {"QianFuRen", "ATuBo", "SunXiaoMei", "JinBeiBei"};
+        return new Player(names[index - 1], site, money);
     }
 
     public void forward(int steps) {
@@ -36,14 +43,14 @@ public class Player {
         this.money = money;
     }
 
-    public void setSite(Site newSite) {
-        site.resetPlayer();
-        setPlayerOnSite(newSite);
+    public void setSite(Site targetSite) {
+        if (site != null) site.resetPlayer();
+        setPlayerOnSite(targetSite);
     }
 
-    private void setPlayerOnSite(Site newSite) {
-        site = newSite;
-        newSite.setPlayer(this);
+    private void setPlayerOnSite(Site targetSite) {
+        site = targetSite;
+        targetSite.setPlayer(this);
     }
 
     public Site getSite() {

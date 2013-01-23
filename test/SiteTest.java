@@ -6,6 +6,7 @@ import static org.junit.Assert.assertThat;
 
 public class SiteTest {
 
+    private static final int DUMMY_MONEY = 0;
     private Map map;
 
     @Before
@@ -33,14 +34,14 @@ public class SiteTest {
     @Test
     public void should_display_player_if_there_is_player() {
         Site site = map.getSite(0);
-        Player player = new Player(site, "ATuBo");
+        Player player = new Player("ATuBo", site, DUMMY_MONEY);
         assertThat(site.display(), is("A"));
     }
 
     @Test
     public void should_not_display_if_player_is_move_out() {
         Site site = map.getSite(0);
-        Player player = new Player(site, "ATuBo");
+        Player player = new Player("ATuBo", site, DUMMY_MONEY);
         player.forward(1);
         assertThat(site.display(), is("0"));
     }

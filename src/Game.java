@@ -6,6 +6,9 @@ public class Game {
     private final int DEFAULT_INIT_MONEY = 10000;
     private final int MIN_INIT_MONEY = 1000;
     private final int MAX_INIT_MONEY = 50000;
+    private final int MIN_PLAYER_NUMBER = 2;
+    private final int MAX_PLAYER_NUMBER = Player.playerSize();
+
     private int initPlayerMoney = DEFAULT_INIT_MONEY;
     private Scanner scanner;
     private List<Player> players = new ArrayList();
@@ -47,7 +50,7 @@ public class Game {
     public void selectPlayers() {
         try {
             String playerString = prompt("请选择2~4位不重复玩家，输入编号即可。(1.钱夫人; 2.阿土伯; 3.孙小美; 4.金贝贝):");
-            if (hasPlayerNumberError(playerString)) throw new IllegalUserInputException();
+            if (isPlayerNumberOutOfRange(playerString)) throw new IllegalUserInputException();
             if (hasDuplicatePlayers(playerString)) throw new IllegalUserInputException();
             for (char playerChar : playerString.toCharArray()) {
                 players.add(Player.createPlayer(playerChar, firstSite(), initPlayerMoney));
@@ -62,8 +65,8 @@ public class Game {
         return map.getSite(0);
     }
 
-    private boolean hasPlayerNumberError(String playerString) {
-        return playerString.length() < 2 || playerString.length() > 4;
+    private boolean isPlayerNumberOutOfRange(String playerString) {
+        return playerString.length() < MIN_PLAYER_NUMBER || playerString.length() > MAX_PLAYER_NUMBER;
     }
 
     private boolean hasDuplicatePlayers(String playerString) {

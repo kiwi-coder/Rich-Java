@@ -2,6 +2,7 @@ public class Player {
     private String name;
     private int money;
     private Site site;
+    private static final String[] names = new String[]{"QianFuRen", "ATuBo", "SunXiaoMei", "JinBeiBei"};
 
     public Player(String name, Site site, int money) {
         if (site != null) setPlayerOnSite(site);
@@ -11,8 +12,11 @@ public class Player {
 
     public static Player createPlayer(char playerChar, Site site, int money) {
         int index = Integer.valueOf(String.valueOf(playerChar));
-        String[] names = {"QianFuRen", "ATuBo", "SunXiaoMei", "JinBeiBei"};
         return new Player(names[index - 1], site, money);
+    }
+
+    public static int playerSize() {
+        return names.length;
     }
 
     public void forward(int steps) {

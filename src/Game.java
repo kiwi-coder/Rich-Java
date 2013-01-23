@@ -81,7 +81,7 @@ public class Game {
     }
 
     private String getPlayerNameByIndex(char playerChar) {
-        String name = "";
+        String name;
         if (playerChar == '1') {
             name = "QianFuRen";
         } else if (playerChar == '2') {

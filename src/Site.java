@@ -10,6 +10,10 @@ public class Site {
         this.player = null;
     }
 
+    public Site(String type) {
+        this(type, 0);
+    }
+
     private boolean hasPlayer() {
         return player != null;
     }
@@ -41,5 +45,9 @@ public class Site {
     public String display() {
         if (hasPlayer()) return player.display();
         return type;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 }

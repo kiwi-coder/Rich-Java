@@ -1,11 +1,16 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class TestHelper {
     public static String newLine() {
         return System.getProperty("line.separator");
     }
 
     public static Map simpleMap() {
-        Map map = new Map(3, 3);
-        for (int index = 0; index < map.size(); index++) map.setSite(index, new Site("0", index));
-        return map;
+        List<Site> sites = new ArrayList();
+        for (int index = 0; index < 8; index++) {
+            sites.add(new Site("0"));
+        }
+        return new Map(sites, new MapLayout(3, 3));
     }
 }

@@ -4,14 +4,10 @@ public class Site {
     private int index;
     private Map map;
 
-    public Site(String type, int index){
-        this.type = type;
-        this.index = index;
-        this.player = null;
-    }
-
     public Site(String type) {
-        this(type, 0);
+        this.type = type;
+        this.index = 0;
+        this.player = null;
     }
 
     private boolean hasPlayer() {

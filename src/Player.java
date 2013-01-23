@@ -5,9 +5,9 @@ public class Player {
     private static final String[] names = new String[]{"QianFuRen", "ATuBo", "SunXiaoMei", "JinBeiBei"};
 
     public Player(String name, Site site, int money) {
-        if (site != null) setPlayerOnSite(site);
         this.name = name;
         this.money = money;
+        if (site != null) setPlayerOnSite(site);
     }
 
     public static Player createPlayer(char playerChar, Site site, int money) {
@@ -41,10 +41,6 @@ public class Player {
 
     public String getName() {
         return name;
-    }
-
-    public void setMoney(int money) {
-        this.money = money;
     }
 
     public void setSite(Site targetSite) {

@@ -56,4 +56,15 @@ public class Player {
     public Site getSite() {
         return site;
     }
+
+    public void buy() {
+        if(money >= site.getPrice()){
+            money -= site.getPrice();
+            site.setType("1");
+        }
+    }
+
+    public int getMoney() {
+        return money;
+    }
 }

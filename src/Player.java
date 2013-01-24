@@ -57,17 +57,21 @@ public class Player {
         return site;
     }
 
-    public void buyOrUpgradeProperty() {
+    public void buyProperty(){
         Property property = (Property)site;
 
-        if(canBuyOrUpgradeProperty(property)){
+        if(isPriceAffordable(property.getPrice())){
             pay(property.getPrice());
-            if(property.getOwner() == null){
-                property.setOwner(this);
-            }
-            else{
-                site = property.upgrade();
-            }
+            property.setOwner(this);
+        }
+    }
+
+    public void upgradeProperty(){
+        Property property = (Property)site;
+
+        if(isPriceAffordable(property.getPrice())){
+            pay(property.getPrice());
+            site = property.upgrade();
         }
     }
 
@@ -75,8 +79,8 @@ public class Player {
         money -= price;
     }
 
-    private boolean canBuyOrUpgradeProperty(Property property) {
-        return money >= property.getPrice();
+    private boolean isPriceAffordable(int price){
+        return money >= price;
     }
 
     public int getMoney() {

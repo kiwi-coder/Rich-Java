@@ -15,9 +15,10 @@ public class PropertyTest {
         property.setPrice(200);
 
         // When
-        player.buyOrUpgradeProperty();
+        player.buyProperty();
 
         // Then
+        // TODO: use equals methods....
         assertThat(player.getMoney(), is(4800));
         assertThat(player.getSite().getType(), is("0"));
         assertThat(((Property)player.getSite()).getOwner().getName(), is("Atubo"));
@@ -33,7 +34,7 @@ public class PropertyTest {
         property.setPrice(200);
 
         // When
-        player.buyOrUpgradeProperty();
+        player.buyProperty();
 
         // Then
         assertThat(player.getMoney(), is(180));
@@ -52,7 +53,7 @@ public class PropertyTest {
         property.setOwner(player);
 
         // When
-        player.buyOrUpgradeProperty();
+        player.upgradeProperty();
 
         // Then
         assertThat(player.getMoney(), is(4800));
@@ -70,7 +71,7 @@ public class PropertyTest {
         property.setOwner(player);
 
         // When
-        player.buyOrUpgradeProperty();
+        player.upgradeProperty();
 
         // Then
         assertThat(player.getMoney(), is(180));

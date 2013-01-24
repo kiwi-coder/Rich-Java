@@ -5,8 +5,7 @@ public class Land extends Property {
     }
 
     public Site upgrade(){
-        // TODO: Here seems to be refactored, but i don't know how...
-        Site cabin = new Cabin();
+        Property cabin = new Cabin();
         cabin.setIndex(index);
         cabin.setMap(map);
         cabin.setPlayer(player);

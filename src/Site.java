@@ -3,7 +3,6 @@ public class Site {
     protected Player player;
     protected int index;
     protected Map map;
-    protected int price;
 
     public Site(String type) {
         this.type = type;
@@ -46,14 +45,6 @@ public class Site {
 
     public void setIndex(int index) {
         this.index = index;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public int getPrice() {
-        return price;
     }
 
     public void setType(String type) {

@@ -3,6 +3,7 @@ public class Player {
     private int money;
     private Site site;
     private static final String[] names = new String[]{"QianFuRen", "ATuBo", "SunXiaoMei", "JinBeiBei"};
+    private boolean isBroke = false;
 
     public Player(String name, Site site, int money) {
         this.name = name;
@@ -60,7 +61,7 @@ public class Player {
     public void buyProperty(){
         Property property = (Property)site;
 
-        if(isPriceAffordable(property.getPrice())){
+        if(isAffordable(property.getPrice())){
             pay(property.getPrice());
             property.setOwner(this);
         }
@@ -76,18 +77,49 @@ public class Player {
     }
 
     public boolean isPropertyUpgradable(Property property){
-        return isPriceAffordable(property.getPrice()) && !(property instanceof Skyscraper);
+        return isAffordable(property.getPrice()) && !(property instanceof Skyscraper);
     }
 
     private void pay(int price) {
         money -= price;
     }
 
-    private boolean isPriceAffordable(int price){
+    private boolean isAffordable(int price){
         return money >= price;
     }
 
     public int getMoney() {
         return money;
+    }
+
+    public void payTollFee() {
+        Property property = (Property)site;
+        Player propertyOwner = property.getOwner();
+
+        int tollFee = property.getTollFee();
+
+        if(!isAffordable(tollFee)){
+            tollFee = money;
+            broke();
+        }
+
+        payMoneyToPlayer(tollFee, propertyOwner);
+    }
+
+    public void payMoneyToPlayer(int money, Player player){
+        pay(money);
+        player.earn(money);
+    }
+
+    private void broke() {
+        isBroke = true;
+    }
+
+    private void earn(int money) {
+        this.money += money;
+    }
+
+    public boolean isBroke() {
+        return isBroke;
     }
 }

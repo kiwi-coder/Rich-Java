@@ -25,4 +25,8 @@ public class Property extends Site{
     public void setPrice(int price) {
         this.price = price;
     }
+
+    public int getTollFee() {
+        return 0;
+    }
 }

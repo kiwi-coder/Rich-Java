@@ -219,4 +219,46 @@ public class PlayerTest {
         assertThat(player.getMoney(), is(180));
         assertThat(player.getSite().getType(), is("3"));
     }
+
+    @Test
+    public void should_player_pay_when_he_is_on_other_one_s_land_and_has_enough_money(){
+        // Given
+        Property landofQianfuren = new Land();
+        Property randomProperty = new Land();
+        Player atubo = new Player("Atubo", landofQianfuren, 5000);
+        Player qianfuren = new Player("Qianfuren", randomProperty, 5000);
+
+        landofQianfuren.setPlayer(atubo);
+        landofQianfuren.setIndex(3);
+        landofQianfuren.setPrice(200);
+        landofQianfuren.setOwner(qianfuren);
+
+        // When
+        atubo.payTollFee();
+
+        // Then
+        assertThat(atubo.getMoney(), is(4900));
+        assertThat(qianfuren.getMoney(), is(5100));
+    }
+
+    @Test
+    public void should_player_broke_when_he_is_on_other_one_s_land_and_has_not_enough_money(){
+        // Given
+        Property landofQianfuren = new Land();
+        Property randomProperty = new Land();
+        Player atubo = new Player("Atubo", landofQianfuren, 50);
+        Player qianfuren = new Player("Qianfuren", randomProperty, 5000);
+
+        landofQianfuren.setPlayer(atubo);
+        landofQianfuren.setIndex(3);
+        landofQianfuren.setPrice(200);
+        landofQianfuren.setOwner(qianfuren);
+
+        // When
+        atubo.payTollFee();
+
+        // Then
+        assertThat(atubo.isBroke(), is(true));
+        assertThat(qianfuren.getMoney(), is(5050));
+    }
 }

@@ -1,5 +1,7 @@
 public class Land extends Property {
     private static final String LAND_TYPE_CODE = "0";
+    private static final int TOLL_FEE = 100;
+
     public Land() {
         super(LAND_TYPE_CODE);
     }
@@ -13,5 +15,10 @@ public class Land extends Property {
 
         // TODO: map.setSite(index, cabin);
         return cabin;
+    }
+
+    @Override
+    public int getTollFee(){
+        return TOLL_FEE;
     }
 }

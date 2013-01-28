@@ -1,5 +1,5 @@
 public class Land extends Property {
-    static final String LAND_TYPE_CODE = "0";
+    private static final String LAND_TYPE_CODE = "0";
     public Land() {
         super(LAND_TYPE_CODE);
     }
@@ -11,6 +11,7 @@ public class Land extends Property {
         cabin.setPlayer(player);
         cabin.setPrice(price);
 
+        // TODO: map.setSite(index, cabin);
         return cabin;
     }
 }

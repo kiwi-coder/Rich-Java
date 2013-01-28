@@ -69,10 +69,14 @@ public class Player {
     public void upgradeProperty(){
         Property property = (Property)site;
 
-        if(isPriceAffordable(property.getPrice())){
+        if(isPropertyUpgradable(property)){
             pay(property.getPrice());
             site = property.upgrade();
         }
+    }
+
+    public boolean isPropertyUpgradable(Property property){
+        return isPriceAffordable(property.getPrice()) && !(property instanceof Skyscraper);
     }
 
     private void pay(int price) {

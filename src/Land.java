@@ -1,5 +1,6 @@
 public class Land extends Property {
     private static final String LAND_TYPE_CODE = "0";
+    private static final double TOLL_FEE_RATE = 0.5;
 
     public Land() {
         super(LAND_TYPE_CODE);
@@ -18,6 +19,6 @@ public class Land extends Property {
 
     @Override
     public int getTollFee(){
-        return price / 2;
+        return (int)(price * TOLL_FEE_RATE);
     }
 }

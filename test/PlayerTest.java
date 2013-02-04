@@ -85,6 +85,7 @@ public class PlayerTest {
         property.setIndex(3);
         property.setPrice(200);
         property.setOwner(player);
+        property.setMap(map);
 
         // When
         player.upgradeProperty();
@@ -103,6 +104,7 @@ public class PlayerTest {
         property.setIndex(3);
         property.setPrice(200);
         property.setOwner(player);
+        property.setMap(map);
 
         // When
         player.upgradeProperty();
@@ -121,6 +123,7 @@ public class PlayerTest {
         property.setIndex(3);
         property.setPrice(200);
         property.setOwner(player);
+        property.setMap(map);
 
         // When
         player.upgradeProperty();
@@ -139,6 +142,7 @@ public class PlayerTest {
         property.setIndex(3);
         property.setPrice(200);
         property.setOwner(player);
+        property.setMap(map);
 
         // When
         player.upgradeProperty();
@@ -157,6 +161,7 @@ public class PlayerTest {
         property.setIndex(3);
         property.setPrice(200);
         property.setOwner(player);
+        property.setMap(map);
 
         // When
         player.upgradeProperty();
@@ -175,6 +180,7 @@ public class PlayerTest {
         property.setIndex(3);
         property.setPrice(200);
         property.setOwner(player);
+        property.setMap(map);
 
         // When
         player.upgradeProperty();
@@ -193,6 +199,7 @@ public class PlayerTest {
         property.setIndex(3);
         property.setPrice(200);
         property.setOwner(player);
+        property.setMap(map);
 
         // When
         player.upgradeProperty();
@@ -211,6 +218,7 @@ public class PlayerTest {
         property.setIndex(3);
         property.setPrice(200);
         property.setOwner(player);
+        property.setMap(map);
 
         // When
         player.upgradeProperty();
@@ -252,6 +260,132 @@ public class PlayerTest {
         landofQianfuren.setPlayer(atubo);
         landofQianfuren.setIndex(3);
         landofQianfuren.setPrice(200);
+        landofQianfuren.setOwner(qianfuren);
+
+        // When
+        atubo.payTollFee();
+
+        // Then
+        assertThat(atubo.isBroke(), is(true));
+        assertThat(qianfuren.getMoney(), is(5050));
+    }
+
+    @Test
+    public void should_player_pay_when_he_is_on_other_one_s_cabin_and_has_enough_money(){
+        // Given
+        Property landofQianfuren = new Cabin();
+        Property randomProperty = new Land();
+        Player atubo = new Player("Atubo", landofQianfuren, 5000);
+        Player qianfuren = new Player("Qianfuren", randomProperty, 5000);
+
+        landofQianfuren.setPlayer(atubo);
+        landofQianfuren.setIndex(3);
+        landofQianfuren.setPrice(300);
+        landofQianfuren.setOwner(qianfuren);
+
+        // When
+        atubo.payTollFee();
+
+        // Then
+        assertThat(atubo.getMoney(), is(4700));
+        assertThat(qianfuren.getMoney(), is(5300));
+    }
+
+    @Test
+    public void should_player_broke_when_he_is_on_other_one_s_cabin_and_has_not_enough_money(){
+        // Given
+        Property landofQianfuren = new Cabin();
+        Property randomProperty = new Land();
+        Player atubo = new Player("Atubo", landofQianfuren, 50);
+        Player qianfuren = new Player("Qianfuren", randomProperty, 5000);
+
+        landofQianfuren.setPlayer(atubo);
+        landofQianfuren.setIndex(3);
+        landofQianfuren.setPrice(300);
+        landofQianfuren.setOwner(qianfuren);
+
+        // When
+        atubo.payTollFee();
+
+        // Then
+        assertThat(atubo.isBroke(), is(true));
+        assertThat(qianfuren.getMoney(), is(5050));
+    }
+
+    @Test
+    public void should_player_pay_when_he_is_on_other_one_s_house_and_has_enough_money(){
+        // Given
+        Property landofQianfuren = new House();
+        Property randomProperty = new Land();
+        Player atubo = new Player("Atubo", landofQianfuren, 5000);
+        Player qianfuren = new Player("Qianfuren", randomProperty, 5000);
+
+        landofQianfuren.setPlayer(atubo);
+        landofQianfuren.setIndex(3);
+        landofQianfuren.setPrice(300);
+        landofQianfuren.setOwner(qianfuren);
+
+        // When
+        atubo.payTollFee();
+
+        // Then
+        assertThat(atubo.getMoney(), is(4400));
+        assertThat(qianfuren.getMoney(), is(5600));
+    }
+
+    @Test
+    public void should_player_broke_when_he_is_on_other_one_s_house_and_has_not_enough_money(){
+        // Given
+        Property landofQianfuren = new House();
+        Property randomProperty = new Land();
+        Player atubo = new Player("Atubo", landofQianfuren, 50);
+        Player qianfuren = new Player("Qianfuren", randomProperty, 5000);
+
+        landofQianfuren.setPlayer(atubo);
+        landofQianfuren.setIndex(3);
+        landofQianfuren.setPrice(300);
+        landofQianfuren.setOwner(qianfuren);
+
+        // When
+        atubo.payTollFee();
+
+        // Then
+        assertThat(atubo.isBroke(), is(true));
+        assertThat(qianfuren.getMoney(), is(5050));
+    }
+
+    @Test
+    public void should_player_pay_when_he_is_on_other_one_s_skyscraper_and_has_enough_money(){
+        // Given
+        Property landofQianfuren = new Skyscraper();
+        Property randomProperty = new Land();
+        Player atubo = new Player("Atubo", landofQianfuren, 5000);
+        Player qianfuren = new Player("Qianfuren", randomProperty, 5000);
+
+        landofQianfuren.setPlayer(atubo);
+        landofQianfuren.setIndex(3);
+        landofQianfuren.setPrice(300);
+        landofQianfuren.setOwner(qianfuren);
+
+        // When
+        atubo.payTollFee();
+
+        // Then
+        assertThat(atubo.getMoney(), is(3800));
+        assertThat(qianfuren.getMoney(), is(6200));
+    }
+
+    @Test
+    public void should_player_broke_when_he_is_on_other_one_s_skyscraper_and_has_not_enough_money(){
+        // Given
+        Property landofQianfuren = new Skyscraper();
+        Property randomProperty = new Land();
+        Player atubo = new Player("Atubo", landofQianfuren, 50);
+        Player qianfuren = new Player("Qianfuren", randomProperty, 5000);
+
+        landofQianfuren.setPlayer(atubo);
+        landofQianfuren.setIndex(3);
+        landofQianfuren.setPrice(300);
         landofQianfuren.setOwner(qianfuren);
 
         // When

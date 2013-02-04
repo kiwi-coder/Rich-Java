@@ -1,5 +1,6 @@
 public class Cabin extends Property{
     private static final String CABIN_TYPE_CODE = "1";
+    private static final double TOLL_FEE_RATE = 1.0;
 
     public Cabin() {
         super(CABIN_TYPE_CODE);
@@ -14,5 +15,10 @@ public class Cabin extends Property{
 
         map.setSite(index, house);
         return house;
+    }
+
+    @Override
+    public int getTollFee(){
+        return (int)(price * TOLL_FEE_RATE);
     }
 }

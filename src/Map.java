@@ -29,4 +29,10 @@ public class Map {
     public String display() {
         return mapLayout.display(this);
     }
+
+    public void setSite(int index, Site site) {
+        sites.set(index, site);
+        site.setMap(this);
+        site.setIndex(index);
+    }
 }

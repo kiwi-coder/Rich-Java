@@ -12,7 +12,7 @@ public class Cabin extends Property{
         house.setPlayer(player);
         house.setPrice(price);
 
-        // TODO: map.setSite(index, house);
+        map.setSite(index, house);
         return house;
     }
 }

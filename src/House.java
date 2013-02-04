@@ -12,7 +12,7 @@ public class House extends Property {
         skyscraper.setPlayer(player);
         skyscraper.setPrice(price);
 
-        // TODO: map.setSite(index, skyscraper);
+        map.setSite(index, skyscraper);
         return skyscraper;
     }
 }

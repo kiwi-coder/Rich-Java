@@ -46,14 +46,12 @@ public class PlayerTest {
         Property property = new Land();
         Player player = new Player("Atubo", property, 5000);
         property.setPlayer(player);
-        property.setIndex(3);
         property.setPrice(200);
 
         // When
         player.buyProperty();
 
         // Then
-        // TODO: use equals methods....
         assertThat(player.getMoney(), is(4800));
         assertThat(player.getSite().getType(), is("0"));
         assertThat(((Property) player.getSite()).getOwner().getName(), is("Atubo"));
@@ -65,7 +63,6 @@ public class PlayerTest {
         Property property = new Land();
         Player player = new Player("Atubo", property, 180);
         property.setPlayer(player);
-        property.setIndex(3);
         property.setPrice(200);
 
         // When
@@ -83,7 +80,6 @@ public class PlayerTest {
         Property property = new Land();
         Player player = new Player("Atubo", property, 5000);
         property.setPlayer(player);
-        property.setIndex(3);
         property.setPrice(200);
         property.setOwner(player);
         property.setMap(map);
@@ -102,7 +98,6 @@ public class PlayerTest {
         Property property = new Land();
         Player player = new Player("Atubo", property, 180);
         property.setPlayer(player);
-        property.setIndex(3);
         property.setPrice(200);
         property.setOwner(player);
         property.setMap(map);
@@ -121,7 +116,6 @@ public class PlayerTest {
         Property property = new Cabin();
         Player player = new Player("Atubo", property, 5000);
         property.setPlayer(player);
-        property.setIndex(3);
         property.setPrice(200);
         property.setOwner(player);
         property.setMap(map);
@@ -140,7 +134,6 @@ public class PlayerTest {
         Property property = new Cabin();
         Player player = new Player("Atubo", property, 180);
         property.setPlayer(player);
-        property.setIndex(3);
         property.setPrice(200);
         property.setOwner(player);
         property.setMap(map);
@@ -159,7 +152,6 @@ public class PlayerTest {
         Property property = new House();
         Player player = new Player("Atubo", property, 5000);
         property.setPlayer(player);
-        property.setIndex(3);
         property.setPrice(200);
         property.setOwner(player);
         property.setMap(map);
@@ -178,7 +170,6 @@ public class PlayerTest {
         Property property = new House();
         Player player = new Player("Atubo", property, 180);
         property.setPlayer(player);
-        property.setIndex(3);
         property.setPrice(200);
         property.setOwner(player);
         property.setMap(map);
@@ -197,7 +188,6 @@ public class PlayerTest {
         Property property = new Skyscraper();
         Player player = new Player("Atubo", property, 5000);
         property.setPlayer(player);
-        property.setIndex(3);
         property.setPrice(200);
         property.setOwner(player);
         property.setMap(map);
@@ -216,7 +206,6 @@ public class PlayerTest {
         Property property = new Skyscraper();
         Player player = new Player("Atubo", property, 180);
         property.setPlayer(player);
-        property.setIndex(3);
         property.setPrice(200);
         property.setOwner(player);
         property.setMap(map);
@@ -238,7 +227,6 @@ public class PlayerTest {
         Player qianfuren = new Player("Qianfuren", randomProperty, 5000);
 
         landofQianfuren.setPlayer(atubo);
-        landofQianfuren.setIndex(3);
         landofQianfuren.setPrice(200);
         landofQianfuren.setOwner(qianfuren);
 
@@ -259,7 +247,6 @@ public class PlayerTest {
         Player qianfuren = new Player("Qianfuren", randomProperty, 5000);
 
         landofQianfuren.setPlayer(atubo);
-        landofQianfuren.setIndex(3);
         landofQianfuren.setPrice(200);
         landofQianfuren.setOwner(qianfuren);
 
@@ -280,7 +267,6 @@ public class PlayerTest {
         Player qianfuren = new Player("Qianfuren", randomProperty, 5000);
 
         landofQianfuren.setPlayer(atubo);
-        landofQianfuren.setIndex(3);
         landofQianfuren.setPrice(300);
         landofQianfuren.setOwner(qianfuren);
 
@@ -301,7 +287,6 @@ public class PlayerTest {
         Player qianfuren = new Player("Qianfuren", randomProperty, 5000);
 
         landofQianfuren.setPlayer(atubo);
-        landofQianfuren.setIndex(3);
         landofQianfuren.setPrice(300);
         landofQianfuren.setOwner(qianfuren);
 
@@ -322,7 +307,6 @@ public class PlayerTest {
         Player qianfuren = new Player("Qianfuren", randomProperty, 5000);
 
         landofQianfuren.setPlayer(atubo);
-        landofQianfuren.setIndex(3);
         landofQianfuren.setPrice(300);
         landofQianfuren.setOwner(qianfuren);
 
@@ -343,7 +327,6 @@ public class PlayerTest {
         Player qianfuren = new Player("Qianfuren", randomProperty, 5000);
 
         landofQianfuren.setPlayer(atubo);
-        landofQianfuren.setIndex(3);
         landofQianfuren.setPrice(300);
         landofQianfuren.setOwner(qianfuren);
 
@@ -364,7 +347,6 @@ public class PlayerTest {
         Player qianfuren = new Player("Qianfuren", randomProperty, 5000);
 
         landofQianfuren.setPlayer(atubo);
-        landofQianfuren.setIndex(3);
         landofQianfuren.setPrice(300);
         landofQianfuren.setOwner(qianfuren);
 
@@ -385,7 +367,6 @@ public class PlayerTest {
         Player qianfuren = new Player("Qianfuren", randomProperty, 5000);
 
         landofQianfuren.setPlayer(atubo);
-        landofQianfuren.setIndex(3);
         landofQianfuren.setPrice(300);
         landofQianfuren.setOwner(qianfuren);
 

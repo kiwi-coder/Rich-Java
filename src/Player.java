@@ -174,4 +174,17 @@ public class Player {
         }
         return result;
     }
+
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
+    public Property sellProperty(Property property) {
+        if(property.getOwner() == this){
+            earn(property.getSalePrice());
+            return property.reset();
+        }
+
+        return property;
+    }
 }

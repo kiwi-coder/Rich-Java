@@ -29,4 +29,20 @@ public class Property extends Site{
     public int getTollFee() {
         return 0;
     }
+
+    public int getSalePrice() {
+        return 0;
+    }
+
+    public Property reset() {
+        Property land = new Land();
+        land.setIndex(index);
+        land.setMap(map);
+        land.setPlayer(player);
+        land.setPrice(price);
+        land.setOwner(null);
+
+        map.setSite(index, land);
+        return land;
+    }
 }

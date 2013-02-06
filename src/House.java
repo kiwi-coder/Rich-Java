@@ -21,4 +21,5 @@ public class House extends Property {
     public int getTollFee(){
         return (int)(price * TOLL_FEE_RATE);
     }
+
 }

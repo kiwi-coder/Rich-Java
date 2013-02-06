@@ -379,6 +379,24 @@ public class PlayerTest {
     }
 
     @Test
+    public void test_player_selling_his_land(){
+        // Given
+        player.setMoney(5000);
+        Property property = new Land();
+
+        property.setPrice(300);
+        property.setOwner(player);
+        property.setMap(map);
+
+        // When
+        property = player.sellProperty(property);
+
+        // Then
+        assertTrue(property.getOwner() == null);
+        assertThat(player.getMoney(), is(5600));
+    }
+
+    @Test
     public void should_success_buy_player_when_player_has_enough_points() {
         player.setPoints(500);
         player.buyTool(new BlockTool());

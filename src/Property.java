@@ -35,14 +35,9 @@ public class Property extends Site{
     }
 
     public Property reset() {
-        Property land = new Land();
-        land.setIndex(index);
-        land.setMap(map);
-        land.setPlayer(player);
-        land.setPrice(price);
+        Property land = PropertyFactory.duplicateLandFromProperty(this);
         land.setOwner(null);
 
-        map.setSite(index, land);
         return land;
     }
 }

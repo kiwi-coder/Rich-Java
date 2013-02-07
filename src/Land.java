@@ -8,14 +8,7 @@ public class Land extends Property {
     }
 
     public Site upgrade(){
-        Property cabin = new Cabin();
-        cabin.setIndex(index);
-        cabin.setMap(map);
-        cabin.setPlayer(player);
-        cabin.setPrice(price);
-
-        map.setSite(index, cabin);
-        return cabin;
+        return PropertyFactory.duplicateCabinFromProperty(this);
     }
 
     @Override

@@ -8,14 +8,7 @@ public class House extends Property {
     }
 
     public Site upgrade(){
-        Property skyscraper = new Skyscraper();
-        map.setSite(index, skyscraper);
-        skyscraper.setIndex(index);
-        skyscraper.setMap(map);
-        skyscraper.setPlayer(player);
-        skyscraper.setPrice(price);
-
-        return skyscraper;
+        return PropertyFactory.duplicateSkyscraperFromProperty(this);
     }
 
     @Override

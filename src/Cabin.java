@@ -8,14 +8,7 @@ public class Cabin extends Property{
     }
 
     public Site upgrade(){
-        Property house = new House();
-        house.setIndex(index);
-        house.setMap(map);
-        house.setPlayer(player);
-        house.setPrice(price);
-
-        map.setSite(index, house);
-        return house;
+        return PropertyFactory.duplicateHouseFromProperty(this);
     }
 
     @Override

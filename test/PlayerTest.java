@@ -495,4 +495,28 @@ public class PlayerTest {
         player.addTool(new RobotTool());
         assertThat(player.countTool(new BombTool()), is(3));
     }
+
+    @Test
+    public void should_player_earn_2000_money_when_he_chose_money_at_gift_house(){
+        // Given
+        player.setMoney(5000);
+
+        // When
+        player.chooseMoneyAtGiftHouse();
+
+        // Then
+        assertThat(player.getMoney(), is(7000));
+    }
+
+    @Test
+    public void should_player_earn_200_point_when_he_chose_point_at_gift_house(){
+        // Given
+        player.setPoints(200);
+
+        // When
+        player.choosePointAtGiftHouse();
+
+        // Then
+        assertThat(player.getPoints(), is(400));
+    }
 }

@@ -68,7 +68,7 @@ public class Player {
         Property property = (Property) site;
 
         if (isAffordable(property.getPrice())) {
-            pay(property.getPrice());
+            payMoney(property.getPrice());
             property.setOwner(this);
         }
     }
@@ -77,7 +77,7 @@ public class Player {
         Property property = (Property) site;
 
         if (isPropertyUpgradable(property)) {
-            pay(property.getPrice());
+            payMoney(property.getPrice());
             site = property.upgrade();
         }
     }
@@ -86,7 +86,7 @@ public class Player {
         return isAffordable(property.getPrice()) && !(property instanceof Skyscraper);
     }
 
-    private void pay(int price) {
+    private void payMoney(int price) {
         money -= price;
     }
 
@@ -113,15 +113,15 @@ public class Player {
     }
 
     public void payMoneyToPlayer(int money, Player player) {
-        pay(money);
-        player.earn(money);
+        payMoney(money);
+        player.earnMoney(money);
     }
 
     private void broke() {
         isBroke = true;
     }
 
-    private void earn(int money) {
+    private void earnMoney(int money) {
         this.money += money;
     }
 
@@ -136,7 +136,7 @@ public class Player {
     public void buyTool(Tool tool) {
         if (points < tool.getPoint()) throw new PointsException();
         if (tools.size() >= MAX_TOO_NUMBER) throw new ToolException();
-        points -= tool.getPoint();
+        payPoints(tool.getPoint());
         addTool(tool);
     }
 
@@ -154,7 +154,7 @@ public class Player {
 
     public void sellTool(Tool tool) {
         removeTool(tool);
-        points += tool.getPoint();
+        earnPoints(tool.getPoint());
     }
 
     private void removeTool(Tool toolToRemove) {
@@ -181,10 +181,26 @@ public class Player {
 
     public Property sellProperty(Property property) {
         if(property.getOwner() == this){
-            earn(property.getSalePrice());
+            earnMoney(property.getSalePrice());
             return property.reset();
         }
 
         return property;
+    }
+
+    public void chooseMoneyAtGiftHouse() {
+        earnMoney(GiftHouse.GIFT_MONEY_AMOUNT);
+    }
+
+    public void choosePointAtGiftHouse() {
+        earnPoints(GiftHouse.GIFT_POINT_AMOUNT);
+    }
+
+    private void earnPoints(int points){
+        this.points += points;
+    }
+
+    private void payPoints(int points){
+        this.points -= points;
     }
 }

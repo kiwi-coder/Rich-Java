@@ -519,4 +519,27 @@ public class PlayerTest {
         // Then
         assertThat(player.getPoints(), is(400));
     }
+
+    @Test
+    public void should_player_get_a_god_of_luck_carried_on_when_he_chose_it_at_gift_house(){
+        // Given
+        player.setGodOfLuck(null);
+
+        // When
+        player.chooseGodOfLuckAtGiftHouse();
+
+        // Then
+        assertTrue( player.hasGodOfLuck());
+    }
+
+    @Test
+    public void should_not_player_pay_toll_fee_when_he_has_a_god_of_luck(){
+        //TODO: 我感觉这个应该是更上层的逻辑, 应该写在 Game 里面.
+    }
+
+    @Test
+    public void should_god_of_luck_leave_the_player_after_five_rounds(){
+        // TODO: 我感觉这个应该是更上层的逻辑, 应该写在 Game 里面.
+    }
+
 }

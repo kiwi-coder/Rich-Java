@@ -10,6 +10,7 @@ public class Player {
     private boolean isBroke = false;
     private int points;
     private List<Tool> tools = new ArrayList<Tool>();
+    private GodOfLuck godOfLuck;
 
     public Player(String name, Site site, int money) {
         this.name = name;
@@ -202,5 +203,17 @@ public class Player {
 
     private void payPoints(int points){
         this.points -= points;
+    }
+
+    public void setGodOfLuck(GodOfLuck godOfLuck) {
+        this.godOfLuck = godOfLuck;
+    }
+
+    public void chooseGodOfLuckAtGiftHouse() {
+        godOfLuck = new GodOfLuck();
+    }
+
+    public boolean hasGodOfLuck() {
+        return godOfLuck != null;
     }
 }

@@ -10,7 +10,6 @@ public class PropertyTest {
     @Test
     public void should_return_cabin_when_upgrade_land() {
         Land land = new Land(DUMMY_MONEY);
-        land.setMap(TestHelper.simpleMap());
         assertThat(land.upgrade(), instanceOf(Cabin.class));
     }
 
@@ -24,21 +23,18 @@ public class PropertyTest {
     @Test
     public void should_return_house_when_upgrade_cabin() {
         Cabin cabin = new Cabin(DUMMY_MONEY);
-        cabin.setMap(TestHelper.simpleMap());
         assertThat(cabin.upgrade(), instanceOf(House.class));
     }
 
     @Test
     public void should_return_sell_cabin_for_1200_when_price_is_300() {
-        Cabin cabin = new Cabin(DUMMY_MONEY);
-        cabin.setPrice(300);
+        Cabin cabin = new Cabin(300);
         assertThat(cabin.getSalePrice(), is(1200));
     }
 
     @Test
     public void should_return_skyscraper_when_upgrade_house() {
         House house = new House(DUMMY_MONEY);
-        house.setMap(TestHelper.simpleMap());
         assertThat(house.upgrade(), instanceOf(Skyscraper.class));
     }
 

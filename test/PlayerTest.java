@@ -76,14 +76,12 @@ public class PlayerTest {
         player.setMoney(5000);
         Property property = new Land(200);
         property.setOwner(player);
-        property.setMap(map);
 
         // When
         player.upgradeProperty(property);
 
         // Then
         assertThat(player.getMoney(), is(4800));
-        assertThat(player.getSite(), instanceOf(Cabin.class));
     }
 
     @Test
@@ -92,63 +90,25 @@ public class PlayerTest {
         player.setMoney(100);
         Property property = new Land(200);
         property.setOwner(player);
-        property.setMap(map);
-        player.setSite(property);
 
         // When
         player.upgradeProperty(property);
 
         // Then
         assertThat(player.getMoney(), is(100));
-        assertThat(player.getSite(), instanceOf(Land.class));
-    }
-
-    @Test
-    public void should_not_player_upgrade_its_skyscraper_when_he_has_enough_money() {
-        // Given
-        Property property = new Skyscraper(200);
-        Player player = new Player("Atubo", property, 5000);
-        property.setPlayer(player);
-        property.setOwner(player);
-        property.setMap(map);
-
-        // When
-        player.upgradeCurrentProperty();
-
-        // Then
-        assertThat(player.getMoney(), is(5000));
-        assertThat(player.getSite().getType(), is("3"));
-    }
-
-    @Test
-    public void should_not_player_upgrade_its_skyscraper_when_he_has_not_enough_money() {
-        // Given
-        Property property = new Skyscraper(200);
-        Player player = new Player("Atubo", property, 180);
-        property.setPlayer(player);
-        property.setOwner(player);
-        property.setMap(map);
-
-        // When
-        player.upgradeCurrentProperty();
-
-        // Then
-        assertThat(player.getMoney(), is(180));
-        assertThat(player.getSite().getType(), is("3"));
     }
 
     @Test
     public void should_player_pay_when_he_is_on_other_one_s_land_and_has_enough_money() {
         // Given
         Property landofQianfuren = new Land(200);
-        Player atubo = new Player("Atubo", landofQianfuren, 5000);
+        Player atubo = new Player("Atubo", DUMMY_SITE, 5000);
         Player qianfuren = new Player("Qianfuren", DUMMY_SITE, 5000);
 
-        landofQianfuren.setPlayer(atubo);
         landofQianfuren.setOwner(qianfuren);
 
         // When
-        atubo.payTollFee();
+        atubo.payTollFee(landofQianfuren);
 
         // Then
         assertThat(atubo.getMoney(), is(4900));
@@ -159,124 +119,14 @@ public class PlayerTest {
     public void should_player_broke_when_he_is_on_other_one_s_land_and_has_not_enough_money() {
         // Given
         Property landofQianfuren = new Land(200);
-        Player atubo = new Player("Atubo", landofQianfuren, 50);
+        Player atubo = new Player("Atubo", DUMMY_SITE, 50);
         Player qianfuren = new Player("Qianfuren", DUMMY_SITE, 5000);
 
-        landofQianfuren.setPlayer(atubo);
         landofQianfuren.setPrice(200);
         landofQianfuren.setOwner(qianfuren);
 
         // When
-        atubo.payTollFee();
-
-        // Then
-        assertThat(atubo.isBroke(), is(true));
-        assertThat(qianfuren.getMoney(), is(5050));
-    }
-
-    @Test
-    public void should_player_pay_when_he_is_on_other_one_s_cabin_and_has_enough_money() {
-        // Given
-        Property landofQianfuren = new Cabin(300);
-        Player atubo = new Player("Atubo", landofQianfuren, 5000);
-        Player qianfuren = new Player("Qianfuren", DUMMY_SITE, 5000);
-
-        landofQianfuren.setPlayer(atubo);
-        landofQianfuren.setOwner(qianfuren);
-
-        // When
-        atubo.payTollFee();
-
-        // Then
-        assertThat(atubo.getMoney(), is(4700));
-        assertThat(qianfuren.getMoney(), is(5300));
-    }
-
-    @Test
-    public void should_player_broke_when_he_is_on_other_one_s_cabin_and_has_not_enough_money() {
-        // Given
-        Property landofQianfuren = new Cabin(300);
-        Player atubo = new Player("Atubo", landofQianfuren, 50);
-        Player qianfuren = new Player("Qianfuren", DUMMY_SITE, 5000);
-
-        landofQianfuren.setPlayer(atubo);
-        landofQianfuren.setOwner(qianfuren);
-
-        // When
-        atubo.payTollFee();
-
-        // Then
-        assertThat(atubo.isBroke(), is(true));
-        assertThat(qianfuren.getMoney(), is(5050));
-    }
-
-    @Test
-    public void should_player_pay_when_he_is_on_other_one_s_house_and_has_enough_money() {
-        // Given
-        Property landofQianfuren = new House(300);
-        Player atubo = new Player("Atubo", landofQianfuren, 5000);
-        Player qianfuren = new Player("Qianfuren", DUMMY_SITE, 5000);
-
-        landofQianfuren.setPlayer(atubo);
-        landofQianfuren.setOwner(qianfuren);
-
-        // When
-        atubo.payTollFee();
-
-        // Then
-        assertThat(atubo.getMoney(), is(4400));
-        assertThat(qianfuren.getMoney(), is(5600));
-    }
-
-    @Test
-    public void should_player_broke_when_he_is_on_other_one_s_house_and_has_not_enough_money() {
-        // Given
-        Property landofQianfuren = new House(300);
-        Player atubo = new Player("Atubo", landofQianfuren, 50);
-        Player qianfuren = new Player("Qianfuren", DUMMY_SITE, 5000);
-
-        landofQianfuren.setPlayer(atubo);
-        landofQianfuren.setOwner(qianfuren);
-
-        // When
-        atubo.payTollFee();
-
-        // Then
-        assertThat(atubo.isBroke(), is(true));
-        assertThat(qianfuren.getMoney(), is(5050));
-    }
-
-    @Test
-    public void should_player_pay_when_he_is_on_other_one_s_skyscraper_and_has_enough_money() {
-        // Given
-        Property landofQianfuren = new Skyscraper(300);
-        Player atubo = new Player("Atubo", landofQianfuren, 5000);
-        Player qianfuren = new Player("Qianfuren", DUMMY_SITE, 5000);
-
-        landofQianfuren.setPlayer(atubo);
-        landofQianfuren.setOwner(qianfuren);
-
-        // When
-        atubo.payTollFee();
-
-        // Then
-        assertThat(atubo.getMoney(), is(3800));
-        assertThat(qianfuren.getMoney(), is(6200));
-    }
-
-    @Test
-    public void should_player_broke_when_he_is_on_other_one_s_skyscraper_and_has_not_enough_money() {
-        // Given
-        Property landofQianfuren = new Skyscraper(300);
-        Site randomProperty = DUMMY_SITE;
-        Player atubo = new Player("Atubo", landofQianfuren, 50);
-        Player qianfuren = new Player("Qianfuren", randomProperty, 5000);
-
-        landofQianfuren.setPlayer(atubo);
-        landofQianfuren.setOwner(qianfuren);
-
-        // When
-        atubo.payTollFee();
+        atubo.payTollFee(landofQianfuren);
 
         // Then
         assertThat(atubo.isBroke(), is(true));
@@ -290,7 +140,6 @@ public class PlayerTest {
         Property property = new Land(300);
 
         property.setOwner(player);
-        property.setMap(map);
 
         // When
         property = player.sellProperty(property);

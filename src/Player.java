@@ -65,12 +65,6 @@ public class Player {
         return site;
     }
 
-    public void buyCurrentProperty() {
-        Property property = (Property) site;
-
-        buyProperty(property);
-    }
-
     public void buyProperty(Property property) {
         if (isAffordable(property.getPrice())) {
             payMoney(property.getPrice());
@@ -78,16 +72,10 @@ public class Player {
         }
     }
 
-    public void upgradeCurrentProperty() {
-        Property property = (Property) site;
-
-        upgradeProperty(property);
-    }
-
     public void upgradeProperty(Property property) {
         if (isPropertyUpgradable(property)) {
             payMoney(property.getPrice());
-            site = property.upgrade();
+            property.upgrade();
         }
     }
 
@@ -107,8 +95,7 @@ public class Player {
         return money;
     }
 
-    public void payTollFee() {
-        Property property = (Property) site;
+    public void payTollFee(Property property) {
         Player propertyOwner = property.getOwner();
 
         int tollFee = property.getTollFee();

@@ -8,17 +8,17 @@ public class Land extends Property {
         this.price = price;
     }
 
-    public Site upgrade(){
+    public Property upgrade() {
         return new Cabin(getPrice());
     }
 
     @Override
-    public int getTollFee(){
-        return (int)(price * TOLL_FEE_RATE);
+    public int getTollFee() {
+        return (int) (price * TOLL_FEE_RATE);
     }
 
     @Override
     public int getSalePrice() {
-        return (int)(price * SALE_PRICE_RATE);
+        return (int) (price * SALE_PRICE_RATE);
     }
 }

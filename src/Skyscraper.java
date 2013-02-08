@@ -9,6 +9,11 @@ public class Skyscraper extends Property {
     }
 
     @Override
+    public Property upgrade() {
+        return null;  //ToDo: throw exception here
+    }
+
+    @Override
     public int getTollFee(){
         return (int)(price * TOLL_FEE_RATE);
     }

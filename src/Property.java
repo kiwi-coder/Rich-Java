@@ -1,13 +1,11 @@
-public class Property extends Site{
+public abstract class Property {
     private Player owner;
     protected int price;
+    private final String type;
+
 
     public Property(String type) {
-        super(type);
-    }
-
-    public Site upgrade(){
-        return null;
+        this.type = type;
     }
 
     public Player getOwner() {
@@ -26,13 +24,11 @@ public class Property extends Site{
         this.price = price;
     }
 
-    public int getTollFee() {
-        return 0;
-    }
+    public abstract int getTollFee();
 
-    public int getSalePrice() {
-        return 0;
-    }
+    public abstract int getSalePrice();
+
+    public abstract Property upgrade();
 
     public Property reset() {
         Property land = new Land(getPrice());

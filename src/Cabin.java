@@ -8,7 +8,7 @@ public class Cabin extends Property{
         this.price = price;
     }
 
-    public Site upgrade(){
+    public Property upgrade(){
         return new House(getPrice());
     }
 

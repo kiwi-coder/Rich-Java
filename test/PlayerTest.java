@@ -323,63 +323,6 @@ public class PlayerTest {
     }
 
     @Test
-    public void test_player_selling_his_cabin() {
-        // Given
-        player.setMoney(5000);
-        Property property = new Cabin();
-
-        property.setPrice(300);
-        property.setOwner(player);
-        property.setMap(map);
-
-        // When
-        property = player.sellProperty(property);
-
-        // Then
-        assertTrue(property.getOwner() == null);
-        assertTrue(property instanceof Land);
-        assertThat(player.getMoney(), is(6200));
-    }
-
-    @Test
-    public void test_player_selling_his_house() {
-        // Given
-        player.setMoney(5000);
-        Property property = new House();
-
-        property.setPrice(300);
-        property.setOwner(player);
-        property.setMap(map);
-
-        // When
-        property = player.sellProperty(property);
-
-        // Then
-        assertTrue(property.getOwner() == null);
-        assertTrue(property instanceof Land);
-        assertThat(player.getMoney(), is(6800));
-    }
-
-    @Test
-    public void test_player_selling_his_skyscraper() {
-        // Given
-        player.setMoney(5000);
-        Property property = new Skyscraper();
-
-        property.setPrice(300);
-        property.setOwner(player);
-        property.setMap(map);
-
-        // When
-        property = player.sellProperty(property);
-
-        // Then
-        assertTrue(property.getOwner() == null);
-        assertTrue(property instanceof Land);
-        assertThat(player.getMoney(), is(7400));
-    }
-
-    @Test
     public void should_success_buy_player_when_player_has_enough_points() {
         player.setPoints(500);
         player.buyTool(new BlockTool());

@@ -40,4 +40,8 @@ public class Property extends Site{
 
         return land;
     }
+
+    public boolean hasOwner() {
+        return owner != null;
+    }
 }

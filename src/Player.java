@@ -65,18 +65,26 @@ public class Player {
         return site;
     }
 
-    public void buyProperty() {
+    public void buyCurrentProperty() {
         Property property = (Property) site;
 
+        buyProperty(property);
+    }
+
+    public void buyProperty(Property property) {
         if (isAffordable(property.getPrice())) {
             payMoney(property.getPrice());
             property.setOwner(this);
         }
     }
 
-    public void upgradeProperty() {
+    public void upgradeCurrentProperty() {
         Property property = (Property) site;
 
+        upgradeProperty(property);
+    }
+
+    public void upgradeProperty(Property property) {
         if (isPropertyUpgradable(property)) {
             payMoney(property.getPrice());
             site = property.upgrade();

@@ -2,6 +2,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsInstanceOf.instanceOf;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
@@ -44,142 +46,65 @@ public class PlayerTest {
     public void should_player_buy_a_land_when_it_has_no_owner_and_he_has_enough_money() {
         // Given
         Property property = new Land();
-        Player player = new Player("Atubo", property, 5000);
-        property.setPlayer(player);
         property.setPrice(200);
+        player.setMoney(5000);
 
         // When
-        player.buyProperty();
+        player.buyProperty(property);
 
         // Then
         assertThat(player.getMoney(), is(4800));
-        assertThat(player.getSite().getType(), is("0"));
-        assertThat(((Property) player.getSite()).getOwner().getName(), is("Atubo"));
+        assertThat(property.getOwner(), is(player));
     }
 
     @Test
     public void should_player_not_buy_a_land_when_he_has_no_enough_money() {
         // Given
         Property property = new Land();
-        Player player = new Player("Atubo", property, 180);
-        property.setPlayer(player);
         property.setPrice(200);
+        player.setMoney(100);
 
         // When
-        player.buyProperty();
+        player.buyProperty(property);
 
         // Then
-        assertThat(player.getMoney(), is(180));
-        assertThat(player.getSite().getType(), is("0"));
-        assertTrue(((Property) player.getSite()).getOwner() == null);
+        assertThat(player.getMoney(), is(100));
+        assertFalse(property.hasOwner());
     }
 
     @Test
-    public void should_player_upgrade_his_land_to_cabin_when_he_has_enough_money() {
+    public void should_player_upgrade_when_he_has_enough_money() {
         // Given
+        player.setMoney(5000);
         Property property = new Land();
-        Player player = new Player("Atubo", property, 5000);
-        property.setPlayer(player);
         property.setPrice(200);
         property.setOwner(player);
         property.setMap(map);
 
         // When
-        player.upgradeProperty();
+        player.upgradeProperty(property);
 
         // Then
         assertThat(player.getMoney(), is(4800));
-        assertThat(player.getSite().getType(), is("1"));
+        assertThat(player.getSite(), instanceOf(Cabin.class));
     }
 
     @Test
-    public void should_not_player_upgrade_his_land_to_cabin_when_he_has_not_enough_money() {
+    public void should_not_player_upgrade_when_he_has_not_enough_money() {
         // Given
+        player.setMoney(100);
         Property property = new Land();
-        Player player = new Player("Atubo", property, 180);
-        property.setPlayer(player);
         property.setPrice(200);
         property.setOwner(player);
         property.setMap(map);
+        player.setSite(property);
 
         // When
-        player.upgradeProperty();
+        player.upgradeProperty(property);
 
         // Then
-        assertThat(player.getMoney(), is(180));
-        assertThat(player.getSite().getType(), is("0"));
-    }
-
-    @Test
-    public void should_player_upgrade_its_cabin_to_house_when_he_has_enough_money() {
-        // Given
-        Property property = new Cabin();
-        Player player = new Player("Atubo", property, 5000);
-        property.setPlayer(player);
-        property.setPrice(200);
-        property.setOwner(player);
-        property.setMap(map);
-
-        // When
-        player.upgradeProperty();
-
-        // Then
-        assertThat(player.getMoney(), is(4800));
-        assertThat(player.getSite().getType(), is("2"));
-    }
-
-    @Test
-    public void should_not_player_upgrade_his_cabin_to_house_when_has_not_enough_money() {
-        // Given
-        Property property = new Cabin();
-        Player player = new Player("Atubo", property, 180);
-        property.setPlayer(player);
-        property.setPrice(200);
-        property.setOwner(player);
-        property.setMap(map);
-
-        // When
-        player.upgradeProperty();
-
-        // Then
-        assertThat(player.getMoney(), is(180));
-        assertThat(player.getSite().getType(), is("1"));
-    }
-
-    @Test
-    public void should_player_upgrade_its_house_to_skyscraper_when_he_has_enough_money() {
-        // Given
-        Property property = new House();
-        Player player = new Player("Atubo", property, 5000);
-        property.setPlayer(player);
-        property.setPrice(200);
-        property.setOwner(player);
-        property.setMap(map);
-
-        // When
-        player.upgradeProperty();
-
-        // Then
-        assertThat(player.getMoney(), is(4800));
-        assertThat(player.getSite().getType(), is("3"));
-    }
-
-    @Test
-    public void should_not_player_upgrade_his_house_to_skyscraper_when_has_not_enough_money() {
-        // Given
-        Property property = new House();
-        Player player = new Player("Atubo", property, 180);
-        property.setPlayer(player);
-        property.setPrice(200);
-        property.setOwner(player);
-        property.setMap(map);
-
-        // When
-        player.upgradeProperty();
-
-        // Then
-        assertThat(player.getMoney(), is(180));
-        assertThat(player.getSite().getType(), is("2"));
+        assertThat(player.getMoney(), is(100));
+        assertThat(player.getSite(), instanceOf(Land.class));
     }
 
     @Test
@@ -193,7 +118,7 @@ public class PlayerTest {
         property.setMap(map);
 
         // When
-        player.upgradeProperty();
+        player.upgradeCurrentProperty();
 
         // Then
         assertThat(player.getMoney(), is(5000));
@@ -211,7 +136,7 @@ public class PlayerTest {
         property.setMap(map);
 
         // When
-        player.upgradeProperty();
+        player.upgradeCurrentProperty();
 
         // Then
         assertThat(player.getMoney(), is(180));
@@ -379,7 +304,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void test_player_selling_his_land(){
+    public void test_player_selling_his_land() {
         // Given
         player.setMoney(5000);
         Property property = new Land();
@@ -398,7 +323,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void test_player_selling_his_cabin(){
+    public void test_player_selling_his_cabin() {
         // Given
         player.setMoney(5000);
         Property property = new Cabin();
@@ -417,7 +342,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void test_player_selling_his_house(){
+    public void test_player_selling_his_house() {
         // Given
         player.setMoney(5000);
         Property property = new House();
@@ -436,7 +361,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void test_player_selling_his_skyscraper(){
+    public void test_player_selling_his_skyscraper() {
         // Given
         player.setMoney(5000);
         Property property = new Skyscraper();
@@ -497,7 +422,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void should_player_earn_2000_money_when_he_chose_money_at_gift_house(){
+    public void should_player_earn_2000_money_when_he_chose_money_at_gift_house() {
         // Given
         player.setMoney(5000);
 
@@ -509,7 +434,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void should_player_earn_200_point_when_he_chose_point_at_gift_house(){
+    public void should_player_earn_200_point_when_he_chose_point_at_gift_house() {
         // Given
         player.setPoints(200);
 
@@ -521,7 +446,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void should_player_get_a_god_of_luck_carried_on_when_he_chose_it_at_gift_house(){
+    public void should_player_get_a_god_of_luck_carried_on_when_he_chose_it_at_gift_house() {
         // Given
         player.setGodOfLuck(null);
 
@@ -529,16 +454,16 @@ public class PlayerTest {
         player.chooseGodOfLuckAtGiftHouse();
 
         // Then
-        assertTrue( player.hasGodOfLuck());
+        assertTrue(player.hasGodOfLuck());
     }
 
     @Test
-    public void should_not_player_pay_toll_fee_when_he_has_a_god_of_luck(){
+    public void should_not_player_pay_toll_fee_when_he_has_a_god_of_luck() {
         //TODO: 我感觉这个应该是更上层的逻辑, 应该写在 Game 里面.
     }
 
     @Test
-    public void should_god_of_luck_leave_the_player_after_five_rounds(){
+    public void should_god_of_luck_leave_the_player_after_five_rounds() {
         // TODO: 我感觉这个应该是更上层的逻辑, 应该写在 Game 里面.
     }
 

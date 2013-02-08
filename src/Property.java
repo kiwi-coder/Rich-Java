@@ -35,7 +35,7 @@ public class Property extends Site{
     }
 
     public Property reset() {
-        Property land = PropertyFactory.duplicateLandFromProperty(this);
+        Property land = new Land(getPrice());
         land.setOwner(null);
 
         return land;

@@ -3,12 +3,13 @@ public class Land extends Property {
     private static final double TOLL_FEE_RATE = 0.5;
     private static final double SALE_PRICE_RATE = 2.0;
 
-    public Land() {
+    public Land(int price) {
         super(LAND_TYPE_CODE);
+        this.price = price;
     }
 
     public Site upgrade(){
-        return PropertyFactory.duplicateCabinFromProperty(this);
+        return new Cabin(getPrice());
     }
 
     @Override

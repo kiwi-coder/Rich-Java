@@ -3,12 +3,13 @@ public class House extends Property {
     private static final double TOLL_FEE_RATE = 2.0;
     private static final double SALE_PRICE_RATE = 6.0;
 
-    public House() {
+    public House(int price) {
         super(HOUSE_TYPE_CODE);
+        this.price = price;
     }
 
     public Site upgrade(){
-        return PropertyFactory.duplicateSkyscraperFromProperty(this);
+        return new Skyscraper(getPrice());
     }
 
     @Override

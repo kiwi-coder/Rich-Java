@@ -3,12 +3,13 @@ public class Cabin extends Property{
     private static final double TOLL_FEE_RATE = 1.0;
     private static final double SALE_PRICE_RATE = 4.0;
 
-    public Cabin() {
+    public Cabin(int price) {
         super(CABIN_TYPE_CODE);
+        this.price = price;
     }
 
     public Site upgrade(){
-        return PropertyFactory.duplicateHouseFromProperty(this);
+        return new House(getPrice());
     }
 
     @Override

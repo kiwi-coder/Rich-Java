@@ -45,8 +45,7 @@ public class PlayerTest {
     @Test
     public void should_player_buy_a_land_when_it_has_no_owner_and_he_has_enough_money() {
         // Given
-        Property property = new Land();
-        property.setPrice(200);
+        Property property = new Land(200);
         player.setMoney(5000);
 
         // When
@@ -60,8 +59,7 @@ public class PlayerTest {
     @Test
     public void should_player_not_buy_a_land_when_he_has_no_enough_money() {
         // Given
-        Property property = new Land();
-        property.setPrice(200);
+        Property property = new Land(200);
         player.setMoney(100);
 
         // When
@@ -76,8 +74,7 @@ public class PlayerTest {
     public void should_player_upgrade_when_he_has_enough_money() {
         // Given
         player.setMoney(5000);
-        Property property = new Land();
-        property.setPrice(200);
+        Property property = new Land(200);
         property.setOwner(player);
         property.setMap(map);
 
@@ -93,8 +90,7 @@ public class PlayerTest {
     public void should_not_player_upgrade_when_he_has_not_enough_money() {
         // Given
         player.setMoney(100);
-        Property property = new Land();
-        property.setPrice(200);
+        Property property = new Land(200);
         property.setOwner(player);
         property.setMap(map);
         player.setSite(property);
@@ -110,10 +106,9 @@ public class PlayerTest {
     @Test
     public void should_not_player_upgrade_its_skyscraper_when_he_has_enough_money() {
         // Given
-        Property property = new Skyscraper();
+        Property property = new Skyscraper(200);
         Player player = new Player("Atubo", property, 5000);
         property.setPlayer(player);
-        property.setPrice(200);
         property.setOwner(player);
         property.setMap(map);
 
@@ -128,10 +123,9 @@ public class PlayerTest {
     @Test
     public void should_not_player_upgrade_its_skyscraper_when_he_has_not_enough_money() {
         // Given
-        Property property = new Skyscraper();
+        Property property = new Skyscraper(200);
         Player player = new Player("Atubo", property, 180);
         property.setPlayer(player);
-        property.setPrice(200);
         property.setOwner(player);
         property.setMap(map);
 
@@ -146,13 +140,11 @@ public class PlayerTest {
     @Test
     public void should_player_pay_when_he_is_on_other_one_s_land_and_has_enough_money() {
         // Given
-        Property landofQianfuren = new Land();
-        Property randomProperty = new Land();
+        Property landofQianfuren = new Land(200);
         Player atubo = new Player("Atubo", landofQianfuren, 5000);
-        Player qianfuren = new Player("Qianfuren", randomProperty, 5000);
+        Player qianfuren = new Player("Qianfuren", DUMMY_SITE, 5000);
 
         landofQianfuren.setPlayer(atubo);
-        landofQianfuren.setPrice(200);
         landofQianfuren.setOwner(qianfuren);
 
         // When
@@ -166,10 +158,9 @@ public class PlayerTest {
     @Test
     public void should_player_broke_when_he_is_on_other_one_s_land_and_has_not_enough_money() {
         // Given
-        Property landofQianfuren = new Land();
-        Property randomProperty = new Land();
+        Property landofQianfuren = new Land(200);
         Player atubo = new Player("Atubo", landofQianfuren, 50);
-        Player qianfuren = new Player("Qianfuren", randomProperty, 5000);
+        Player qianfuren = new Player("Qianfuren", DUMMY_SITE, 5000);
 
         landofQianfuren.setPlayer(atubo);
         landofQianfuren.setPrice(200);
@@ -186,13 +177,11 @@ public class PlayerTest {
     @Test
     public void should_player_pay_when_he_is_on_other_one_s_cabin_and_has_enough_money() {
         // Given
-        Property landofQianfuren = new Cabin();
-        Property randomProperty = new Land();
+        Property landofQianfuren = new Cabin(300);
         Player atubo = new Player("Atubo", landofQianfuren, 5000);
-        Player qianfuren = new Player("Qianfuren", randomProperty, 5000);
+        Player qianfuren = new Player("Qianfuren", DUMMY_SITE, 5000);
 
         landofQianfuren.setPlayer(atubo);
-        landofQianfuren.setPrice(300);
         landofQianfuren.setOwner(qianfuren);
 
         // When
@@ -206,13 +195,11 @@ public class PlayerTest {
     @Test
     public void should_player_broke_when_he_is_on_other_one_s_cabin_and_has_not_enough_money() {
         // Given
-        Property landofQianfuren = new Cabin();
-        Property randomProperty = new Land();
+        Property landofQianfuren = new Cabin(300);
         Player atubo = new Player("Atubo", landofQianfuren, 50);
-        Player qianfuren = new Player("Qianfuren", randomProperty, 5000);
+        Player qianfuren = new Player("Qianfuren", DUMMY_SITE, 5000);
 
         landofQianfuren.setPlayer(atubo);
-        landofQianfuren.setPrice(300);
         landofQianfuren.setOwner(qianfuren);
 
         // When
@@ -226,13 +213,11 @@ public class PlayerTest {
     @Test
     public void should_player_pay_when_he_is_on_other_one_s_house_and_has_enough_money() {
         // Given
-        Property landofQianfuren = new House();
-        Property randomProperty = new Land();
+        Property landofQianfuren = new House(300);
         Player atubo = new Player("Atubo", landofQianfuren, 5000);
-        Player qianfuren = new Player("Qianfuren", randomProperty, 5000);
+        Player qianfuren = new Player("Qianfuren", DUMMY_SITE, 5000);
 
         landofQianfuren.setPlayer(atubo);
-        landofQianfuren.setPrice(300);
         landofQianfuren.setOwner(qianfuren);
 
         // When
@@ -246,13 +231,11 @@ public class PlayerTest {
     @Test
     public void should_player_broke_when_he_is_on_other_one_s_house_and_has_not_enough_money() {
         // Given
-        Property landofQianfuren = new House();
-        Property randomProperty = new Land();
+        Property landofQianfuren = new House(300);
         Player atubo = new Player("Atubo", landofQianfuren, 50);
-        Player qianfuren = new Player("Qianfuren", randomProperty, 5000);
+        Player qianfuren = new Player("Qianfuren", DUMMY_SITE, 5000);
 
         landofQianfuren.setPlayer(atubo);
-        landofQianfuren.setPrice(300);
         landofQianfuren.setOwner(qianfuren);
 
         // When
@@ -266,13 +249,11 @@ public class PlayerTest {
     @Test
     public void should_player_pay_when_he_is_on_other_one_s_skyscraper_and_has_enough_money() {
         // Given
-        Property landofQianfuren = new Skyscraper();
-        Property randomProperty = new Land();
+        Property landofQianfuren = new Skyscraper(300);
         Player atubo = new Player("Atubo", landofQianfuren, 5000);
-        Player qianfuren = new Player("Qianfuren", randomProperty, 5000);
+        Player qianfuren = new Player("Qianfuren", DUMMY_SITE, 5000);
 
         landofQianfuren.setPlayer(atubo);
-        landofQianfuren.setPrice(300);
         landofQianfuren.setOwner(qianfuren);
 
         // When
@@ -286,13 +267,12 @@ public class PlayerTest {
     @Test
     public void should_player_broke_when_he_is_on_other_one_s_skyscraper_and_has_not_enough_money() {
         // Given
-        Property landofQianfuren = new Skyscraper();
-        Property randomProperty = new Land();
+        Property landofQianfuren = new Skyscraper(300);
+        Site randomProperty = DUMMY_SITE;
         Player atubo = new Player("Atubo", landofQianfuren, 50);
         Player qianfuren = new Player("Qianfuren", randomProperty, 5000);
 
         landofQianfuren.setPlayer(atubo);
-        landofQianfuren.setPrice(300);
         landofQianfuren.setOwner(qianfuren);
 
         // When
@@ -307,9 +287,8 @@ public class PlayerTest {
     public void test_player_selling_his_land() {
         // Given
         player.setMoney(5000);
-        Property property = new Land();
+        Property property = new Land(300);
 
-        property.setPrice(300);
         property.setOwner(player);
         property.setMap(map);
 

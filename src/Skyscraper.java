@@ -3,8 +3,9 @@ public class Skyscraper extends Property {
     private static final double TOLL_FEE_RATE = 4.0;
     private static final double SALE_PRICE_RATE = 8.0;
 
-    public Skyscraper() {
+    public Skyscraper(int price) {
         super(SKYSCRAPER_TYPE_CODE);
+        this.price =  price;
     }
 
     @Override

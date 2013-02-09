@@ -1,24 +1,24 @@
-public class Land extends Property {
+public class Land extends PropertyLevel {
     private static final String LAND_TYPE_CODE = "0";
     private static final double TOLL_FEE_RATE = 0.5;
     private static final double SALE_PRICE_RATE = 2.0;
 
     public Land(int price) {
         super(LAND_TYPE_CODE);
-        this.price = price;
+        this.setPrice(price);
     }
 
-    public Property upgrade() {
+    public PropertyLevel upgrade() {
         return new Cabin(getPrice());
     }
 
     @Override
     public int getTollFee() {
-        return (int) (price * TOLL_FEE_RATE);
+        return (int) (getPrice() * TOLL_FEE_RATE);
     }
 
     @Override
     public int getSalePrice() {
-        return (int) (price * SALE_PRICE_RATE);
+        return (int) (getPrice() * SALE_PRICE_RATE);
     }
 }

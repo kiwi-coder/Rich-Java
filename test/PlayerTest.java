@@ -1,8 +1,8 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -45,7 +45,7 @@ public class PlayerTest {
     @Test
     public void should_player_buy_a_land_when_it_has_no_owner_and_he_has_enough_money() {
         // Given
-        Property property = new Land(200);
+        Property property = new Property(new Land(200));
         player.setMoney(5000);
 
         // When
@@ -59,7 +59,7 @@ public class PlayerTest {
     @Test
     public void should_player_not_buy_a_land_when_he_has_no_enough_money() {
         // Given
-        Property property = new Land(200);
+        Property property = new Property(new Land(200));
         player.setMoney(100);
 
         // When
@@ -74,7 +74,7 @@ public class PlayerTest {
     public void should_player_upgrade_when_he_has_enough_money() {
         // Given
         player.setMoney(5000);
-        Property property = new Land(200);
+        Property property = new Property(new Land(200));
         property.setOwner(player);
 
         // When
@@ -82,13 +82,14 @@ public class PlayerTest {
 
         // Then
         assertThat(player.getMoney(), is(4800));
+        assertThat(property.getLevel(), instanceOf(Cabin.class));
     }
 
     @Test
     public void should_not_player_upgrade_when_he_has_not_enough_money() {
         // Given
         player.setMoney(100);
-        Property property = new Land(200);
+        Property property = new Property(new Land(200));
         property.setOwner(player);
 
         // When
@@ -96,15 +97,16 @@ public class PlayerTest {
 
         // Then
         assertThat(player.getMoney(), is(100));
+        assertThat(property.getLevel(), instanceOf(Land.class));
     }
 
     @Test
     public void should_player_pay_when_he_is_on_other_one_s_land_and_has_enough_money() {
         // Given
-        Property landofQianfuren = new Land(200);
         Player atubo = new Player("Atubo", DUMMY_SITE, 5000);
         Player qianfuren = new Player("Qianfuren", DUMMY_SITE, 5000);
 
+        Property landofQianfuren = new Property(new Land(200));
         landofQianfuren.setOwner(qianfuren);
 
         // When
@@ -118,11 +120,10 @@ public class PlayerTest {
     @Test
     public void should_player_broke_when_he_is_on_other_one_s_land_and_has_not_enough_money() {
         // Given
-        Property landofQianfuren = new Land(200);
         Player atubo = new Player("Atubo", DUMMY_SITE, 50);
         Player qianfuren = new Player("Qianfuren", DUMMY_SITE, 5000);
 
-        landofQianfuren.setPrice(200);
+        Property landofQianfuren = new Property(new Land(200));
         landofQianfuren.setOwner(qianfuren);
 
         // When
@@ -134,20 +135,19 @@ public class PlayerTest {
     }
 
     @Test
-    public void test_player_selling_his_land() {
+    public void test_player_selling_his_cabin() {
         // Given
         player.setMoney(5000);
-        Property property = new Land(300);
-
+        Property property = new Property(new Cabin(300));
         property.setOwner(player);
 
         // When
-        property = player.sellProperty(property);
+        player.sellProperty(property);
 
         // Then
-        assertTrue(property.getOwner() == null);
-        assertTrue(property instanceof Land);
-        assertThat(player.getMoney(), is(5600));
+        assertFalse(property.hasOwner());
+        assertThat(player.getMoney(), is(6200));
+        assertThat(property.getLevel(), instanceOf(Land.class));
     }
 
     @Test

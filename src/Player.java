@@ -65,22 +65,8 @@ public class Player {
         return site;
     }
 
-    public void buyProperty(Property property) {
-        if (isAffordable(property.getPrice())) {
-            payMoney(property.getPrice());
-            property.setOwner(this);
-        }
-    }
-
-    public void upgradeProperty(Property property) {
-        if (isPropertyUpgradable(property)) {
-            payMoney(property.getPrice());
-            property.upgrade();
-        }
-    }
-
-    public boolean isPropertyUpgradable(Property property) {
-        return isAffordable(property.getPrice()) && !(property instanceof Skyscraper);
+    public boolean isPropertyUpgradable(PropertyLevel propertyLevel) {
+        return isAffordable(propertyLevel.getPrice()) && !(propertyLevel instanceof Skyscraper);
     }
 
     private void payMoney(int price) {
@@ -93,19 +79,6 @@ public class Player {
 
     public int getMoney() {
         return money;
-    }
-
-    public void payTollFee(Property property) {
-        Player propertyOwner = property.getOwner();
-
-        int tollFee = property.getTollFee();
-
-        if (!isAffordable(tollFee)) {
-            tollFee = money;
-            broke();
-        }
-
-        payMoneyToPlayer(tollFee, propertyOwner);
     }
 
     public void payMoneyToPlayer(int money, Player player) {
@@ -175,15 +148,6 @@ public class Player {
         this.money = money;
     }
 
-    public Property sellProperty(Property property) {
-        if(property.getOwner() == this){
-            earnMoney(property.getSalePrice());
-            return property.reset();
-        }
-
-        return property;
-    }
-
     public void chooseMoneyAtGiftHouse() {
         earnMoney(GiftHouse.GIFT_MONEY_AMOUNT);
     }
@@ -192,11 +156,11 @@ public class Player {
         earnPoints(GiftHouse.GIFT_POINT_AMOUNT);
     }
 
-    private void earnPoints(int points){
+    private void earnPoints(int points) {
         this.points += points;
     }
 
-    private void payPoints(int points){
+    private void payPoints(int points) {
         this.points -= points;
     }
 
@@ -210,5 +174,40 @@ public class Player {
 
     public boolean hasGodOfLuck() {
         return godOfLuck != null;
+    }
+
+    public void upgradeProperty(Property property) {
+        if (isPropertyUpgradable(property.getLevel())) {
+            payMoney(property.getPrice());
+            property.upgrade();
+        }
+    }
+
+
+    public void sellProperty(Property property) {
+        if (property.getOwner() == this) {
+            earnMoney(property.getSalePrice());
+            property.reset();
+        }
+    }
+
+    public void buyProperty(Property property) {
+        if (isAffordable(property.getPrice())) {
+            payMoney(property.getPrice());
+            property.setOwner(this);
+        }
+    }
+
+    public void payTollFee(Property property) {
+        Player propertyOwner = property.getOwner();
+
+        int tollFee = property.getTollFee();
+
+        if (!isAffordable(tollFee)) {
+            tollFee = money;
+            broke();
+        }
+
+        payMoneyToPlayer(tollFee, propertyOwner);
     }
 }

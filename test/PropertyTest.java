@@ -1,3 +1,4 @@
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
@@ -5,50 +6,28 @@ import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.junit.Assert.assertThat;
 
 public class PropertyTest {
-    private static final int DUMMY_MONEY = 0;
 
-    @Test
-    public void should_return_cabin_when_upgrade_land() {
-        Land land = new Land(DUMMY_MONEY);
-        assertThat(land.upgrade(), instanceOf(Cabin.class));
+    private Property property;
+
+    @Before
+    public void setUp() throws Exception {
+        property = new Property(new Land(100));
     }
 
     @Test
-    public void should_return_sell_land_for_600_when_price_is_300() {
-        Land land = new Land(DUMMY_MONEY);
-        land.setPrice(300);
-        assertThat(land.getSalePrice(), is(600));
+    public void should_return_cabin_after_upgrade_land() {
+        property.upgrade();
+        assertThat(property.getLevel(), instanceOf(Cabin.class));
+        assertThat(property.getSalePrice(), is(400));
     }
 
     @Test
-    public void should_return_house_when_upgrade_cabin() {
-        Cabin cabin = new Cabin(DUMMY_MONEY);
-        assertThat(cabin.upgrade(), instanceOf(House.class));
+    public void should_return_200_for_sale_price() {
+        assertThat(property.getSalePrice(), is(200));
     }
 
     @Test
-    public void should_return_sell_cabin_for_1200_when_price_is_300() {
-        Cabin cabin = new Cabin(300);
-        assertThat(cabin.getSalePrice(), is(1200));
-    }
-
-    @Test
-    public void should_return_skyscraper_when_upgrade_house() {
-        House house = new House(DUMMY_MONEY);
-        assertThat(house.upgrade(), instanceOf(Skyscraper.class));
-    }
-
-    @Test
-    public void should_return_sell_house_1800_when_price_is_300() {
-        House house = new House(DUMMY_MONEY);
-        house.setPrice(300);
-        assertThat(house.getSalePrice(), is(1800));
-    }
-
-    @Test
-    public void should_return_sell_skyscraper_2400_when_price_is_300() {
-        Skyscraper skyscraper = new Skyscraper(DUMMY_MONEY);
-        skyscraper.setPrice(300);
-        assertThat(skyscraper.getSalePrice(), is(2400));
+    public void should_return_50_for_toll_fee() {
+        assertThat(property.getTollFee(), is(50));
     }
 }

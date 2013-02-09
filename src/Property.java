@@ -1,43 +1,45 @@
-public abstract class Property {
-    private Player owner;
-    protected int price;
-    private final String type;
+class Property {
+    private PropertyLevel level;
+    private Player owner = null;
 
+    public Property(PropertyLevel level) {
+        this.level = level;
+    }
 
-    public Property(String type) {
-        this.type = type;
+    public void upgrade() {
+        level = level.upgrade();
+    }
+
+    public PropertyLevel getLevel() {
+        return level;
+    }
+
+    public int getSalePrice() {
+        return level.getSalePrice();
+    }
+
+    public int getTollFee() {
+        return level.getTollFee();
+    }
+
+    public int getPrice() {
+        return level.getPrice();
     }
 
     public Player getOwner() {
         return owner;
     }
 
-    public void setOwner(Player player) {
-        owner = player;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public abstract int getTollFee();
-
-    public abstract int getSalePrice();
-
-    public abstract Property upgrade();
-
-    public Property reset() {
-        Property land = new Land(getPrice());
-        land.setOwner(null);
-
-        return land;
+    public void reset() {
+        level = new Land(getPrice());
+        owner = null;
     }
 
     public boolean hasOwner() {
         return owner != null;
+    }
+
+    public void setOwner(Player player) {
+        owner = player;
     }
 }

@@ -42,4 +42,8 @@ class Property {
     public void setOwner(Player player) {
         owner = player;
     }
+
+    public String display() {
+        return level.display();
+    }
 }

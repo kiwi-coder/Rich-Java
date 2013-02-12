@@ -43,4 +43,13 @@ public class MapTest {
         // When and Then
         assertThat(pointMine.display(), is("$"));
     }
+
+    @Test
+    public void should_gift_house_display_G_on_map(){
+        // Given
+        GiftHouse giftHouse = new GiftHouse();
+
+        // When and Then
+        assertThat(giftHouse.display(), is("G"));
+    }
 }

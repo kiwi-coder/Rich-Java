@@ -238,4 +238,17 @@ public class PlayerTest {
         // TODO: 我感觉这个应该是更上层的逻辑, 应该写在 Game 里面.
     }
 
+    @Test
+    public void should_player_get_correct_amount_of_points_when_he_is_on_point_mine() {
+        // Given
+        player.setPoints(200);
+        PointMine pointMine = new PointMine(80);
+
+        // When
+        player.mine(pointMine);
+
+        // Then
+        assertThat(player.getPoints(), is(280));
+    }
+
 }

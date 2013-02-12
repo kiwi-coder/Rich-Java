@@ -14,7 +14,7 @@ public class Site {
         return player != null;
     }
 
-    public int getIndex(){
+    public int getIndex() {
         return index;
     }
 

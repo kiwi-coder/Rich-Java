@@ -11,7 +11,7 @@ public class Map {
 
     private void setSites(List<Site> sites) {
         this.sites = sites;
-        for(int index = 0; index < size();index++) {
+        for (int index = 0; index < size(); index++) {
             Site site = sites.get(index);
             site.setMap(this);
             site.setIndex(index);

@@ -210,4 +210,8 @@ public class Player {
 
         payMoneyToPlayer(tollFee, propertyOwner);
     }
+
+    public void mine(PointMine pointMine) {
+        earnPoints(pointMine.getPoint());
+    }
 }

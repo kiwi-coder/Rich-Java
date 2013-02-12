@@ -2,7 +2,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 public class MapTest {
@@ -34,5 +33,14 @@ public class MapTest {
                 + "000\n";
         Player player = new Player("ATuBo", map.getSite(0), DUMMY_MONEY);
         assertThat(map.display(), is(expected));
+    }
+
+    @Test
+    public void should_point_mine_display_$_on_map() {
+        // Given
+        PointMine pointMine = new PointMine(80);
+
+        // When and Then
+        assertThat(pointMine.display(), is("$"));
     }
 }

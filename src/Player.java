@@ -149,11 +149,11 @@ public class Player {
     }
 
     public void chooseMoneyAtGiftHouse() {
-        earnMoney(GiftHouse.GIFT_MONEY_AMOUNT);
+        earnMoney(GiftHouseSite.GIFT_MONEY_AMOUNT);
     }
 
     public void choosePointAtGiftHouse() {
-        earnPoints(GiftHouse.GIFT_POINT_AMOUNT);
+        earnPoints(GiftHouseSite.GIFT_POINT_AMOUNT);
     }
 
     private void earnPoints(int points) {
@@ -211,7 +211,7 @@ public class Player {
         payMoneyToPlayer(tollFee, propertyOwner);
     }
 
-    public void mine(PointMine pointMine) {
-        earnPoints(pointMine.getPoint());
+    public void mine(PointMineSite pointMineSite) {
+        earnPoints(pointMineSite.getPoint());
     }
 }

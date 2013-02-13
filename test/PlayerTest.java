@@ -242,10 +242,10 @@ public class PlayerTest {
     public void should_player_get_correct_amount_of_points_when_he_is_on_point_mine() {
         // Given
         player.setPoints(200);
-        PointMine pointMine = new PointMine(80);
+        PointMineSite pointMineSite = new PointMineSite(80);
 
         // When
-        player.mine(pointMine);
+        player.mine(pointMineSite);
 
         // Then
         assertThat(player.getPoints(), is(280));

@@ -49,18 +49,18 @@ public class SiteTest {
     @Test
     public void should_point_mine_display_$_on_map() {
         // Given
-        PointMine pointMine = new PointMine(80);
+        PointMineSite pointMineSite = new PointMineSite(80);
 
         // When and Then
-        assertThat(pointMine.display(), is("$"));
+        assertThat(pointMineSite.display(), is("$"));
     }
 
     @Test
     public void should_gift_house_display_G_on_map() {
         // Given
-        GiftHouse giftHouse = new GiftHouse();
+        GiftHouseSite giftHouseSite = new GiftHouseSite();
 
         // When and Then
-        assertThat(giftHouse.display(), is("G"));
+        assertThat(giftHouseSite.display(), is("G"));
     }
 }

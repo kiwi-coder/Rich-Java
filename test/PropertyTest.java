@@ -30,4 +30,22 @@ public class PropertyTest {
     public void should_return_50_for_toll_fee() {
         assertThat(property.getTollFee(), is(50));
     }
+
+    @Test
+    public void should_land_display_0_on_map() {
+        // Given
+        Property property = new Property(new Land(200));
+
+        // When and then
+        assertThat(property.display(), is("0"));
+    }
+
+    @Test
+    public void should_cabin_display_1_on_map() {
+        // Given
+        Property property = new Property(new Cabin(200));
+
+        // When and then
+        assertThat(property.display(), is("1"));
+    }
 }

@@ -34,40 +34,4 @@ public class MapTest {
         Player player = new Player("ATuBo", map.getSite(0), DUMMY_MONEY);
         assertThat(map.display(), is(expected));
     }
-
-    @Test
-    public void should_point_mine_display_$_on_map() {
-        // Given
-        PointMine pointMine = new PointMine(80);
-
-        // When and Then
-        assertThat(pointMine.display(), is("$"));
-    }
-
-    @Test
-    public void should_gift_house_display_G_on_map(){
-        // Given
-        GiftHouse giftHouse = new GiftHouse();
-
-        // When and Then
-        assertThat(giftHouse.display(), is("G"));
-    }
-
-    @Test
-    public void should_land_display_0_on_map(){
-        // Given
-        Property property = new Property(new Land(200));
-
-        // When and then
-        assertThat(property.display(), is("0"));
-    }
-
-    @Test
-    public void should_cabin_display_1_on_map(){
-        // Given
-        Property property = new Property(new Cabin(200));
-
-        // When and then
-        assertThat(property.display(), is("1"));
-    }
 }

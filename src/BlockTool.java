@@ -6,4 +6,8 @@ public class BlockTool extends Tool {
     public int getPoint() {
         return 50;
     }
+
+    public void on(Site siteToHaveBlockTool) {
+        siteToHaveBlockTool.setBlockTool(this);
+    }
 }

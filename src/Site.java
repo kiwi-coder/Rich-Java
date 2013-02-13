@@ -3,6 +3,7 @@ public class Site {
     protected Player player;
     protected int index;
     protected Map map;
+    private BlockTool blockTool;
 
     public Site(String type) {
         this.type = type;
@@ -53,5 +54,22 @@ public class Site {
 
     public String getType() {
         return type;
+    }
+
+    public boolean hasBlockTool() {
+        return blockTool != null;
+    }
+
+
+    public void setBlockTool(BlockTool blockTool) {
+        this.blockTool = blockTool;
+    }
+
+    public Site previousSite() {
+        return map.getSite(previousIndex());
+    }
+
+    private int previousIndex() {
+        return (index - 1 + map.size()) % map.size();
     }
 }

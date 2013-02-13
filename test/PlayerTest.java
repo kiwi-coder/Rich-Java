@@ -251,4 +251,86 @@ public class PlayerTest {
         assertThat(player.getPoints(), is(280));
     }
 
+    @Test
+    public void test_player_at_0_placing_block_tool_on_1_site_forward(){
+        // Given
+        player.addTool(new BlockTool());
+        player.setSite(map.getSite(0));
+
+        // When
+        player.useBlockTool(1);
+
+        // Then
+        assertTrue(map.getSite(1).hasBlockTool());
+        assertThat(player.countTool(new BlockTool()), is(0));
+    }
+
+    @Test
+    public void test_player_at_last_site_placing_block_tool_on_1_site_forward(){
+        // Given
+        player.addTool(new BlockTool());
+        player.setSite(map.getSite(LAST_SITE_INDEX));
+
+        // When
+        player.useBlockTool(1);
+
+        // Then
+        assertTrue(map.getSite(0).hasBlockTool());
+        assertThat(player.countTool(new BlockTool()), is(0));
+    }
+
+    @Test
+    public void test_player_at_1_placing_block_tool_on_1_site_afterward(){
+        // Given
+        player.addTool(new BlockTool());
+        player.setSite(map.getSite(1));
+
+        // When
+        player.useBlockTool(-1);
+
+        // Then
+        assertTrue(map.getSite(0).hasBlockTool());
+        assertThat(player.countTool(new BlockTool()), is(0));
+    }
+
+    @Test
+    public void test_player_at_0_placing_block_tool_on_1_site_afterward(){
+        // Given
+        player.addTool(new BlockTool());
+        player.setSite(map.getSite(0));
+
+        // When
+        player.useBlockTool(-1);
+
+        // Then
+        assertTrue(map.getSite(LAST_SITE_INDEX).hasBlockTool());
+        assertThat(player.countTool(new BlockTool()), is(0));
+    }
+
+    @Test
+    public void test_player_at_1_placing_block_tool_on_site_1(){
+        // Given
+        player.addTool(new BlockTool());
+        player.setSite(map.getSite(1));
+
+        // When
+        player.useBlockTool(0);
+
+        // Then
+        assertTrue(map.getSite(1).hasBlockTool());
+        assertThat(player.countTool(new BlockTool()), is(0));
+    }
+
+    @Test
+    public void should_player_stop_at_1_because_of_the_block_tool_when_he_was_supposed_to_move_to_3(){
+        // Given
+        player.setSite(map.getSite(0));
+        map.getSite(1).setBlockTool(new BlockTool());
+
+        // When
+        player.forward(3);
+
+        // Then
+        assertThat(player.getSite(), is(map.getSite(1)));
+    }
 }

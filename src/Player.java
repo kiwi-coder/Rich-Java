@@ -31,7 +31,12 @@ public class Player {
         int remainSteps = steps;
         while (remainSteps-- > 0) {
             forwardSingleStep();
+            if(isBlocked()) return;
         }
+    }
+
+    private boolean isBlocked(){
+        return site.hasBlockTool();
     }
 
     private void forwardSingleStep() {
@@ -103,10 +108,15 @@ public class Player {
     }
 
     public void buyTool(Tool tool) {
-        if (points < tool.getPoint()) throw new PointsException();
+        if (!isToolAffordable(tool)) throw new PointsException();
+        // TODO: tools.size = MAX_TOO_NUMBER 的时候, 不需要抛出异常吧?
         if (tools.size() >= MAX_TOO_NUMBER) throw new ToolException();
         payPoints(tool.getPoint());
         addTool(tool);
+    }
+
+    private boolean isToolAffordable(Tool tool) {
+        return points > tool.getPoint();
     }
 
     public int getToolsNumber() {
@@ -213,5 +223,38 @@ public class Player {
 
     public void mine(PointMineSite pointMineSite) {
         earnPoints(pointMineSite.getPoint());
+    }
+
+    public void useBlockTool(int distance) {
+        BlockTool blockTool = blockToolToUse();
+        Site siteToHaveBlockTool = getSiteToHaveBlockTool(distance);
+
+        blockTool.on(siteToHaveBlockTool);
+        removeTool(blockTool);
+    }
+
+    private Site getSiteToHaveBlockTool(int distance){
+        Site siteToHaveBlockTool = site;
+
+        if(distance >0){
+            while(distance -- > 0){
+                siteToHaveBlockTool = siteToHaveBlockTool.nextSite();
+            }
+        }
+        else if(distance < 0){
+            while (distance ++ < 0){
+                siteToHaveBlockTool = siteToHaveBlockTool.previousSite();
+            }
+        }
+
+        return siteToHaveBlockTool;
+    }
+
+    private BlockTool blockToolToUse() {
+        for(Tool tool: tools){
+            if(tool instanceof BlockTool)
+                return (BlockTool)tool;
+        }
+        throw new ToolNotFoundException();
     }
 }

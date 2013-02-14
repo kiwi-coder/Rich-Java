@@ -72,4 +72,8 @@ public class Site {
     private int previousIndex() {
         return (index - 1 + map.size()) % map.size();
     }
+
+    public boolean hasBombTool() {
+        return false;
+    }
 }

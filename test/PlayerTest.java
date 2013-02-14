@@ -333,4 +333,18 @@ public class PlayerTest {
         // Then
         assertThat(player.getSite(), is(map.getSite(1)));
     }
+
+    @Test
+    public void test_player_at_1_placing_bomb_tool_on_site_2(){
+        // Given
+        player.addTool(new BombTool());
+        player.setSite(map.getSite(1));
+
+        // When
+        player.useBombTool(1);
+
+        // Then
+        assertTrue(map.getSite(2).hasBombTool());
+        assertThat(player.countTool(new BombTool()), is(0));
+    }
 }

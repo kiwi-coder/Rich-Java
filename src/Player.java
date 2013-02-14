@@ -229,7 +229,7 @@ public class Player {
         BlockTool blockTool = blockToolToUse();
         Site siteToHaveBlockTool = getSiteToHaveBlockTool(distance);
 
-        blockTool.on(siteToHaveBlockTool);
+        blockTool.usedOnSite(siteToHaveBlockTool);
         removeTool(blockTool);
     }
 
@@ -256,5 +256,8 @@ public class Player {
                 return (BlockTool)tool;
         }
         throw new ToolNotFoundException();
+    }
+
+    public void useBombTool(int distance) {
     }
 }

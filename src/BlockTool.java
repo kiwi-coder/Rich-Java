@@ -7,7 +7,7 @@ public class BlockTool extends Tool {
         return 50;
     }
 
-    public void on(Site siteToHaveBlockTool) {
+    public void usedOnSite(Site siteToHaveBlockTool) {
         siteToHaveBlockTool.setBlockTool(this);
     }
 }

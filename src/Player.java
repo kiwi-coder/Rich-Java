@@ -137,13 +137,8 @@ public class Player {
     }
 
     private void removeTool(Tool toolToRemove) {
-        for (Tool tool : tools) {
-            if (tool.equals(toolToRemove)) {
-                tools.remove(tool);
-                return;
-            }
-        }
-        throw new ToolException();
+        Tool tool = findTool(toolToRemove);
+        tools.remove(tool);
     }
 
     public int countTool(Tool toolToCount) {
@@ -226,38 +221,51 @@ public class Player {
     }
 
     public void useBlockTool(int distance) {
-        BlockTool blockTool = blockToolToUse();
-        Site siteToHaveBlockTool = getSiteToHaveBlockTool(distance);
+        BlockTool blockTool = (BlockTool)findTool(new BlockTool());
+        Site siteToPlaceBlockTool = getSiteToPlaceTool(distance);
 
-        blockTool.usedOnSite(siteToHaveBlockTool);
+        blockTool.usedOnSite(siteToPlaceBlockTool);
         removeTool(blockTool);
     }
 
-    private Site getSiteToHaveBlockTool(int distance){
-        Site siteToHaveBlockTool = site;
+    private Site getSiteToPlaceTool(int distance){
+        Site siteToPlaceTool = site;
 
         if(distance >0){
             while(distance -- > 0){
-                siteToHaveBlockTool = siteToHaveBlockTool.nextSite();
+                siteToPlaceTool = siteToPlaceTool.nextSite();
             }
         }
         else if(distance < 0){
             while (distance ++ < 0){
-                siteToHaveBlockTool = siteToHaveBlockTool.previousSite();
+                siteToPlaceTool = siteToPlaceTool.previousSite();
             }
         }
 
-        return siteToHaveBlockTool;
-    }
-
-    private BlockTool blockToolToUse() {
-        for(Tool tool: tools){
-            if(tool instanceof BlockTool)
-                return (BlockTool)tool;
-        }
-        throw new ToolNotFoundException();
+        return siteToPlaceTool;
     }
 
     public void useBombTool(int distance) {
+        BombTool bombTool = (BombTool)findTool(new BombTool());
+        Site siteToPlaceBombTool = getSiteToPlaceTool(distance);
+
+        bombTool.usedOnSite(siteToPlaceBombTool);
+        removeTool(bombTool);
+    }
+
+    public void useRobotTool() {
+        RobotTool robotTool = (RobotTool)findTool(new RobotTool());
+
+        robotTool.usedOnSite(site);
+        removeTool(robotTool);
+    }
+
+    private Tool findTool(Tool toolToFind){
+        for(Tool tool: tools){
+            if(tool.equals(toolToFind))
+                return tool;
+        }
+
+        throw new ToolNotFoundException();
     }
 }

@@ -179,7 +179,7 @@ public class PlayerTest {
         assertThat(player.getToolsNumber(), is(0));
     }
 
-    @Test(expected = ToolException.class)
+    @Test(expected = ToolNotFoundException.class)
     public void should_failed_sell_tool_when_player_do_not_have_that_kind_of_tool() {
         player.sellTool(new BombTool());
     }
@@ -346,5 +346,27 @@ public class PlayerTest {
         // Then
         assertTrue(map.getSite(2).hasBombTool());
         assertThat(player.countTool(new BombTool()), is(0));
+    }
+
+    @Test
+    public void test_player_stepping_on_bomb_and_sent_to_hospital(){
+        // TODO:...
+    }
+
+    @Test
+    public void test_player_at_1_placing_robot_tool_on_site_2(){
+        // Given
+        player.addTool(new RobotTool());
+        player.setSite(map.getSite(1));
+        map.getSite(3).setBlockTool(new BlockTool());
+        map.getSite(4).setBombTool(new BombTool());
+
+        // When
+        player.useRobotTool();
+
+        // Then
+        assertFalse(map.getSite(3).hasBlockTool());
+        assertFalse(map.getSite(4).hasBombTool());
+        assertThat(player.countTool(new RobotTool()), is(0));
     }
 }

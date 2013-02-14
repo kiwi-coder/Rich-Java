@@ -4,6 +4,7 @@ public class Site {
     protected int index;
     protected Map map;
     private BlockTool blockTool;
+    private BombTool bombTool;
 
     public Site(String type) {
         this.type = type;
@@ -74,6 +75,15 @@ public class Site {
     }
 
     public boolean hasBombTool() {
-        return false;
+        return bombTool != null;
+    }
+
+    public void setBombTool(BombTool bombTool) {
+        this.bombTool = bombTool;
+    }
+
+    public void clearTools(){
+        bombTool = null;
+        blockTool = null;
     }
 }

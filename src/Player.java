@@ -261,6 +261,14 @@ public class Player {
         removeTool(robotTool);
     }
 
+    public void useTool(int toolCode, int distance){
+        Tool tool = findTool(toolCode);
+        Site siteToPlaceBombTool = getSiteToPlaceTool(distance);
+
+        tool.usedOnSite(siteToPlaceBombTool);
+        removeTool(tool);
+    }
+
     private Tool findTool(int toolCode) {
         for (Tool tool : tools) {
             if (tool.matchToolCode(toolCode)) {

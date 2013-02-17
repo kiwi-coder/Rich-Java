@@ -256,7 +256,7 @@ public class PlayerTest {
         player.setSite(map.getSite(0));
 
         // When
-        player.useBlockTool(1);
+        player.useTool(BlockTool.BLOCK_TOOL_CODE, 1);
 
         // Then
         assertTrue(map.getSite(1).hasBlockTool());
@@ -270,7 +270,7 @@ public class PlayerTest {
         player.setSite(map.getSite(LAST_SITE_INDEX));
 
         // When
-        player.useBlockTool(1);
+        player.useTool(BlockTool.BLOCK_TOOL_CODE, 1);
 
         // Then
         assertTrue(map.getSite(0).hasBlockTool());
@@ -284,7 +284,7 @@ public class PlayerTest {
         player.setSite(map.getSite(1));
 
         // When
-        player.useBlockTool(-1);
+        player.useTool(BlockTool.BLOCK_TOOL_CODE, -1);
 
         // Then
         assertTrue(map.getSite(0).hasBlockTool());
@@ -298,7 +298,7 @@ public class PlayerTest {
         player.setSite(map.getSite(0));
 
         // When
-        player.useBlockTool(-1);
+        player.useTool(BlockTool.BLOCK_TOOL_CODE, -1);
 
         // Then
         assertTrue(map.getSite(LAST_SITE_INDEX).hasBlockTool());
@@ -312,7 +312,7 @@ public class PlayerTest {
         player.setSite(map.getSite(1));
 
         // When
-        player.useBlockTool(0);
+        player.useTool(BlockTool.BLOCK_TOOL_CODE, 0);
 
         // Then
         assertTrue(map.getSite(1).hasBlockTool());
@@ -339,11 +339,10 @@ public class PlayerTest {
         player.setSite(map.getSite(1));
 
         // When
-        player.useBombTool(1);
+        player.useTool(BombTool.BOMB_TOOL_CODE, 1);
 
         // Then
         assertTrue(map.getSite(2).hasBombTool());
-        //assertThat(player.countTool(new BombTool()), is(0));
         assertThat(player.countTool(BombTool.BOMB_TOOL_CODE), is(0));
     }
 
@@ -361,12 +360,11 @@ public class PlayerTest {
         map.getSite(4).setBombTool(new BombTool());
 
         // When
-        player.useRobotTool();
+        player.useTool(RobotTool.ROBOT_TOOL_CODE, 0);
 
         // Then
         assertFalse(map.getSite(3).hasBlockTool());
         assertFalse(map.getSite(4).hasBombTool());
-        //assertThat(player.countTool(new RobotTool()), is(0));
         assertThat(player.countTool(RobotTool.ROBOT_TOOL_CODE), is(0));
     }
 }

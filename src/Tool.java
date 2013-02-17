@@ -24,4 +24,6 @@ abstract class Tool {
         }
         throw new ToolException();
     }
+
+    public abstract void usedOnSite(Site siteToPlaceBombTool);
 }

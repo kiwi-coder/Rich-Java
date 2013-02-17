@@ -348,7 +348,16 @@ public class PlayerTest {
 
     @Test
     public void test_player_stepping_on_bomb_and_sent_to_hospital(){
-        // TODO:...
+        // Given
+        player.setSite(map.getSite(0));
+        map.getSite(2).setBombTool(new BombTool());
+        map.setSite(5, new HospitalSite());
+
+        // When
+        player.forward(2);
+
+        // Then
+        assertThat(player.getSite(), is(map.getSite(5)));
     }
 
     @Test

@@ -33,6 +33,12 @@ public class Player {
             forwardSingleStep();
             if (isBlocked()) return;
         }
+
+        if(site.hasBombTool()) sendToHospital();
+    }
+
+    private void sendToHospital() {
+        setSite(site.findNearestHospital());
     }
 
     private boolean isBlocked() {

@@ -1,6 +1,8 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.math.RoundingMode;
+
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -358,6 +360,19 @@ public class PlayerTest {
 
         // Then
         assertThat(player.getSite(), is(map.getSite(5)));
+    }
+
+    // TODO:...
+    @Test
+    public void should_not_player_move_one_round_after_sent_to_hospital(){
+        // Given
+        player.setInjured();
+
+        // When
+        RoundEngine.instance().nextRound();
+
+        // Then
+        assertTrue(player.isInjured());
     }
 
     @Test

@@ -31,11 +31,11 @@ public class Player {
         int remainSteps = steps;
         while (remainSteps-- > 0) {
             forwardSingleStep();
-            if(isBlocked()) return;
+            if (isBlocked()) return;
         }
     }
 
-    private boolean isBlocked(){
+    private boolean isBlocked() {
         return site.hasBlockTool();
     }
 
@@ -107,9 +107,9 @@ public class Player {
         this.points = points;
     }
 
-    public void buyTool(Tool tool) {
+    public void buyTool(int toolCode){
+        Tool tool = Tool.makeTool(toolCode);
         if (!isToolAffordable(tool)) throw new PointsException();
-        // TODO: tools.size = MAX_TOO_NUMBER 的时候, 不需要抛出异常吧?
         if (tools.size() >= MAX_TOO_NUMBER) throw new ToolException();
         payPoints(tool.getPoint());
         addTool(tool);
@@ -131,21 +131,23 @@ public class Player {
         return points;
     }
 
-    public void sellTool(Tool tool) {
-        removeTool(tool);
+    public void sellTool(int toolCode) {
+        Tool tool = findTool(toolCode);
+        tools.remove(tool);
         earnPoints(tool.getPoint());
     }
 
     private void removeTool(Tool toolToRemove) {
-        Tool tool = findTool(toolToRemove);
-        tools.remove(tool);
+        tools.remove(toolToRemove);
     }
 
-    public int countTool(Tool toolToCount) {
+    public int countTool(int toolCode) {
         int result = 0;
+
         for (Tool tool : tools) {
-            if (tool.equals(toolToCount)) result++;
+            if (tool.matchToolCode(toolCode)) result++;
         }
+
         return result;
     }
 
@@ -221,23 +223,22 @@ public class Player {
     }
 
     public void useBlockTool(int distance) {
-        BlockTool blockTool = (BlockTool)findTool(new BlockTool());
+        BlockTool blockTool = (BlockTool) findTool(BlockTool.BLOCK_TOOL_CODE);
         Site siteToPlaceBlockTool = getSiteToPlaceTool(distance);
 
         blockTool.usedOnSite(siteToPlaceBlockTool);
         removeTool(blockTool);
     }
 
-    private Site getSiteToPlaceTool(int distance){
+    private Site getSiteToPlaceTool(int distance) {
         Site siteToPlaceTool = site;
 
-        if(distance >0){
-            while(distance -- > 0){
+        if (distance > 0) {
+            while (distance-- > 0) {
                 siteToPlaceTool = siteToPlaceTool.nextSite();
             }
-        }
-        else if(distance < 0){
-            while (distance ++ < 0){
+        } else if (distance < 0) {
+            while (distance++ < 0) {
                 siteToPlaceTool = siteToPlaceTool.previousSite();
             }
         }
@@ -246,7 +247,7 @@ public class Player {
     }
 
     public void useBombTool(int distance) {
-        BombTool bombTool = (BombTool)findTool(new BombTool());
+        BombTool bombTool = (BombTool) findTool(BombTool.BOMB_TOOL_CODE);
         Site siteToPlaceBombTool = getSiteToPlaceTool(distance);
 
         bombTool.usedOnSite(siteToPlaceBombTool);
@@ -254,16 +255,17 @@ public class Player {
     }
 
     public void useRobotTool() {
-        RobotTool robotTool = (RobotTool)findTool(new RobotTool());
+        RobotTool robotTool = (RobotTool) findTool(RobotTool.ROBOT_TOOL_CODE);
 
         robotTool.usedOnSite(site);
         removeTool(robotTool);
     }
 
-    private Tool findTool(Tool toolToFind){
-        for(Tool tool: tools){
-            if(tool.equals(toolToFind))
+    private Tool findTool(int toolCode) {
+        for (Tool tool : tools) {
+            if (tool.matchToolCode(toolCode)) {
                 return tool;
+            }
         }
 
         throw new ToolNotFoundException();

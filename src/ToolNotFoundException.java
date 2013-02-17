@@ -1,2 +1,2 @@
-public class ToolNotFoundException extends RuntimeException{
+public class ToolNotFoundException extends RuntimeException {
 }

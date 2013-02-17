@@ -82,7 +82,7 @@ public class Site {
         this.bombTool = bombTool;
     }
 
-    public void clearTools(){
+    public void clearTools() {
         bombTool = null;
         blockTool = null;
     }

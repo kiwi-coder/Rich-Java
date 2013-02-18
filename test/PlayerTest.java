@@ -369,7 +369,7 @@ public class PlayerTest {
 
         // Then
         assertThat(player.getSite(), is(map.getSite(5)));
-        assertTrue(player.isInjured());
+        assertFalse(player.isMovable());
     }
 
     @Test
@@ -383,7 +383,7 @@ public class PlayerTest {
         RoundEngine.instance().nextRound();
 
         // Then
-        assertTrue(player.isInjured());
+        assertFalse(player.isMovable());
     }
 
     @Test
@@ -399,7 +399,7 @@ public class PlayerTest {
         RoundEngine.instance().nextRound();
 
         // Then
-        assertFalse(player.isInjured());
+        assertTrue(player.isMovable());
     }
 
     @Test
@@ -417,5 +417,30 @@ public class PlayerTest {
         assertFalse(map.getSite(3).hasBlockTool());
         assertFalse(map.getSite(4).hasBombTool());
         assertThat(player.countTool(RobotTool.ROBOT_TOOL_CODE), is(0));
+    }
+
+    @Test
+    public void should_not_player_be_movable_after_staying_at_prison_for_1_rounds(){
+        // Given
+        player.setSite(new PrisonSite());
+
+        // When
+        RoundEngine.instance().nextRound();
+
+        // Then
+        assertFalse(player.isMovable());
+    }
+
+    @Test
+    public void should_player_be_movable_after_staying_at_prison_for_2_rounds(){
+        // Given
+        player.setSite(new PrisonSite());
+
+        // When
+        RoundEngine.instance().nextRound();
+        RoundEngine.instance().nextRound();
+
+        // Then
+        assertTrue(player.isMovable());
     }
 }

@@ -12,6 +12,7 @@ public class Player {
     private List<Tool> tools = new ArrayList<Tool>();
     private GodOfLuck godOfLuck;
     private boolean isInjured;
+    private boolean inPrison;
 
     public Player(String name, Site site, int money) {
         this.name = name;
@@ -42,10 +43,10 @@ public class Player {
         isInjured = true;
         setSite(site.findNearestHospital());
 
-        registerImmovable();
+        registerInjured();
     }
 
-    private void registerImmovable() {
+    private void registerInjured() {
         RoundEngine.instance().registerImmovablePlayer(this, HospitalSite.ROUND_TO_STAY_FOR_INJURED_PLAYER);
     }
 
@@ -75,7 +76,16 @@ public class Player {
         setPlayerOnSite(targetSite);
     }
 
+    private void registerPrisoned() {
+        RoundEngine.instance().registerImmovablePlayer(this, PrisonSite.ROUND_TO_STAY_IN_PRISON);
+    }
+
     private void setPlayerOnSite(Site targetSite) {
+        if (targetSite instanceof PrisonSite) {
+            registerPrisoned();
+            setInPrison(true);
+        }
+
         site = targetSite;
         targetSite.setPlayer(this);
     }
@@ -310,5 +320,19 @@ public class Player {
 
     public void setMovable() {
         setInjured(false);
+        setInPrison(false);
+    }
+
+    public boolean isMovable() {
+        return !isInjured() && !isInPrison();
+    }
+
+    private boolean isInPrison() {
+        return inPrison;
+    }
+
+
+    public void setInPrison(boolean inPrison) {
+        this.inPrison = inPrison;
     }
 }

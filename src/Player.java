@@ -11,6 +11,7 @@ public class Player {
     private int points;
     private List<Tool> tools = new ArrayList<Tool>();
     private GodOfLuck godOfLuck;
+    private boolean isInjured;
 
     public Player(String name, Site site, int money) {
         this.name = name;
@@ -34,11 +35,18 @@ public class Player {
             if (isBlocked()) return;
         }
 
-        if(site.hasBombTool()) sendToHospital();
+        if(site.hasBombTool()) sentToHospital();
     }
 
-    private void sendToHospital() {
+    public void sentToHospital() {
+        isInjured = true;
         setSite(site.findNearestHospital());
+
+        registerImmovable();
+    }
+
+    private void registerImmovable() {
+        RoundEngine.instance().registerImmovablePlayer(this, HospitalSite.ROUND_TO_STAY_FOR_INJURED_PLAYER);
     }
 
     private boolean isBlocked() {
@@ -283,5 +291,17 @@ public class Player {
         }
 
         throw new ToolNotFoundException();
+    }
+
+    public void setInjured(boolean isInjured) {
+        this.isInjured = isInjured;
+    }
+
+    public boolean isInjured() {
+        return isInjured;
+    }
+
+    public void setMovable() {
+        setInjured(false);
     }
 }

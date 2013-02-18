@@ -233,7 +233,18 @@ public class PlayerTest {
 
     @Test
     public void should_god_of_luck_leave_the_player_after_five_rounds() {
-        // TODO: 我感觉这个应该是更上层的逻辑, 应该写在 Game 里面.
+        // Given
+        player.setGodOfLuck(new GodOfLuck());
+
+        // When
+        RoundEngine.instance().nextRound();
+        RoundEngine.instance().nextRound();
+        RoundEngine.instance().nextRound();
+        RoundEngine.instance().nextRound();
+        RoundEngine.instance().nextRound();
+
+        // Then
+        assertFalse(player.hasGodOfLuck());
     }
 
     @Test
@@ -250,7 +261,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void test_player_at_0_placing_block_tool_on_1_site_forward(){
+    public void test_player_at_0_placing_block_tool_on_1_site_forward() {
         // Given
         player.addTool(new BlockTool());
         player.setSite(map.getSite(0));
@@ -264,7 +275,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void test_player_at_last_site_placing_block_tool_on_1_site_forward(){
+    public void test_player_at_last_site_placing_block_tool_on_1_site_forward() {
         // Given
         player.addTool(new BlockTool());
         player.setSite(map.getSite(LAST_SITE_INDEX));
@@ -278,7 +289,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void test_player_at_1_placing_block_tool_on_1_site_afterward(){
+    public void test_player_at_1_placing_block_tool_on_1_site_afterward() {
         // Given
         player.addTool(new BlockTool());
         player.setSite(map.getSite(1));
@@ -292,7 +303,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void test_player_at_0_placing_block_tool_on_1_site_afterward(){
+    public void test_player_at_0_placing_block_tool_on_1_site_afterward() {
         // Given
         player.addTool(new BlockTool());
         player.setSite(map.getSite(0));
@@ -306,7 +317,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void test_player_at_1_placing_block_tool_on_site_1(){
+    public void test_player_at_1_placing_block_tool_on_site_1() {
         // Given
         player.addTool(new BlockTool());
         player.setSite(map.getSite(1));
@@ -320,7 +331,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void should_player_stop_at_1_because_of_the_block_tool_when_he_was_supposed_to_move_to_3(){
+    public void should_player_stop_at_1_because_of_the_block_tool_when_he_was_supposed_to_move_to_3() {
         // Given
         player.setSite(map.getSite(0));
         map.getSite(1).setBlockTool(new BlockTool());
@@ -333,7 +344,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void test_player_at_1_placing_bomb_tool_on_site_2(){
+    public void test_player_at_1_placing_bomb_tool_on_site_2() {
         // Given
         player.addTool(new BombTool());
         player.setSite(map.getSite(1));
@@ -347,7 +358,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void test_player_stepping_on_bomb_and_sent_to_hospital(){
+    public void test_player_stepping_on_bomb_and_sent_to_hospital() {
         // Given
         player.setSite(map.getSite(0));
         map.getSite(2).setBombTool(new BombTool());
@@ -362,7 +373,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void should_not_player_be_movable_one_round_after_sent_to_hospital(){
+    public void should_not_player_be_movable_one_round_after_sent_to_hospital() {
         // Given
         map.setSite(5, new HospitalSite());
         player.setSite(map.getSite(0));
@@ -376,7 +387,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void should_player_be_movable_three_round_after_sent_to_hospital(){
+    public void should_player_be_movable_three_round_after_sent_to_hospital() {
         // Given
         map.setSite(5, new HospitalSite());
         player.setSite(map.getSite(0));
@@ -392,7 +403,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void test_player_at_1_placing_robot_tool_on_site_2(){
+    public void test_player_at_1_placing_robot_tool_on_site_2() {
         // Given
         player.addTool(new RobotTool());
         player.setSite(map.getSite(1));

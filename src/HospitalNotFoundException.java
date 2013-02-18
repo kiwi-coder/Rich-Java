@@ -1,2 +1,2 @@
-public class HospitalNotFoundException extends RuntimeException{
+public class HospitalNotFoundException extends RuntimeException {
 }

@@ -35,7 +35,7 @@ public class Player {
             if (isBlocked()) return;
         }
 
-        if(site.hasBombTool()) sentToHospital();
+        if (site.hasBombTool()) sentToHospital();
     }
 
     public void sentToHospital() {
@@ -121,7 +121,7 @@ public class Player {
         this.points = points;
     }
 
-    public void buyTool(int toolCode){
+    public void buyTool(int toolCode) {
         Tool tool = Tool.makeTool(toolCode);
         if (!isToolAffordable(tool)) throw new PointsException();
         if (tools.size() >= MAX_TOO_NUMBER) throw new ToolException();
@@ -187,6 +187,13 @@ public class Player {
 
     public void setGodOfLuck(GodOfLuck godOfLuck) {
         this.godOfLuck = godOfLuck;
+        if (hasGodOfLuck()) {
+            registerGodOfLuck();
+        }
+    }
+
+    private void registerGodOfLuck() {
+        RoundEngine.instance().registerPlayerWithGodOfLuck(this, GodOfLuck.ROUND_IN_EFFECT);
     }
 
     public void chooseGodOfLuckAtGiftHouse() {
@@ -275,7 +282,7 @@ public class Player {
         removeTool(robotTool);
     }
 
-    public void useTool(int toolCode, int distance){
+    public void useTool(int toolCode, int distance) {
         Tool tool = findTool(toolCode);
         Site siteToPlaceBombTool = getSiteToPlaceTool(distance);
 

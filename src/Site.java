@@ -90,11 +90,11 @@ public class Site {
     public HospitalSite findNearestHospital() {
         Site forward = this;
         Site backward = this;
-        for (int i = 0; i < map.size()/2; i++){
-            if(forward.nextSite() instanceof HospitalSite)
-                return (HospitalSite)forward.nextSite();
-            if(backward.previousSite() instanceof HospitalSite)
-                return (HospitalSite)backward.previousSite();
+        for (int i = 0; i < map.size() / 2; i++) {
+            if (forward.nextSite() instanceof HospitalSite)
+                return (HospitalSite) forward.nextSite();
+            if (backward.previousSite() instanceof HospitalSite)
+                return (HospitalSite) backward.previousSite();
 
             forward = forward.nextSite();
             backward = backward.previousSite();

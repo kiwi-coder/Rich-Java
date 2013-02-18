@@ -13,8 +13,8 @@ abstract class Tool {
         return getToolCode() == toolCode;
     }
 
-    public static Tool makeTool(int toolCode){
-        switch (toolCode){
+    public static Tool makeTool(int toolCode) {
+        switch (toolCode) {
             case BlockTool.BLOCK_TOOL_CODE:
                 return new BlockTool();
             case BombTool.BOMB_TOOL_CODE:

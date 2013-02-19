@@ -13,4 +13,5 @@ public class TestHelper {
         }
         return new Map(sites, new MapLayout(3, 3));
     }
+
 }

@@ -1,6 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import static junit.framework.Assert.assertFalse;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -442,5 +443,19 @@ public class PlayerTest {
 
         // Then
         assertTrue(player.isMovable());
+    }
+
+    @Test
+    public void test_player_executing_roll_command_and_take_his_action(){
+        // Given
+        player.setSite(map.getSite(0));
+        Command command = Command.makeCommand("roll", player);
+        Site oldSite = player.getSite();
+
+        // When
+        player.executeCommand(command);
+
+        // Then
+        assertFalse(oldSite == player.getSite());
     }
 }

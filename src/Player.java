@@ -335,4 +335,8 @@ public class Player {
     public void setInPrison(boolean inPrison) {
         this.inPrison = inPrison;
     }
+
+    public void executeCommand(Command command) {
+        command.execute();
+    }
 }

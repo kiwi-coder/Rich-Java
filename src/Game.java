@@ -29,7 +29,7 @@ public class Game {
         }
     }
 
-    private String prompt(String description) {
+    public String prompt(String description) {
         System.out.println(description);
         return scanner.next();
     }
@@ -79,5 +79,10 @@ public class Game {
 
     public List<Player> getPlayers() {
         return players;
+    }
+
+    public Player getCurrentPlayer() {
+        // TODO
+        return players.get(0);
     }
 }

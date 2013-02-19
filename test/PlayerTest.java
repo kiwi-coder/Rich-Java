@@ -2,9 +2,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class PlayerTest {
     private final Site DUMMY_SITE = null;
@@ -421,7 +422,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void should_not_player_be_movable_after_staying_at_prison_for_1_rounds(){
+    public void should_not_player_be_movable_after_staying_at_prison_for_1_rounds() {
         // Given
         player.setSite(new PrisonSite());
 
@@ -433,7 +434,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void should_player_be_movable_after_staying_at_prison_for_2_rounds(){
+    public void should_player_be_movable_after_staying_at_prison_for_2_rounds() {
         // Given
         player.setSite(new PrisonSite());
 
@@ -446,7 +447,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void test_player_executing_roll_command_and_take_his_action(){
+    public void test_player_executing_roll_command() {
         // Given
         player.setSite(map.getSite(0));
         Command command = Command.makeCommand("roll", player);
@@ -457,5 +458,19 @@ public class PlayerTest {
 
         // Then
         assertFalse(oldSite == player.getSite());
+    }
+
+    @Test
+    public void test_player_executing_block_command() {
+        // Given
+        player.setSite(map.getSite(0));
+        player.addTool(new BlockTool());
+        Command command = Command.makeCommand("block 3", player);
+
+        // When
+        player.executeCommand(command);
+
+        // Then
+        assertTrue(map.getSite(3).hasBlockTool());
     }
 }

@@ -337,6 +337,7 @@ public class Player {
     }
 
     public void executeCommand(Command command) {
-        command.execute();
+        if (command.getPlayer() == this)
+            command.execute();
     }
 }

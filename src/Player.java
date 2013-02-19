@@ -222,7 +222,7 @@ public class Player {
     }
 
 
-    public void sellProperty(Property property) {
+    private void sellProperty(Property property) {
         if (property.getOwner() == this) {
             earnMoney(property.getSalePrice());
             property.reset();
@@ -253,14 +253,6 @@ public class Player {
         earnPoints(pointMineSite.getPoint());
     }
 
-    public void useBlockTool(int distance) {
-        BlockTool blockTool = (BlockTool) findTool(BlockTool.BLOCK_TOOL_CODE);
-        Site siteToPlaceBlockTool = getSiteToPlaceTool(distance);
-
-        blockTool.usedOnSite(siteToPlaceBlockTool);
-        removeTool(blockTool);
-    }
-
     private Site getSiteToPlaceTool(int distance) {
         Site siteToPlaceTool = site;
 
@@ -275,21 +267,6 @@ public class Player {
         }
 
         return siteToPlaceTool;
-    }
-
-    public void useBombTool(int distance) {
-        BombTool bombTool = (BombTool) findTool(BombTool.BOMB_TOOL_CODE);
-        Site siteToPlaceBombTool = getSiteToPlaceTool(distance);
-
-        bombTool.usedOnSite(siteToPlaceBombTool);
-        removeTool(bombTool);
-    }
-
-    public void useRobotTool() {
-        RobotTool robotTool = (RobotTool) findTool(RobotTool.ROBOT_TOOL_CODE);
-
-        robotTool.usedOnSite(site);
-        removeTool(robotTool);
     }
 
     public void useTool(int toolCode, int distance) {
@@ -339,5 +316,10 @@ public class Player {
     public void executeCommand(Command command) {
         if (command.isExecutable(this))
             command.execute();
+    }
+
+    public void sellPropertyByIndex(int siteIndex) {
+        Site siteToSell = site.findSiteByIndex(siteIndex);
+        sellProperty((Property)siteToSell);
     }
 }

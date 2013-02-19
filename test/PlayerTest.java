@@ -138,11 +138,13 @@ public class PlayerTest {
     public void test_player_selling_his_cabin() {
         // Given
         player.setMoney(5000);
+        player.setSite(map.getSite(3));
         Property property = new Property(new Cabin(300));
         property.setOwner(player);
+        map.setSite(0, property);
 
         // When
-        player.sellProperty(property);
+        player.sellPropertyByIndex(0);
 
         // Then
         assertFalse(property.hasOwner());
@@ -151,7 +153,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void should_success_buy_player_when_player_has_enough_points() {
+    public void should_success_buy_block_tool_when_player_has_enough_points() {
         player.setPoints(500);
         player.buyTool(BlockTool.BLOCK_TOOL_CODE);
         assertThat(player.getToolsNumber(), is(1));
@@ -505,4 +507,25 @@ public class PlayerTest {
         assertFalse(map.getSite(3).hasBlockTool());
         assertFalse(map.getSite(4).hasBombTool());
     }
+
+    @Test
+    public void test_player_executing_selling_property_command() {
+        // Given
+        Property property = new Property(new House(400));
+        property.setOwner(player);
+        map.setSite(0, property);
+        player.setMoney(5000);
+        player.setSite(map.getSite(7));
+
+        Command command = Command.makeCommand("sell 0", player);
+
+        // When
+        player.executeCommand(command);
+
+        // Then
+        assertFalse(property.hasOwner());
+        assertThat(player.getMoney(), is(7400));
+        assertThat(property.getLevel(), instanceOf(Land.class));
+    }
+
 }

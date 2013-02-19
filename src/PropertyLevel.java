@@ -23,4 +23,8 @@ public abstract class PropertyLevel {
     public String display() {
         return type;
     }
+
+    public String getType() {
+        return type;
+    }
 }

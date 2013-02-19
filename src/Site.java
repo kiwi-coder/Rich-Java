@@ -102,4 +102,13 @@ public class Site {
 
         throw new HospitalNotFoundException();
     }
+
+    public Site findSiteByIndex(int siteIndex) {
+        Site siteToSell = this;
+
+        while( siteIndex != siteToSell.getIndex()){
+            siteToSell = siteToSell.nextSite();
+        }
+        return siteToSell;
+    }
 }

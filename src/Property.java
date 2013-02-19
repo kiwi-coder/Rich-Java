@@ -1,8 +1,9 @@
-class Property {
+class Property extends Site{
     private PropertyLevel level;
     private Player owner = null;
 
     public Property(PropertyLevel level) {
+        super(level.getType());
         this.level = level;
     }
 

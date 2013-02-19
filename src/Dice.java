@@ -5,6 +5,6 @@ public class Dice {
 
     public static int roll() {
         Random random = new Random();
-        return random.nextInt(DICE_MAX_NUMBER);
+        return random.nextInt(DICE_MAX_NUMBER) + 1;
     }
 }

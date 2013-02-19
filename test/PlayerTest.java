@@ -160,7 +160,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void test_player_counting_his_properties(){
+    public void test_player_counting_his_properties() {
         // Given
         Property property = new Property(new House(300));
         property.setOwner(player);
@@ -561,11 +561,11 @@ public class PlayerTest {
     }
 
     @Test
-    public void test_player_executing_query_command(){
+    public void test_player_executing_query_command() {
         // Given
         player.setMoney(5400);
         player.setPoints(300);
-        for(int i = 0; i < 3; i++)
+        for (int i = 0; i < 3; i++)
             player.addProperty(new Property(new Land(300)));
         player.addProperty(new Property(new Skyscraper(300)));
         player.addProperty(new Property(new House(300)));
@@ -581,9 +581,35 @@ public class PlayerTest {
 
         // Then
         String expectedString = "资金：5400 元\n" +
-                                "点数：300 点\n" +
-                                "地产：空地 3 处；茅屋 1 处；洋房 1 处；摩天楼 1 处。\n" +
-                                "道具：路障 1 个；炸弹 1 个；机器娃娃 1 个\n";
+                "点数：300 点\n" +
+                "地产：空地 3 处；茅屋 1 处；洋房 1 处；摩天楼 1 处。\n" +
+                "道具：路障 1 个；炸弹 1 个；机器娃娃 1 个\n";
         assertEquals(expectedString, systemOutMock.getLog());
+    }
+
+    @Test
+    public void test_player_executing_help_command() {
+        // Given
+        Command command = Command.makeCommand("help", player);
+
+        // When
+        player.executeCommand(command);
+
+        // Then
+        String expectedString = "命令一览表\n" +
+                "roll:\t掷骰子命令，行走1~6步。步数由随即算法产生。\n" +
+                "block n:\t玩家拥有路障后，可将路障放置到离当前位置前后10步的距离，任一玩家经过路障，都将被拦截。" +
+                "该道具一次有效。n 前后的相对距离，负数表示后方。\n" +
+                "bomb n:\t可将路障放置到离当前位置前后10步的距离，任一玩家j 经过在该位置，将被炸伤，送往医院，住院三天。" +
+                "n 前后的相对距离，负数表示后方。\n" +
+                "robot:\t使用该道具，可清扫前方路面上10步以内的其它道具，如炸弹、路障。\n" +
+                "sell x:\t出售自己的房产，x 地图上的绝对位置，即地产的编号。\n" +
+                "sellTool x\t出售道具，x 道具编号\n" +
+                "query:\t显示自家资产信息\n" +
+                "help:\t查看命令帮助\n" +
+                "quit:\t强制退出\n";
+
+        assertEquals(expectedString, systemOutMock.getLog());
+
     }
 }

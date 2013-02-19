@@ -8,6 +8,7 @@ public abstract class Command {
     private static final String SELL_PROPERTY_COMMAND_TYPE = "sell";
     private static final String SELL_TOOL_COMMAND_TYPE = "sellTool";
     private static final String QUERY_COMMAND_TYPE = "query";
+    private static final String HELP_COMMAND_TYPE = "help";
 
     private static final String COMMAND_SEPARATOR = " ";
     private static String commandType;
@@ -30,6 +31,8 @@ public abstract class Command {
             return new SellToolCommand(player, commandParameter);
         } else if (QUERY_COMMAND_TYPE.equals(commandType)) {
             return new QueryCommand(player);
+        } else if (HELP_COMMAND_TYPE.equals(commandType)) {
+            return new HelpCommand(player);
         }
 
         throw new InvalidCommandException();

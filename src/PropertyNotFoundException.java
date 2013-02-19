@@ -1,2 +1,2 @@
-public class PropertyNotFoundException extends RuntimeException{
+public class PropertyNotFoundException extends RuntimeException {
 }

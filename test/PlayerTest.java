@@ -487,4 +487,22 @@ public class PlayerTest {
         // Then
         assertTrue(map.getSite(3).hasBombTool());
     }
+
+    @Test
+    public void test_player_executing_robot_command() {
+        // Given
+        player.setSite(map.getSite(0));
+        player.addTool(new RobotTool());
+        Command command = Command.makeCommand("robot", player);
+
+        map.getSite(3).setBlockTool(new BlockTool());
+        map.getSite(4).setBombTool(new BombTool());
+
+        // When
+        player.executeCommand(command);
+
+        // Then
+        assertFalse(map.getSite(3).hasBlockTool());
+        assertFalse(map.getSite(4).hasBombTool());
+    }
 }

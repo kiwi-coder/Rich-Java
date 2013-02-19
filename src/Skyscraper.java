@@ -1,5 +1,5 @@
 public class Skyscraper extends PropertyLevel {
-    private static final String SKYSCRAPER_TYPE_CODE = "3";
+    public static final String SKYSCRAPER_TYPE_CODE = "3";
     private static final double TOLL_FEE_RATE = 4.0;
     private static final double SALE_PRICE_RATE = 8.0;
 

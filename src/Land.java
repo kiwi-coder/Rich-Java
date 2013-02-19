@@ -1,5 +1,5 @@
 public class Land extends PropertyLevel {
-    private static final String LAND_TYPE_CODE = "0";
+    public static final String LAND_TYPE_CODE = "0";
     private static final double TOLL_FEE_RATE = 0.5;
     private static final double SALE_PRICE_RATE = 2.0;
 

@@ -1,5 +1,5 @@
 public class Cabin extends PropertyLevel {
-    private static final String CABIN_TYPE_CODE = "1";
+    public static final String CABIN_TYPE_CODE = "1";
     private static final double TOLL_FEE_RATE = 1.0;
     private static final double SALE_PRICE_RATE = 4.0;
 

@@ -1,5 +1,5 @@
 public class House extends PropertyLevel {
-    private static final String HOUSE_TYPE_CODE = "2";
+    public static final String HOUSE_TYPE_CODE = "2";
     private static final double TOLL_FEE_RATE = 2.0;
     private static final double SALE_PRICE_RATE = 6.0;
 

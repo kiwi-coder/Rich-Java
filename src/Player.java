@@ -10,6 +10,7 @@ public class Player {
     private boolean isBroke = false;
     private int points;
     private List<Tool> tools = new ArrayList<Tool>();
+    private List<Property> properties = new ArrayList<Property>();
     private GodOfLuck godOfLuck;
     private boolean isInjured;
     private boolean inPrison;
@@ -226,6 +227,7 @@ public class Player {
         if (property.getOwner() == this) {
             earnMoney(property.getSalePrice());
             property.reset();
+            properties.remove(property);
         }
     }
 
@@ -319,7 +321,45 @@ public class Player {
     }
 
     public void sellPropertyByIndex(int siteIndex) {
-        Site siteToSell = site.findSiteByIndex(siteIndex);
-        sellProperty((Property) siteToSell);
+        Property propertyToSell = findPropertyByIndex(siteIndex);
+        sellProperty(propertyToSell);
+    }
+
+    private Property findPropertyByIndex(int siteIndex){
+        for (Property property : properties){
+            if(siteIndex == property.getIndex())
+                return property;
+        }
+        throw new PropertyNotFoundException();
+    }
+
+    public String query() {
+        String format = "资金：%d 元\n" +
+                        "点数：%d 点\n" +
+                        "地产：空地 %d 处；茅屋 %d 处；洋房 %d 处；摩天楼 %d 处。\n" +
+                        "道具：路障 %d 个；炸弹 %d 个；机器娃娃 %d 个\n";
+        String result = String.format(format,
+                getMoney(),
+                getPoints(),
+                countProperty(Land.LAND_TYPE_CODE), countProperty(Cabin.CABIN_TYPE_CODE),
+                countProperty(House.HOUSE_TYPE_CODE), countProperty(Skyscraper.SKYSCRAPER_TYPE_CODE),
+                countTool(BlockTool.BLOCK_TOOL_CODE), countTool(BombTool.BOMB_TOOL_CODE),
+                countTool(RobotTool.ROBOT_TOOL_CODE));
+
+        return result;
+    }
+
+   public int countProperty(String propertyType) {
+       int result = 0;
+
+       for (Property property: properties) {
+           if (property.matchPropertyType(propertyType)) result++;
+       }
+
+       return result;
+    }
+
+    public void addProperty(Property property) {
+        properties.add(property);
     }
 }

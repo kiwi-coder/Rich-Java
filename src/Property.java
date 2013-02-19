@@ -42,9 +42,15 @@ class Property extends Site {
 
     public void setOwner(Player player) {
         owner = player;
+
+        player.addProperty(this);
     }
 
     public String display() {
         return level.display();
+    }
+
+    public boolean matchPropertyType(String propertyType) {
+        return this.level.getType().equals(propertyType);
     }
 }

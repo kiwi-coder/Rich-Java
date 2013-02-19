@@ -1,13 +1,19 @@
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.contrib.java.lang.system.StandardOutputStreamLog;
 
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 public class PlayerTest {
+    @Rule
+    public final StandardOutputStreamLog systemOutMock = new StandardOutputStreamLog();
+
     private final Site DUMMY_SITE = null;
     private static final int DUMMY_MONEY = 0;
     private static final String DUMMY_NAME = "";
@@ -149,7 +155,18 @@ public class PlayerTest {
         // Then
         assertFalse(property.hasOwner());
         assertThat(player.getMoney(), is(6200));
+        assertThat(player.countProperty(Cabin.CABIN_TYPE_CODE), is(0));
         assertThat(property.getLevel(), instanceOf(Land.class));
+    }
+
+    @Test
+    public void test_player_counting_his_properties(){
+        // Given
+        Property property = new Property(new House(300));
+        property.setOwner(player);
+
+        // When and then
+        assertThat(player.countProperty("2"), is(1));
     }
 
     @Test
@@ -541,5 +558,32 @@ public class PlayerTest {
         // Then
         assertThat(player.getPoints(), is(550));
         assertThat(player.countTool(BlockTool.BLOCK_TOOL_CODE), is(0));
+    }
+
+    @Test
+    public void test_player_executing_query_command(){
+        // Given
+        player.setMoney(5400);
+        player.setPoints(300);
+        for(int i = 0; i < 3; i++)
+            player.addProperty(new Property(new Land(300)));
+        player.addProperty(new Property(new Skyscraper(300)));
+        player.addProperty(new Property(new House(300)));
+        player.addProperty(new Property(new Cabin(300)));
+        player.addTool(new BombTool());
+        player.addTool(new BlockTool());
+        player.addTool(new RobotTool());
+
+        Command command = Command.makeCommand("query", player);
+
+        // When
+        player.executeCommand(command);
+
+        // Then
+        String expectedString = "资金：5400 元\n" +
+                                "点数：300 点\n" +
+                                "地产：空地 3 处；茅屋 1 处；洋房 1 处；摩天楼 1 处。\n" +
+                                "道具：路障 1 个；炸弹 1 个；机器娃娃 1 个\n";
+        assertEquals(expectedString, systemOutMock.getLog());
     }
 }

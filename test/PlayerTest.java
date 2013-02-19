@@ -473,4 +473,18 @@ public class PlayerTest {
         // Then
         assertTrue(map.getSite(3).hasBlockTool());
     }
+
+    @Test
+    public void test_player_executing_bomb_command() {
+        // Given
+        player.setSite(map.getSite(0));
+        player.addTool(new BombTool());
+        Command command = Command.makeCommand("bomb 3", player);
+
+        // When
+        player.executeCommand(command);
+
+        // Then
+        assertTrue(map.getSite(3).hasBombTool());
+    }
 }

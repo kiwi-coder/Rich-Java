@@ -337,7 +337,7 @@ public class Player {
     }
 
     public void executeCommand(Command command) {
-        if(command.isExecutable(this))
+        if (command.isExecutable(this))
             command.execute();
     }
 }

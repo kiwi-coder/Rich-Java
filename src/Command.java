@@ -12,6 +12,8 @@ public abstract class Command {
             return new RollCommand(player);
         } else if ("block".equals(commandType)) {
             return new BlockCommand(player, commandParameter);
+        } else if ("bomb".equals(commandType)) {
+            return new BombCommand(player, commandParameter);
         }
 
         throw new InvalidCommandException();
@@ -28,7 +30,7 @@ public abstract class Command {
 
     public abstract void execute();
 
-    boolean isExecutable(Player player){
+    boolean isExecutable(Player player) {
         return this.player == player;
     }
 

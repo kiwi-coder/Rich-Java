@@ -6,6 +6,7 @@ public abstract class Command {
     private static final String BOMB_COMMAND_TYPE = "bomb";
     private static final String ROBOT_COMMAND_TYPE = "robot";
     private static final String SELL_PROPERTY_COMMAND_TYPE = "sell";
+    private static final String SELL_TOOL_COMMAND_TYPE = "sellTool";
 
     private static final String COMMAND_SEPARATOR = " ";
     private static String commandType;
@@ -24,6 +25,8 @@ public abstract class Command {
             return new RobotCommand(player);
         } else if (SELL_PROPERTY_COMMAND_TYPE.equals(commandType)) {
             return new SellPropertyCommand(player, commandParameter);
+        } else if (SELL_TOOL_COMMAND_TYPE.equals(commandType)) {
+            return new SellToolCommand(player, commandParameter);
         }
 
         throw new InvalidCommandException();

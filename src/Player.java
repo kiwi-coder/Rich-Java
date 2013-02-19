@@ -320,6 +320,6 @@ public class Player {
 
     public void sellPropertyByIndex(int siteIndex) {
         Site siteToSell = site.findSiteByIndex(siteIndex);
-        sellProperty((Property)siteToSell);
+        sellProperty((Property) siteToSell);
     }
 }

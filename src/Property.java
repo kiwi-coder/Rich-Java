@@ -1,4 +1,4 @@
-class Property extends Site{
+class Property extends Site {
     private PropertyLevel level;
     private Player owner = null;
 

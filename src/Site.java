@@ -106,7 +106,7 @@ public class Site {
     public Site findSiteByIndex(int siteIndex) {
         Site siteToSell = this;
 
-        while( siteIndex != siteToSell.getIndex()){
+        while (siteIndex != siteToSell.getIndex()) {
             siteToSell = siteToSell.nextSite();
         }
         return siteToSell;

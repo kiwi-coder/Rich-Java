@@ -528,4 +528,18 @@ public class PlayerTest {
         assertThat(property.getLevel(), instanceOf(Land.class));
     }
 
+    @Test
+    public void test_player_executing_selling_tool_command() {
+        // Given
+        player.addTool(new BlockTool());
+        player.setPoints(500);
+        Command command = Command.makeCommand("sellTool 1", player);
+
+        // When
+        player.executeCommand(command);
+
+        // Then
+        assertThat(player.getPoints(), is(550));
+        assertThat(player.countTool(BlockTool.BLOCK_TOOL_CODE), is(0));
+    }
 }

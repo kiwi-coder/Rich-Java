@@ -28,7 +28,8 @@ public abstract class Command {
 
     public abstract void execute();
 
-    public Player getPlayer() {
-        return player;
+    boolean isExecutable(Player player){
+        return this.player == player;
     }
+
 }

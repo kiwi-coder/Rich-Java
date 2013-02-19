@@ -1,10 +1,3 @@
-/**
- * Created with IntelliJ IDEA.
- * User: goghvanmr
- * Date: 2/19/13
- * Time: 8:16 PM
- * To change this template use File | Settings | File Templates.
- */
 public class BlockCommand extends Command {
     private int distance;
 

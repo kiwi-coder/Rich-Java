@@ -4,6 +4,7 @@ public abstract class Command {
     public static final String BUY_LAND_COMMAND_SUFFIX = "_buy";
     public static final String UPGRADE_PROPERTY_COMMAND_SUFFIX = "_upgrade";
     public static final String CHOOSE_GIFT_COMMAND_PREFIX = "gift ";
+    public static final String BUY_TOOL_COMMAND_PREFIX = "buyTool ";
 
     private static final String ROLL_COMMAND_TYPE = "roll";
     private static final String BLOCK_COMMAND_TYPE = "block";
@@ -20,6 +21,7 @@ public abstract class Command {
     private static final String NOT_UPGRADE_PROPERTY_COMMAND_TYPE = "n_upgrade";
     public static final String PAY_TOLL_FEE_COMMAND_TYPE = "toll";
     private static final String CHOOSE_GIFT_COMMAND_TYPE = "gift";
+    private static final String BUY_TOOL_COMMAND_TYPE = "buyTool";
 
     private static final String COMMAND_SEPARATOR = " ";
     private static String commandType;
@@ -58,6 +60,8 @@ public abstract class Command {
             return new PayTollFeeCommand(player);
         } else if (CHOOSE_GIFT_COMMAND_TYPE.equals(commandType)) {
             return new ChooseGiftCommand(player, commandParameter);
+        } else if (BUY_TOOL_COMMAND_TYPE.equals(commandType)) {
+            return new BuyToolCommand(player, commandParameter);
         }
 
         throw new InvalidCommandException();

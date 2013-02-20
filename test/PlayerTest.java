@@ -773,4 +773,21 @@ public class PlayerTest {
         // Then
         assertThat(player.getPoints(), is(400));
     }
+
+    @Test
+    public void test_player_stopping_on_tool_house(){
+        // Given
+        ToolHouseSite toolHouseSite = new ToolHouseSite();
+        map.setSite(3, toolHouseSite);
+        player.setSite(map.getSite(0));
+        player.setPoints(200);
+
+        // When
+        systemInMock.provideText("2");
+        player.forward(3);
+
+        // Then
+        assertThat(player.getPoints(), is(170));
+        assertThat(player.countTool(2), is(1));
+    }
 }

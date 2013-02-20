@@ -9,6 +9,7 @@ public abstract class Command {
     private static final String SELL_TOOL_COMMAND_TYPE = "sellTool";
     private static final String QUERY_COMMAND_TYPE = "query";
     private static final String HELP_COMMAND_TYPE = "help";
+    private static final String QUIT_COMMAND_TYPE = "quit";
 
     private static final String COMMAND_SEPARATOR = " ";
     private static String commandType;
@@ -33,6 +34,8 @@ public abstract class Command {
             return new QueryCommand(player);
         } else if (HELP_COMMAND_TYPE.equals(commandType)) {
             return new HelpCommand(player);
+        } else if (QUIT_COMMAND_TYPE.equals(commandType)) {
+            return new QuitCommand(player);
         }
 
         throw new InvalidCommandException();

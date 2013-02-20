@@ -610,6 +610,5 @@ public class PlayerTest {
                 "quit:\t强制退出\n";
 
         assertEquals(expectedString, systemOutMock.getLog());
-
     }
 }

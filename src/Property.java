@@ -1,14 +1,19 @@
+import java.util.Scanner;
+
 class Property extends Site {
+    private Scanner scanner;
     private PropertyLevel level;
     private Player owner = null;
 
     public Property(PropertyLevel level) {
         super(level.getType());
         this.level = level;
+        scanner = new Scanner(System.in);
     }
 
     public void upgrade() {
         level = level.upgrade();
+        setType(level.getType());
     }
 
     public PropertyLevel getLevel() {
@@ -52,5 +57,34 @@ class Property extends Site {
 
     public boolean matchPropertyType(String propertyType) {
         return this.level.getType().equals(propertyType);
+    }
+
+    public void greetPlayer(Player player) {
+        super.greetPlayer(player);
+
+        String description;
+        String commandSuffix;
+        String answer;
+
+        if(!hasOwner()){
+            description = "是否购买该处空地，" + getPrice() + " 元（Y/N）?";
+            answer = prompt(description).toLowerCase();
+            commandSuffix = Command.BUY_LAND_COMMAND_SUFFIX;
+        } else if (getOwner() == player){
+            description = "是否升级该处地产，" + getPrice() + " 元（Y/N）?";
+            answer = prompt(description).toLowerCase();
+            commandSuffix = Command.UPGRADE_PROPERTY_COMMAND_SUFFIX;
+        } else {
+            answer = "toll";
+            commandSuffix = "";
+        }
+
+        Command command = Command.makeCommand(answer + commandSuffix, player);
+        player.executeCommand(command);
+    }
+
+    private String prompt(String description) {
+        System.out.println(description);
+        return scanner.next();
     }
 }

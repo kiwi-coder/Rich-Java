@@ -10,12 +10,11 @@ public class Game {
     private final int MAX_PLAYER_NUMBER = Player.playerSize();
 
     private int initPlayerMoney = DEFAULT_INIT_MONEY;
-    private Scanner scanner;
+    private Scanner scanner = new Scanner(System.in);
     private List<Player> players = new ArrayList();
     private Map map;
 
     public Game(Map map) {
-        scanner = new Scanner(System.in);
         this.map = map;
     }
 

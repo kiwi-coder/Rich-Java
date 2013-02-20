@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Player {
     private final int MAX_TOO_NUMBER = 10;
@@ -14,11 +15,13 @@ public class Player {
     private GodOfLuck godOfLuck;
     private boolean isInjured;
     private boolean inPrison;
+    private Scanner scanner;
 
     public Player(String name, Site site, int money) {
         this.name = name;
         this.money = money;
         if (site != null) setPlayerOnSite(site);
+        scanner = new Scanner(System.in);
     }
 
     public static Player createPlayer(char playerChar, Site site, int money) {
@@ -34,10 +37,14 @@ public class Player {
         int remainSteps = steps;
         while (remainSteps-- > 0) {
             forwardSingleStep();
-            if (isBlocked()) return;
+            if (isBlocked()) break;
         }
 
-        if (site.hasBombTool()) sentToHospital();
+        stop();
+    }
+
+    private void stop() {
+        site.greetPlayer(this);
     }
 
     public void sentToHospital() {

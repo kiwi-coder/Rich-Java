@@ -102,4 +102,8 @@ public class Site {
 
         throw new HospitalNotFoundException();
     }
+
+    public void greetPlayer(Player player) {
+        if (hasBombTool()) player.sentToHospital();
+    }
 }

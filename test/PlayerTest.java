@@ -2,6 +2,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.StandardOutputStreamLog;
+import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
@@ -11,6 +12,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 public class PlayerTest {
+    @Rule
+    public final TextFromStandardInputStream systemInMock = TextFromStandardInputStream.emptyStandardInputStream();
     @Rule
     public final StandardOutputStreamLog systemOutMock = new StandardOutputStreamLog();
 
@@ -610,5 +613,126 @@ public class PlayerTest {
                 "quit:\t强制退出\n";
 
         assertEquals(expectedString, systemOutMock.getLog());
+    }
+
+    @Test
+    public void test_player_stopping_on_land_after_moving_and_get_asked_if_he_wants_to_buy(){
+        // Given
+        player.setMoney(5000);
+        Property property = new Property(new Land(300));
+        map.setSite(0, property);
+        player.setSite(map.getSite(0));
+
+        // When
+        systemInMock.provideText("Y");
+        property.greetPlayer(player);
+
+
+        // Then
+        String expectedString = "是否购买该处空地，300 元（Y/N）?\n";
+        assertEquals(expectedString, systemOutMock.getLog());
+    }
+
+    @Test
+    public void test_player_stopping_on_land_after_moving_and_he_pressed_Y_and_buy_the_land(){
+        // Given
+        player.setMoney(5000);
+        player.setSite(map.getSite(0));
+        Property property = new Property(new Land(300));
+        map.setSite(3, property);
+
+        // When
+        systemInMock.provideText("Y");
+        player.forward(3);
+
+        // Then
+        assertThat(property.getOwner(), is(player));
+    }
+
+    @Test
+    public void test_player_stopping_on_land_after_moving_and_he_pressed_N_and_not_buy_the_land(){
+        // Given
+        player.setMoney(5000);
+        player.setSite(map.getSite(0));
+        Property property = new Property(new Land(300));
+        map.setSite(3, property);
+
+        // When
+        systemInMock.provideText("N");
+        player.forward(3);
+
+        // Then
+        assertFalse(property.hasOwner());
+    }
+
+    @Test
+    public void test_player_stopping_on_his_land_after_moving_and_get_asked_if_he_wants_to_upgrade(){
+        // Given
+        player.setMoney(5000);
+        Property property = new Property(new Land(300));
+        property.setOwner(player);
+        map.setSite(0, property);
+        player.setSite(map.getSite(0));
+
+        // When
+        systemInMock.provideText("Y");
+        property.greetPlayer(player);
+
+        // Then
+        String expectedString = "是否升级该处地产，300 元（Y/N）?\n";
+        assertEquals(expectedString, systemOutMock.getLog());
+    }
+
+    @Test
+    public void test_player_stopping_on_his_land_after_moving_and_he_pressed_Y_and_upgraded_the_land(){
+        // Given
+        player.setMoney(5000);
+        player.setSite(map.getSite(0));
+        Property property = new Property(new Land(300));
+        property.setOwner(player);
+        map.setSite(3, property);
+
+        // When
+        systemInMock.provideText("Y");
+        player.forward(3);
+
+        // Then
+        assertThat(property.getType(), is(Cabin.CABIN_TYPE_CODE));
+    }
+
+    @Test
+    public void test_player_stopping_on_his_land_after_moving_and_he_pressed_N_and_not_upgraded_the_land(){
+        // Given
+        player.setMoney(5000);
+        player.setSite(map.getSite(0));
+        Property property = new Property(new Land(300));
+        property.setOwner(player);
+        map.setSite(3, property);
+
+        // When
+        systemInMock.provideText("N");
+        player.forward(3);
+
+        // Then
+        assertThat(property.getType(), is(Land.LAND_TYPE_CODE));
+    }
+
+    @Test
+    public void test_player_stopping_on_other_player_s_property(){
+        // Given
+        player.setMoney(5000);
+        player.setSite(map.getSite(0));
+        Player other = new Player("Qianfuren", null, 5000);
+
+        Property property = new Property(new House(300));
+        property.setOwner(other);
+        map.setSite(3, property);
+
+        // Then
+        player.forward(3);
+
+        // Then
+        assertThat(player.getMoney(), is(4400));
+        assertThat(other.getMoney(), is(5600));
     }
 }

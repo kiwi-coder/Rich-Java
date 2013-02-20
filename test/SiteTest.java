@@ -63,4 +63,13 @@ public class SiteTest {
         // When and Then
         assertThat(giftHouseSite.display(), is("G"));
     }
+
+    @Test
+    public void should_magic_house_display_M_on_map(){
+        // Given
+        MagicHouseSite magicHouseSite = new MagicHouseSite();
+
+        // When and Then
+        assertThat(magicHouseSite.display(), is("M"));
+    }
 }

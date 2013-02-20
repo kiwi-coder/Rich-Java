@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Site {
     protected String type;
     protected Player player;
@@ -5,11 +7,13 @@ public class Site {
     protected Map map;
     private BlockTool blockTool;
     private BombTool bombTool;
+    private Scanner scanner;
 
     public Site(String type) {
         this.type = type;
         this.index = 0;
         this.player = null;
+        scanner = new Scanner(System.in);
     }
 
     private boolean hasPlayer() {
@@ -103,7 +107,13 @@ public class Site {
         throw new HospitalNotFoundException();
     }
 
-    public void greetPlayer(Player player) {
+    public Command giveCommand(Player player) {
         if (hasBombTool()) player.sentToHospital();
+        return new VoidCommand();
+    }
+
+    protected String prompt(String description) {
+        System.out.println(description);
+        return scanner.next();
     }
 }

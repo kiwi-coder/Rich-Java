@@ -220,7 +220,7 @@ public class PlayerTest {
         player.setMoney(5000);
 
         // When
-        player.chooseMoneyAtGiftHouse();
+        player.chooseGift(MoneyGift.MONEY_GIFT_CODE);
 
         // Then
         assertThat(player.getMoney(), is(7000));
@@ -232,7 +232,7 @@ public class PlayerTest {
         player.setPoints(200);
 
         // When
-        player.choosePointAtGiftHouse();
+        player.chooseGift(PointGift.POINT_GIFT_CODE);
 
         // Then
         assertThat(player.getPoints(), is(400));
@@ -244,7 +244,7 @@ public class PlayerTest {
         player.setGodOfLuck(null);
 
         // When
-        player.chooseGodOfLuckAtGiftHouse();
+        player.chooseGift(GodOfLuckGift.GOD_OF_LUCK_GIFT_CODE);
 
         // Then
         assertTrue(player.hasGodOfLuck());
@@ -625,7 +625,7 @@ public class PlayerTest {
 
         // When
         systemInMock.provideText("Y");
-        property.greetPlayer(player);
+        property.giveCommand(player);
 
 
         // Then
@@ -676,7 +676,7 @@ public class PlayerTest {
 
         // When
         systemInMock.provideText("Y");
-        property.greetPlayer(player);
+        property.giveCommand(player);
 
         // Then
         String expectedString = "是否升级该处地产，300 元（Y/N）?\n";
@@ -748,7 +748,7 @@ public class PlayerTest {
         property.setOwner(other);
         map.setSite(3, property);
 
-        // Then
+        // When
         player.forward(3);
 
         // Then
@@ -756,5 +756,21 @@ public class PlayerTest {
         assertThat(other.getMoney(), is(5000));
         String expectedString = "福神附身，可免过路费\n";
         assertEquals(expectedString, systemOutMock.getLog());
+    }
+
+    @Test
+    public void test_player_stopping_on_gift_house(){
+        // Given
+        GiftHouseSite giftHouseSite = new GiftHouseSite();
+        map.setSite(3, giftHouseSite);
+        player.setSite(map.getSite(0));
+        player.setPoints(200);
+
+        // When
+        systemInMock.provideText("2");
+        player.forward(3);
+
+        // Then
+        assertThat(player.getPoints(), is(400));
     }
 }

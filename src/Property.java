@@ -1,14 +1,10 @@
-import java.util.Scanner;
-
 class Property extends Site {
-    private Scanner scanner;
     private PropertyLevel level;
     private Player owner = null;
 
     public Property(PropertyLevel level) {
         super(level.getType());
         this.level = level;
-        scanner = new Scanner(System.in);
     }
 
     public void upgrade() {
@@ -59,9 +55,9 @@ class Property extends Site {
         return this.level.getType().equals(propertyType);
     }
 
-    public void greetPlayer(Player player) {
+    public Command giveCommand(Player player) {
         // TODO: 感觉这里需要重构, 但是不知道怎么弄.
-        super.greetPlayer(player);
+        super.giveCommand(player);
 
         String description;
         String commandSuffix;
@@ -83,11 +79,6 @@ class Property extends Site {
         }
 
         Command command = Command.makeCommand(answer + commandSuffix, player);
-        player.executeCommand(command);
-    }
-
-    private String prompt(String description) {
-        System.out.println(description);
-        return scanner.next();
+        return command;
     }
 }

@@ -44,7 +44,8 @@ public class Player {
     }
 
     private void stop() {
-        site.greetPlayer(this);
+        Command command = site.giveCommand(this);
+        executeCommand(command);
     }
 
     public void sentToHospital() {
@@ -127,7 +128,7 @@ public class Player {
         isBroke = true;
     }
 
-    private void earnMoney(int money) {
+    public void earnMoney(int money) {
         this.money += money;
     }
 
@@ -187,15 +188,7 @@ public class Player {
         this.money = money;
     }
 
-    public void chooseMoneyAtGiftHouse() {
-        earnMoney(GiftHouseSite.GIFT_MONEY_AMOUNT);
-    }
-
-    public void choosePointAtGiftHouse() {
-        earnPoints(GiftHouseSite.GIFT_POINT_AMOUNT);
-    }
-
-    private void earnPoints(int points) {
+    public void earnPoints(int points) {
         this.points += points;
     }
 
@@ -212,10 +205,6 @@ public class Player {
 
     private void registerGodOfLuck() {
         RoundEngine.instance().registerPlayerWithGodOfLuck(this, GodOfLuck.ROUND_IN_EFFECT);
-    }
-
-    public void chooseGodOfLuckAtGiftHouse() {
-        godOfLuck = new GodOfLuck();
     }
 
     public boolean hasGodOfLuck() {
@@ -368,5 +357,14 @@ public class Player {
 
     public void addProperty(Property property) {
         properties.add(property);
+    }
+
+    public void chooseGift(int giftCode) {
+        Gift gift = Gift.makeGift(giftCode);
+        openGift(gift);
+    }
+
+    private void openGift(Gift gift) {
+        gift.open(this);
     }
 }

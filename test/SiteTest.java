@@ -65,7 +65,7 @@ public class SiteTest {
     }
 
     @Test
-    public void should_magic_house_display_M_on_map(){
+    public void should_magic_house_display_M_on_map() {
         // Given
         MagicHouseSite magicHouseSite = new MagicHouseSite();
 

@@ -616,7 +616,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void test_player_stopping_on_land_after_moving_and_get_asked_if_he_wants_to_buy(){
+    public void test_player_stopping_on_land_after_moving_and_get_asked_if_he_wants_to_buy() {
         // Given
         player.setMoney(5000);
         Property property = new Property(new Land(300));
@@ -634,7 +634,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void test_player_stopping_on_land_after_moving_and_he_pressed_Y_and_buy_the_land(){
+    public void test_player_stopping_on_land_after_moving_and_he_pressed_Y_and_buy_the_land() {
         // Given
         player.setMoney(5000);
         player.setSite(map.getSite(0));
@@ -650,7 +650,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void test_player_stopping_on_land_after_moving_and_he_pressed_N_and_not_buy_the_land(){
+    public void test_player_stopping_on_land_after_moving_and_he_pressed_N_and_not_buy_the_land() {
         // Given
         player.setMoney(5000);
         player.setSite(map.getSite(0));
@@ -666,7 +666,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void test_player_stopping_on_his_land_after_moving_and_get_asked_if_he_wants_to_upgrade(){
+    public void test_player_stopping_on_his_land_after_moving_and_get_asked_if_he_wants_to_upgrade() {
         // Given
         player.setMoney(5000);
         Property property = new Property(new Land(300));
@@ -684,7 +684,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void test_player_stopping_on_his_land_after_moving_and_he_pressed_Y_and_upgraded_the_land(){
+    public void test_player_stopping_on_his_land_after_moving_and_he_pressed_Y_and_upgraded_the_land() {
         // Given
         player.setMoney(5000);
         player.setSite(map.getSite(0));
@@ -701,7 +701,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void test_player_stopping_on_his_land_after_moving_and_he_pressed_N_and_not_upgraded_the_land(){
+    public void test_player_stopping_on_his_land_after_moving_and_he_pressed_N_and_not_upgraded_the_land() {
         // Given
         player.setMoney(5000);
         player.setSite(map.getSite(0));
@@ -718,7 +718,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void test_player_stopping_on_other_player_s_property(){
+    public void test_player_stopping_on_other_player_s_property() {
         // Given
         player.setMoney(5000);
         player.setSite(map.getSite(0));
@@ -734,5 +734,27 @@ public class PlayerTest {
         // Then
         assertThat(player.getMoney(), is(4400));
         assertThat(other.getMoney(), is(5600));
+    }
+
+    @Test
+    public void test_player_who_has_a_god_of_luck_stopping_on_other_player_s_property() {
+        // Given
+        player.setMoney(5000);
+        player.setSite(map.getSite(0));
+        player.setGodOfLuck(new GodOfLuck());
+        Player other = new Player("Qianfuren", null, 5000);
+
+        Property property = new Property(new House(300));
+        property.setOwner(other);
+        map.setSite(3, property);
+
+        // Then
+        player.forward(3);
+
+        // Then
+        assertThat(player.getMoney(), is(5000));
+        assertThat(other.getMoney(), is(5000));
+        String expectedString = "福神附身，可免过路费\n";
+        assertEquals(expectedString, systemOutMock.getLog());
     }
 }

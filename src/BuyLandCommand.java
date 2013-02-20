@@ -6,6 +6,6 @@ public class BuyLandCommand extends Command {
 
     @Override
     public void execute() {
-        player.buyProperty((Property)player.getSite());
+        player.buyProperty((Property) player.getSite());
     }
 }

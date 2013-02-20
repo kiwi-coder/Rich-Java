@@ -6,6 +6,7 @@ public class PayTollFeeCommand extends Command {
 
     @Override
     public void execute() {
-        player.payTollFee((Property)player.getSite());
+        if (player.hasGodOfLuck()) return;
+        player.payTollFee((Property) player.getSite());
     }
 }

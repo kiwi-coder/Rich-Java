@@ -60,23 +60,26 @@ class Property extends Site {
     }
 
     public void greetPlayer(Player player) {
+        // TODO: 感觉这里需要重构, 但是不知道怎么弄.
         super.greetPlayer(player);
 
         String description;
         String commandSuffix;
         String answer;
 
-        if(!hasOwner()){
+        if (!hasOwner()) {
             description = "是否购买该处空地，" + getPrice() + " 元（Y/N）?";
             answer = prompt(description).toLowerCase();
             commandSuffix = Command.BUY_LAND_COMMAND_SUFFIX;
-        } else if (getOwner() == player){
+        } else if (getOwner() == player) {
             description = "是否升级该处地产，" + getPrice() + " 元（Y/N）?";
             answer = prompt(description).toLowerCase();
             commandSuffix = Command.UPGRADE_PROPERTY_COMMAND_SUFFIX;
         } else {
             answer = "toll";
             commandSuffix = "";
+            if (player.hasGodOfLuck())
+                System.out.println("福神附身，可免过路费");
         }
 
         Command command = Command.makeCommand(answer + commandSuffix, player);

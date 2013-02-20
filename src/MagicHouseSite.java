@@ -1,4 +1,4 @@
-public class MagicHouseSite extends Site{
+public class MagicHouseSite extends Site {
     private static final String MAGIC_HOUSE_TYPE = "M";
 
     public MagicHouseSite() {

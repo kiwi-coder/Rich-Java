@@ -9,8 +9,8 @@ public abstract class Gift {
                 return new PointGift();
             case GodOfLuckGift.GOD_OF_LUCK_GIFT_CODE:
                 return new GodOfLuckGift();
+            default:
+                return new NothingGift();
         }
-
-        throw new InvalidGiftException();
     }
 }

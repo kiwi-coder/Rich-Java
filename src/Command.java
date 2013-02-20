@@ -5,6 +5,7 @@ public abstract class Command {
     public static final String UPGRADE_PROPERTY_COMMAND_SUFFIX = "_upgrade";
     public static final String CHOOSE_GIFT_COMMAND_PREFIX = "gift ";
     public static final String BUY_TOOL_COMMAND_PREFIX = "buyTool ";
+    public static final String KEY_TO_EXIT_TOOL_HOUSE = "f";
 
     private static final String ROLL_COMMAND_TYPE = "roll";
     private static final String BLOCK_COMMAND_TYPE = "block";
@@ -22,6 +23,7 @@ public abstract class Command {
     public static final String PAY_TOLL_FEE_COMMAND_TYPE = "toll";
     private static final String CHOOSE_GIFT_COMMAND_TYPE = "gift";
     private static final String BUY_TOOL_COMMAND_TYPE = "buyTool";
+    public static final String EXIT_TOOL_HOUSE_COMMAND_TYPE = "f_exit";
 
     private static final String COMMAND_SEPARATOR = " ";
     private static String commandType;
@@ -62,6 +64,8 @@ public abstract class Command {
             return new ChooseGiftCommand(player, commandParameter);
         } else if (BUY_TOOL_COMMAND_TYPE.equals(commandType)) {
             return new BuyToolCommand(player, commandParameter);
+        } else if (EXIT_TOOL_HOUSE_COMMAND_TYPE.equals(commandType)) {
+            return new ExitToolHouseCommand(player);
         }
 
         throw new InvalidCommandException();

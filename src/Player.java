@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Player {
     private final int MAX_TOO_NUMBER = 10;
@@ -15,13 +14,15 @@ public class Player {
     private GodOfLuck godOfLuck;
     private boolean isInjured;
     private boolean inPrison;
-    private Scanner scanner;
+    private boolean isActive;
 
     public Player(String name, Site site, int money) {
         this.name = name;
         this.money = money;
         if (site != null) setPlayerOnSite(site);
-        scanner = new Scanner(System.in);
+
+        // TODO: this is temporary
+        isActive = true;
     }
 
     public static Player createPlayer(char playerChar, Site site, int money) {
@@ -33,22 +34,30 @@ public class Player {
         return names.length;
     }
 
+    public void takeTurn1() {
+        // TODO
+
+        forward(3);
+        stop();
+    }
+
     public void forward(int steps) {
         int remainSteps = steps;
         while (remainSteps-- > 0) {
             forwardSingleStep();
             if (isBlocked()) break;
         }
-
-        stop();
     }
 
-    private void stop() {
-        Command command = site.giveCommand(this);
-        executeCommand(command);
+    public void stop() {
+        while (isActive()) {
+            Command command = site.giveCommand(this);
+            executeCommand(command);
+        }
     }
 
     public void sentToHospital() {
+        isActive = false;
         isInjured = true;
         setSite(site.findNearestHospital());
 
@@ -142,13 +151,17 @@ public class Player {
 
     public void buyTool(int toolCode) {
         Tool tool = Tool.makeTool(toolCode);
-        if (!isToolAffordable(tool)) throw new PointsException();
+        if (!canAffordTool(tool)) throw new PointsException();
         if (tools.size() >= MAX_TOO_NUMBER) throw new ToolException();
+        buyTool(tool);
+    }
+
+    public void buyTool(Tool tool) {
         payPoints(tool.getPoint());
         addTool(tool);
     }
 
-    private boolean isToolAffordable(Tool tool) {
+    public boolean canAffordTool(Tool tool) {
         return points > tool.getPoint();
     }
 
@@ -366,5 +379,13 @@ public class Player {
 
     private void openGift(Gift gift) {
         gift.open(this);
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void becomeInactive() {
+        isActive = false;
     }
 }

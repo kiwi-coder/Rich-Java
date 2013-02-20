@@ -1,2 +1,2 @@
-public class InvalidGiftException extends RuntimeException{
+public class InvalidGiftException extends RuntimeException {
 }

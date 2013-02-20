@@ -7,5 +7,6 @@ public class UpgradePropertyCommand extends Command {
     @Override
     public void execute() {
         player.upgradeProperty((Property) player.getSite());
+        player.becomeInactive();
     }
 }

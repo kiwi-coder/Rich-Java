@@ -1,7 +1,7 @@
 public abstract class Gift {
     abstract void open(Player player);
 
-    public static Gift makeGift(int giftCode){
+    public static Gift makeGift(int giftCode) {
         switch (giftCode) {
             case MoneyGift.MONEY_GIFT_CODE:
                 return new MoneyGift();

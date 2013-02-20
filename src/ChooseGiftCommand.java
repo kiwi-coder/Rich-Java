@@ -10,5 +10,6 @@ public class ChooseGiftCommand extends Command {
     @Override
     public void execute() {
         player.chooseGift(giftCode);
+        player.becomeInactive();
     }
 }

@@ -10,7 +10,7 @@ public class Skyscraper extends PropertyLevel {
 
     @Override
     public PropertyLevel upgrade() {
-        return null;  //ToDo: throw exception here
+        return null;  //TODO: throw exception here
     }
 
     @Override

@@ -6,6 +6,6 @@ public class NotUpgradePropertyCommand extends Command {
 
     @Override
     public void execute() {
-        // Do nothing
+        player.becomeInactive();
     }
 }

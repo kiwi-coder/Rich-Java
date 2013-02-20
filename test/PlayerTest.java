@@ -384,12 +384,12 @@ public class PlayerTest {
     @Test
     public void test_player_stepping_on_bomb_and_sent_to_hospital() {
         // Given
-        player.setSite(map.getSite(0));
-        map.getSite(2).setBombTool(new BombTool());
+        map.getSite(3).setBombTool(new BombTool());
         map.setSite(5, new HospitalSite());
 
+        player.setSite(map.getSite(3));
         // When
-        player.forward(2);
+        player.stop();
 
         // Then
         assertThat(player.getSite(), is(map.getSite(5)));
@@ -625,7 +625,7 @@ public class PlayerTest {
 
         // When
         systemInMock.provideText("Y");
-        property.giveCommand(player);
+        player.stop();
 
 
         // Then
@@ -636,14 +636,15 @@ public class PlayerTest {
     @Test
     public void test_player_stopping_on_land_after_moving_and_he_pressed_Y_and_buy_the_land() {
         // Given
-        player.setMoney(5000);
-        player.setSite(map.getSite(0));
         Property property = new Property(new Land(300));
         map.setSite(3, property);
 
+        player.setMoney(5000);
+        player.setSite(map.getSite(3));
+
         // When
         systemInMock.provideText("Y");
-        player.forward(3);
+        player.stop();
 
         // Then
         assertThat(property.getOwner(), is(player));
@@ -652,14 +653,15 @@ public class PlayerTest {
     @Test
     public void test_player_stopping_on_land_after_moving_and_he_pressed_N_and_not_buy_the_land() {
         // Given
-        player.setMoney(5000);
-        player.setSite(map.getSite(0));
         Property property = new Property(new Land(300));
         map.setSite(3, property);
 
+        player.setMoney(5000);
+        player.setSite(map.getSite(3));
+
         // When
         systemInMock.provideText("N");
-        player.forward(3);
+        player.stop();
 
         // Then
         assertFalse(property.hasOwner());
@@ -668,15 +670,16 @@ public class PlayerTest {
     @Test
     public void test_player_stopping_on_his_land_after_moving_and_get_asked_if_he_wants_to_upgrade() {
         // Given
-        player.setMoney(5000);
         Property property = new Property(new Land(300));
         property.setOwner(player);
         map.setSite(0, property);
+
         player.setSite(map.getSite(0));
+        player.setMoney(5000);
 
         // When
         systemInMock.provideText("Y");
-        property.giveCommand(player);
+        player.stop();
 
         // Then
         String expectedString = "是否升级该处地产，300 元（Y/N）?\n";
@@ -686,15 +689,16 @@ public class PlayerTest {
     @Test
     public void test_player_stopping_on_his_land_after_moving_and_he_pressed_Y_and_upgraded_the_land() {
         // Given
-        player.setMoney(5000);
-        player.setSite(map.getSite(0));
         Property property = new Property(new Land(300));
         property.setOwner(player);
         map.setSite(3, property);
 
+        player.setMoney(5000);
+        player.setSite(map.getSite(3));
+
         // When
         systemInMock.provideText("Y");
-        player.forward(3);
+        player.stop();
 
         // Then
         assertThat(property.getType(), is(Cabin.CABIN_TYPE_CODE));
@@ -703,15 +707,16 @@ public class PlayerTest {
     @Test
     public void test_player_stopping_on_his_land_after_moving_and_he_pressed_N_and_not_upgraded_the_land() {
         // Given
-        player.setMoney(5000);
-        player.setSite(map.getSite(0));
         Property property = new Property(new Land(300));
         property.setOwner(player);
         map.setSite(3, property);
 
+        player.setMoney(5000);
+        player.setSite(map.getSite(3));
+
         // When
         systemInMock.provideText("N");
-        player.forward(3);
+        player.stop();
 
         // Then
         assertThat(property.getType(), is(Land.LAND_TYPE_CODE));
@@ -720,16 +725,16 @@ public class PlayerTest {
     @Test
     public void test_player_stopping_on_other_player_s_property() {
         // Given
-        player.setMoney(5000);
-        player.setSite(map.getSite(0));
         Player other = new Player("Qianfuren", null, 5000);
-
         Property property = new Property(new House(300));
         property.setOwner(other);
+
         map.setSite(3, property);
+        player.setMoney(5000);
+        player.setSite(map.getSite(3));
 
         // Then
-        player.forward(3);
+        player.stop();
 
         // Then
         assertThat(player.getMoney(), is(4400));
@@ -739,17 +744,17 @@ public class PlayerTest {
     @Test
     public void test_player_who_has_a_god_of_luck_stopping_on_other_player_s_property() {
         // Given
-        player.setMoney(5000);
-        player.setSite(map.getSite(0));
-        player.setGodOfLuck(new GodOfLuck());
         Player other = new Player("Qianfuren", null, 5000);
-
         Property property = new Property(new House(300));
         property.setOwner(other);
         map.setSite(3, property);
 
+        player.setMoney(5000);
+        player.setSite(map.getSite(3));
+        player.setGodOfLuck(new GodOfLuck());
+
         // When
-        player.forward(3);
+        player.stop();
 
         // Then
         assertThat(player.getMoney(), is(5000));
@@ -759,35 +764,110 @@ public class PlayerTest {
     }
 
     @Test
-    public void test_player_stopping_on_gift_house(){
+    public void test_player_stopping_on_gift_house() {
         // Given
         GiftHouseSite giftHouseSite = new GiftHouseSite();
         map.setSite(3, giftHouseSite);
-        player.setSite(map.getSite(0));
+
+        player.setSite(map.getSite(3));
         player.setPoints(200);
 
         // When
         systemInMock.provideText("2");
-        player.forward(3);
+        player.stop();
 
         // Then
         assertThat(player.getPoints(), is(400));
     }
 
     @Test
-    public void test_player_stopping_on_tool_house(){
+    public void test_player_stopping_on_tool_house_and_press_F_to_exit() {
         // Given
         ToolHouseSite toolHouseSite = new ToolHouseSite();
         map.setSite(3, toolHouseSite);
-        player.setSite(map.getSite(0));
+        player.setSite(map.getSite(3));
+        player.setPoints(40);
+
+        // When
+        systemInMock.provideText("F");
+        player.stop();
+
+        // Then
+        String expectedString = "欢迎光临道具屋， 请选择您所需要的道具：\n";
+        assertEquals(expectedString, systemOutMock.getLog());
+    }
+
+    @Test
+    public void test_player_stopping_on_tool_house_and_buy_one_tool() {
+        // Given
+        ToolHouseSite toolHouseSite = new ToolHouseSite();
+        map.setSite(3, toolHouseSite);
+
+        player.setSite(map.getSite(3));
         player.setPoints(200);
 
         // When
-        systemInMock.provideText("2");
-        player.forward(3);
+        systemInMock.provideText("2\nF");
+        player.stop();
 
         // Then
         assertThat(player.getPoints(), is(170));
         assertThat(player.countTool(2), is(1));
+    }
+
+    @Test
+    public void test_player_stopping_on_tool_house_and_buy_two_tool() {
+        // Given
+        ToolHouseSite toolHouseSite = new ToolHouseSite();
+        map.setSite(3, toolHouseSite);
+
+        player.setSite(map.getSite(3));
+        player.setPoints(200);
+
+        // When
+        systemInMock.provideText("2\n1\nF");
+        player.stop();
+
+        // Then
+        assertThat(player.getPoints(), is(120));
+        assertThat(player.countTool(2), is(1));
+        assertThat(player.countTool(1), is(1));
+    }
+
+    @Test
+    public void test_player_stopping_on_tool_house_and_does_not_have_enough_point_to_buy_what_he_wants() {
+        // Given
+        ToolHouseSite toolHouseSite = new ToolHouseSite();
+        map.setSite(3, toolHouseSite);
+
+        player.setSite(map.getSite(3));
+        player.setPoints(40);
+
+        // When
+        systemInMock.provideText("1\nF");
+        player.stop();
+
+        // Then
+        assertThat(player.getPoints(), is(40));
+        String greetings = "欢迎光临道具屋， 请选择您所需要的道具：\n";
+        String expectedString = greetings + "您当前剩余的点数为 40， 不足以购买路障道具\n" + greetings;
+        assertEquals(expectedString, systemOutMock.getLog());
+    }
+
+    @Test
+    public void test_player_stopping_on_tool_house_and_does_not_have_enough_point_to_buy_the_cheapest_tool() {
+        // Given
+        ToolHouseSite toolHouseSite = new ToolHouseSite();
+        map.setSite(3, toolHouseSite);
+
+        player.setSite(map.getSite(3));
+        player.setPoints(20);
+
+        // When
+        player.stop();
+
+        // Then
+        assertFalse(player.isActive());
+        assertThat(player.getPoints(), is(20));
     }
 }

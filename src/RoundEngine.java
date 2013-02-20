@@ -22,6 +22,7 @@ public class RoundEngine {
         nextRoundForGodsOfLuck();
     }
 
+    // TODO: 这两个nextRound...函数, 有重复代码, 但是不知道怎么重构...
     private void nextRoundForGodsOfLuck() {
         Iterator<Map.Entry<Player, Integer>> it = roundLeftForGodOfLuck.entrySet().iterator();
         while (it.hasNext()) {

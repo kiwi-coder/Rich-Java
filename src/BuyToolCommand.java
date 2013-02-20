@@ -9,6 +9,12 @@ public class BuyToolCommand extends Command {
 
     @Override
     public void execute() {
-        player.buyTool(toolCode);
+        Tool tool = Tool.makeTool(toolCode);
+
+        if (player.canAffordTool(tool)) {
+            player.buyTool(tool);
+        } else {
+            System.out.println("您当前剩余的点数为 " + player.getPoints() + "， 不足以购买" + tool.getName() + "道具");
+        }
     }
 }

@@ -26,4 +26,10 @@ abstract class Tool {
     }
 
     public abstract void usedOnSite(Site siteToPlaceBombTool);
+
+    public abstract String getName();
+
+    public static Tool makeCheapestTool() {
+        return new RobotTool();
+    }
 }

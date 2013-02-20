@@ -870,4 +870,19 @@ public class PlayerTest {
         assertFalse(player.isActive());
         assertThat(player.getPoints(), is(20));
     }
+
+    @Test
+    public void test_player_stopping_on_magic_house_and_nothing_happen(){
+        // Given
+        MagicHouseSite magicHouseSite = new MagicHouseSite();
+        map.setSite(3, magicHouseSite);
+
+        player.setSite(map.getSite(3));
+
+        // When
+        player.stop();
+
+        // Then
+        assertFalse(player.isActive());
+    }
 }

@@ -182,7 +182,7 @@ public class Player {
     }
 
     public boolean canAffordTool(Tool tool) {
-        return points > tool.getPoint();
+        return points >= tool.getPoint();
     }
 
     public int getToolsNumber() {

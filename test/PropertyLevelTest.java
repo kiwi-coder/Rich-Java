@@ -23,11 +23,6 @@ public class PropertyLevelTest {
     }
 
     @Test
-    public void should_return_0_for_display() {
-        assertThat(new Land(DUMMY_MONEY).display(), is("0"));
-    }
-
-    @Test
     public void should_return_house_when_upgrade_cabin() {
         assertThat(new Cabin(DUMMY_MONEY).upgrade(), instanceOf(House.class));
     }
@@ -40,11 +35,6 @@ public class PropertyLevelTest {
     @Test
     public void should_return_toll_fee_for_200_when_cabin_price_is_200() {
         assertThat(new Cabin(200).getTollFee(), is(200));
-    }
-
-    @Test
-    public void should_return_1_for_display() {
-        assertThat(new Cabin(DUMMY_MONEY).display(), is("1"));
     }
 
     @Test
@@ -63,11 +53,6 @@ public class PropertyLevelTest {
     }
 
     @Test
-    public void should_return_2_for_house_display() {
-        assertThat(new House(DUMMY_MONEY).display(), is("2"));
-    }
-
-    @Test
     public void should_return_sell_skyscraper_2400_when_price_is_300() {
         assertThat(new Skyscraper(300).getSalePrice(), is(2400));
     }
@@ -75,10 +60,5 @@ public class PropertyLevelTest {
     @Test
     public void should_return_toll_fee_800_when_skyscraper_price_is_200() {
         assertThat(new Skyscraper(200).getTollFee(), is(800));
-    }
-
-    @Test
-    public void should_return_3_for_skyscraper_display() {
-        assertThat(new Skyscraper(DUMMY_MONEY).display(), is("3"));
     }
 }

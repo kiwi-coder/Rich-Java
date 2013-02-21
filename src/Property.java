@@ -47,10 +47,6 @@ class Property extends Site {
         player.addProperty(this);
     }
 
-    public String display() {
-        return level.display();
-    }
-
     public boolean matchPropertyType(String propertyType) {
         return this.level.getType().equals(propertyType);
     }

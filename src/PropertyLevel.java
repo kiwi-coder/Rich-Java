@@ -20,10 +20,6 @@ public abstract class PropertyLevel {
 
     public abstract PropertyLevel upgrade();
 
-    public String display() {
-        return type;
-    }
-
     public String getType() {
         return type;
     }

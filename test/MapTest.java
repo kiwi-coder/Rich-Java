@@ -34,4 +34,14 @@ public class MapTest {
         Player player = new Player("ATuBo", map.getSite(0), DUMMY_MONEY);
         assertThat(map.display(), is(expected));
     }
+
+    @Test
+    public void test_display_property(){
+        String expected = "020\n"
+                + "0 0\n"
+                + "000\n";
+
+        map.setSite(1, new Property(new House(200)));
+        assertThat(map.display(), is(expected));
+    }
 }

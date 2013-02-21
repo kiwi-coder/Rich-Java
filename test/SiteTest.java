@@ -81,4 +81,31 @@ public class SiteTest {
         // When and Then
         assertThat(startingSite.display(), is("S"));
     }
+
+    @Test
+    public void should_land_display_0_on_map(){
+        // Given
+        Site property = new Property(new Land(200));
+
+        // When and then
+        assertThat(property.display(), is("0"));
+    }
+
+    @Test
+    public void should_cabin_display_1_on_map(){
+        // Given
+        Site property = new Property(new Cabin(200));
+
+        // When and then
+        assertThat(property.display(), is("1"));
+    }
+
+    @Test
+    public void should_house_display_2_on_map(){
+        // Given
+        Site site = new Property(new House(200));
+
+        // When and then
+        assertThat(site.display(), is("2"));
+    }
 }

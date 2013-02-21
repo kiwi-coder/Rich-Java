@@ -887,6 +887,22 @@ public class PlayerTest {
     }
 
     @Test
+    public void test_player_stopping_on_point_mine_and_get_points(){
+        // Given
+        PointMineSite pointMineSite = new PointMineSite(40);
+        map.setSite(3, pointMineSite);
+
+        player.setSite(map.getSite(3));
+        player.setPoints(300);
+
+        // When
+        player.stopping();
+
+        // Then
+        assertThat(player.getPoints(), is(340));
+    }
+
+    @Test
     public void test_player_taking_his_turn_and_then_becoming_inactive() {
         // Given
         player.setSite(map.getSite(0));

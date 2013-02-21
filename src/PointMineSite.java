@@ -10,4 +10,10 @@ public class PointMineSite extends Site {
     public int getPoint() {
         return point;
     }
+
+    public Command giveCommand(Player player) {
+        super.giveCommand(player);
+
+        return new MineCommand(player);
+    }
 }

@@ -1,8 +1,10 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Site {
     protected String type;
-    protected Player player;
+    private List<Player> players = new ArrayList();
     protected int index;
     protected Map map;
     private BlockTool blockTool;
@@ -12,20 +14,19 @@ public class Site {
     public Site(String type) {
         this.type = type;
         this.index = 0;
-        this.player = null;
         scanner = new Scanner(System.in);
     }
 
     private boolean hasPlayer() {
-        return player != null;
+        return players.size() != 0;
     }
 
     public int getIndex() {
         return index;
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
+    public void addPlayer(Player player) {
+        players.add(player);
     }
 
     public void setMap(Map map) {
@@ -40,12 +41,8 @@ public class Site {
         return (index + 1) % map.size();
     }
 
-    public void resetPlayer() {
-        player = null;
-    }
-
     public String display() {
-        if (hasPlayer()) return player.display();
+        if (hasPlayer()) return players.get(players.size() -1).display();
         return type;
     }
 
@@ -115,5 +112,17 @@ public class Site {
     protected String prompt(String description) {
         System.out.println(description);
         return scanner.next();
+    }
+
+    private Player findPlayer(Player playerToFind){
+        for (Player player : players){
+            if (player.equals(playerToFind))
+                return player;
+        }
+        return null;
+    }
+
+    public void removePlayer(Player player) {
+        players.remove(findPlayer(player));
     }
 }

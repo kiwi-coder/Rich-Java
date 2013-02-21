@@ -93,6 +93,7 @@ public class Player {
     }
 
     private void forwardSingleStep() {
+        site.removePlayer(this);
         Site nextSite = site.nextSite();
         setSite(nextSite);
     }
@@ -110,7 +111,6 @@ public class Player {
     }
 
     public void setSite(Site targetSite) {
-        if (site != null) site.resetPlayer();
         setPlayerOnSite(targetSite);
     }
 
@@ -125,7 +125,7 @@ public class Player {
         }
 
         site = targetSite;
-        targetSite.setPlayer(this);
+        targetSite.addPlayer(this);
     }
 
     public Site getSite() {

@@ -109,7 +109,7 @@ public class Site {
 
     public Command giveCommand(Player player) {
         if (hasBombTool()) player.sentToHospital();
-        return new VoidCommand(player);
+        return new DoNothingCommand(player);
     }
 
     protected String prompt(String description) {

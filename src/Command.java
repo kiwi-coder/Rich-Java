@@ -66,9 +66,9 @@ public abstract class Command {
             return new BuyToolCommand(player, commandParameter);
         } else if (EXIT_TOOL_HOUSE_COMMAND_TYPE.equals(commandType)) {
             return new ExitToolHouseCommand(player);
+        } else {
+            return new InvalidCommand();
         }
-
-        throw new InvalidCommandException();
     }
 
     private static void parseCommand(String command) {

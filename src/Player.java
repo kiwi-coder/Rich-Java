@@ -38,6 +38,7 @@ public class Player {
     }
 
     public void takeTurn() {
+        becomeActive();
         RollCommand roll = waiting();
         moving(roll);
         stopping();

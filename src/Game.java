@@ -84,10 +84,6 @@ public class Game {
         return players;
     }
 
-    public Player getActivePlayer() {
-        return players.get(0);
-    }
-
     public boolean isOver() {
         int playerNumber = 0;
         for (Player player : players) {
@@ -106,6 +102,7 @@ public class Game {
         while (true) {
             for (Player player : players) {
                 if (!player.isBroke()) {
+                    System.out.println(map.display());
                     System.out.print(player.getName() + ">");
                     player.takeTurn();
                 }

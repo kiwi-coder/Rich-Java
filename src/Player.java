@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Player {
     private final int MAX_TOO_NUMBER = 10;
@@ -15,13 +16,15 @@ public class Player {
     private boolean isInjured;
     private boolean inPrison;
     private boolean isActive;
+    private Scanner scanner;
 
     public Player(String name, Site site, int money) {
         this.name = name;
         this.money = money;
         if (site != null) setPlayerOnSite(site);
 
-        // TODO: this is temporary
+        scanner = new Scanner(System.in);
+        // TODO
         isActive = true;
     }
 
@@ -34,11 +37,27 @@ public class Player {
         return names.length;
     }
 
-    public void takeTurn1() {
-        // TODO
+    public void takeTurn() {
+        RollCommand roll = waiting();
+        moving(roll);
+        stopping();
+    }
 
-        forward(3);
-        stop();
+    private void becomeActive() {
+        isActive = true;
+    }
+
+    private void moving(RollCommand roll) {
+        executeCommand(roll);
+    }
+
+    private RollCommand waiting() {
+        while (true){
+            String string = scanner.next();
+            Command command = Command.makeCommand(string, this);
+            if(command instanceof RollCommand) return (RollCommand)command;
+            executeCommand(command);
+        }
     }
 
     public void forward(int steps) {
@@ -49,7 +68,7 @@ public class Player {
         }
     }
 
-    public void stop() {
+    public void stopping() {
         while (isActive()) {
             Command command = site.giveCommand(this);
             executeCommand(command);
@@ -133,7 +152,7 @@ public class Player {
         player.earnMoney(money);
     }
 
-    private void broke() {
+    public void broke() {
         isBroke = true;
     }
 

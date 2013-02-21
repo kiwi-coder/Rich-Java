@@ -52,7 +52,7 @@ public class Game {
             if (isPlayerNumberOutOfRange(playerString)) throw new IllegalUserInputException();
             if (hasDuplicatePlayers(playerString)) throw new IllegalUserInputException();
             for (char playerChar : playerString.toCharArray()) {
-                players.add(Player.createPlayer(playerChar, firstSite(), initPlayerMoney));
+                addPlayer(Player.createPlayer(playerChar, firstSite(), initPlayerMoney));
             }
         } catch (Exception exception) {
             System.err.println("选择玩家错误，请再次选择");
@@ -60,7 +60,11 @@ public class Game {
         }
     }
 
-    private Site firstSite() {
+    public void addPlayer(Player player){
+        players.add(player);
+    }
+
+    public Site firstSite() {
         return map.getSite(0);
     }
 
@@ -80,8 +84,33 @@ public class Game {
         return players;
     }
 
-    public Player getCurrentPlayer() {
-        // TODO
+    public Player getActivePlayer() {
         return players.get(0);
+    }
+
+    public boolean isOver() {
+        int playerNumber = 0;
+        for (Player player : players){
+            if(player.isBroke()) continue;
+            playerNumber++;
+        }
+        return playerNumber == 1;
+    }
+
+    public Player winner() {
+        if(isOver()) return players.get(0);
+        return null;
+    }
+
+    public void run(){
+        while (true){
+            for (Player player : players){
+                if(!player.isBroke()){
+                    System.out.print(player.getName() + ">");
+                    player.takeTurn();
+                }
+            }
+            RoundEngine.instance().nextRound();
+        }
     }
 }

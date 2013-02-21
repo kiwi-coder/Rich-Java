@@ -3,5 +3,7 @@ public class Rich {
         Game game = new Game(null);
         game.initPlayerMoney();
         game.selectPlayers();
+
+        game.run();
     }
 }

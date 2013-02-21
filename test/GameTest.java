@@ -7,7 +7,10 @@ import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 
 import java.util.List;
 
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class GameTest {
 
@@ -105,6 +108,20 @@ public class GameTest {
         game.selectPlayers();
         assertEquals(repeatSelectUserNotice(), systemOutMock.getLog());
         assertEquals("选择玩家错误，请再次选择" + TestHelper.newLine(), systemErrMock.getLog());
+    }
+
+    @Test
+    public void test_if_game_is_over(){
+        // Given
+        Player player = Player.createPlayer('1', game.firstSite(), 5000);
+        Player player1 = Player.createPlayer('2', game.firstSite(), 5000);
+        player1.broke();
+        game.addPlayer(player);
+        game.addPlayer(player1);
+
+        // When and then
+        assertTrue(game.isOver());
+        assertThat(game.winner(), is(player));
     }
 
     private String repeatSelectUserNotice() {

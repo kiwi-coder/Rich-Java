@@ -389,7 +389,7 @@ public class PlayerTest {
 
         player.setSite(map.getSite(3));
         // When
-        player.stop();
+        player.stopping();
 
         // Then
         assertThat(player.getSite(), is(map.getSite(5)));
@@ -625,7 +625,7 @@ public class PlayerTest {
 
         // When
         systemInMock.provideText("Y");
-        player.stop();
+        player.stopping();
 
 
         // Then
@@ -644,7 +644,7 @@ public class PlayerTest {
 
         // When
         systemInMock.provideText("Y");
-        player.stop();
+        player.stopping();
 
         // Then
         assertThat(property.getOwner(), is(player));
@@ -661,7 +661,7 @@ public class PlayerTest {
 
         // When
         systemInMock.provideText("N");
-        player.stop();
+        player.stopping();
 
         // Then
         assertFalse(property.hasOwner());
@@ -679,7 +679,7 @@ public class PlayerTest {
 
         // When
         systemInMock.provideText("Y");
-        player.stop();
+        player.stopping();
 
         // Then
         String expectedString = "是否升级该处地产，300 元（Y/N）?\n";
@@ -698,7 +698,7 @@ public class PlayerTest {
 
         // When
         systemInMock.provideText("Y");
-        player.stop();
+        player.stopping();
 
         // Then
         assertThat(property.getType(), is(Cabin.CABIN_TYPE_CODE));
@@ -716,7 +716,7 @@ public class PlayerTest {
 
         // When
         systemInMock.provideText("N");
-        player.stop();
+        player.stopping();
 
         // Then
         assertThat(property.getType(), is(Land.LAND_TYPE_CODE));
@@ -734,7 +734,7 @@ public class PlayerTest {
         player.setSite(map.getSite(3));
 
         // Then
-        player.stop();
+        player.stopping();
 
         // Then
         assertThat(player.getMoney(), is(4400));
@@ -754,7 +754,7 @@ public class PlayerTest {
         player.setGodOfLuck(new GodOfLuck());
 
         // When
-        player.stop();
+        player.stopping();
 
         // Then
         assertThat(player.getMoney(), is(5000));
@@ -774,7 +774,7 @@ public class PlayerTest {
 
         // When
         systemInMock.provideText("2");
-        player.stop();
+        player.stopping();
 
         // Then
         assertThat(player.getPoints(), is(400));
@@ -790,7 +790,7 @@ public class PlayerTest {
 
         // When
         systemInMock.provideText("F");
-        player.stop();
+        player.stopping();
 
         // Then
         String expectedString = "欢迎光临道具屋， 请选择您所需要的道具：\n";
@@ -808,7 +808,7 @@ public class PlayerTest {
 
         // When
         systemInMock.provideText("2\nF");
-        player.stop();
+        player.stopping();
 
         // Then
         assertThat(player.getPoints(), is(170));
@@ -826,7 +826,7 @@ public class PlayerTest {
 
         // When
         systemInMock.provideText("2\n1\nF");
-        player.stop();
+        player.stopping();
 
         // Then
         assertThat(player.getPoints(), is(120));
@@ -845,7 +845,7 @@ public class PlayerTest {
 
         // When
         systemInMock.provideText("1\nF");
-        player.stop();
+        player.stopping();
 
         // Then
         assertThat(player.getPoints(), is(40));
@@ -864,7 +864,7 @@ public class PlayerTest {
         player.setPoints(20);
 
         // When
-        player.stop();
+        player.stopping();
 
         // Then
         assertFalse(player.isActive());
@@ -880,7 +880,20 @@ public class PlayerTest {
         player.setSite(map.getSite(3));
 
         // When
-        player.stop();
+        player.stopping();
+
+        // Then
+        assertFalse(player.isActive());
+    }
+
+    @Test
+    public void test_player_taking_his_turn_and_then_becoming_inactive(){
+        // Given
+        player.setSite(map.getSite(0));
+
+        // When
+        systemInMock.provideText("help\nroll");
+        player.takeTurn();
 
         // Then
         assertFalse(player.isActive());

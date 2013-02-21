@@ -872,7 +872,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void test_player_stopping_on_magic_house_and_nothing_happen(){
+    public void test_player_stopping_on_magic_house_and_nothing_happen() {
         // Given
         MagicHouseSite magicHouseSite = new MagicHouseSite();
         map.setSite(3, magicHouseSite);
@@ -887,7 +887,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void test_player_taking_his_turn_and_then_becoming_inactive(){
+    public void test_player_taking_his_turn_and_then_becoming_inactive() {
         // Given
         player.setSite(map.getSite(0));
 

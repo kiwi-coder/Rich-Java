@@ -60,7 +60,7 @@ public class Game {
         }
     }
 
-    public void addPlayer(Player player){
+    public void addPlayer(Player player) {
         players.add(player);
     }
 
@@ -90,22 +90,22 @@ public class Game {
 
     public boolean isOver() {
         int playerNumber = 0;
-        for (Player player : players){
-            if(player.isBroke()) continue;
+        for (Player player : players) {
+            if (player.isBroke()) continue;
             playerNumber++;
         }
         return playerNumber == 1;
     }
 
     public Player winner() {
-        if(isOver()) return players.get(0);
+        if (isOver()) return players.get(0);
         return null;
     }
 
-    public void run(){
-        while (true){
-            for (Player player : players){
-                if(!player.isBroke()){
+    public void run() {
+        while (true) {
+            for (Player player : players) {
+                if (!player.isBroke()) {
                     System.out.print(player.getName() + ">");
                     player.takeTurn();
                 }

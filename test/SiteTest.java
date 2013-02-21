@@ -72,4 +72,13 @@ public class SiteTest {
         // When and Then
         assertThat(magicHouseSite.display(), is("M"));
     }
+
+    @Test
+    public void should_starting_point_display_S_on_map() {
+        // Given
+        StartingSite startingSite = new StartingSite();
+
+        // When and Then
+        assertThat(startingSite.display(), is("S"));
+    }
 }

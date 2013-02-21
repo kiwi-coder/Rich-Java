@@ -52,10 +52,10 @@ public class Player {
     }
 
     private RollCommand waiting() {
-        while (true){
+        while (true) {
             String string = scanner.next();
             Command command = Command.makeCommand(string, this);
-            if(command instanceof RollCommand) return (RollCommand)command;
+            if (command instanceof RollCommand) return (RollCommand) command;
             executeCommand(command);
         }
     }

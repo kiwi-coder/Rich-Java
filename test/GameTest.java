@@ -8,9 +8,7 @@ import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class GameTest {
 
@@ -111,7 +109,7 @@ public class GameTest {
     }
 
     @Test
-    public void test_if_game_is_over(){
+    public void test_if_game_is_over() {
         // Given
         Player player = Player.createPlayer('1', game.firstSite(), 5000);
         Player player1 = Player.createPlayer('2', game.firstSite(), 5000);

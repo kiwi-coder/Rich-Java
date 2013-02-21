@@ -1,5 +1,5 @@
 public class VoidCommand extends Command {
-    public VoidCommand(Player player){
+    public VoidCommand(Player player) {
         this.player = player;
     }
 

@@ -103,7 +103,6 @@ public class Game {
             for (Player player : players) {
                 if (!player.isBroke()) {
                     System.out.println(map.display());
-                    System.out.print(player.getName() + ">");
                     player.takeTurn();
                 }
             }

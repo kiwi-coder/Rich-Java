@@ -54,11 +54,16 @@ public class Player {
 
     private RollCommand waiting() {
         while (true) {
-            String string = scanner.next();
+            String string = prompt(getName() + ">");
             Command command = Command.makeCommand(string, this);
             if (command instanceof RollCommand) return (RollCommand) command;
             executeCommand(command);
         }
+    }
+
+    private String prompt(String description){
+        System.out.print(description);
+        return scanner.next();
     }
 
     public void forward(int steps) {

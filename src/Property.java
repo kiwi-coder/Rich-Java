@@ -77,4 +77,12 @@ class Property extends Site {
         Command command = Command.makeCommand(answer + commandSuffix, player);
         return command;
     }
+
+    public String display() {
+        if (hasPlayer()) return players.get(players.size() -1).display();
+        String color;
+        if (hasOwner()) color = owner.getColor();
+        else color = Color.ANSI_BLACK;
+        return  Color.paint(color, type);
+    }
 }

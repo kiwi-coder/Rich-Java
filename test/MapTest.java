@@ -20,26 +20,31 @@ public class MapTest {
 
     @Test
     public void test_map_layout() {
-        String expected = "000\n"
-                + "0 0\n"
-                + "000\n";
+        String blackZero = Color.paint(Color.ANSI_BLACK, "0");
+        String expected = blackZero + blackZero + blackZero + "\n" +
+                blackZero + " " + blackZero + "\n" +
+                blackZero + blackZero + blackZero + "\n";
         assertThat(map.display(), is(expected));
     }
 
     @Test
     public void test_display_ATuBo_at_starting_position() {
-        String expected = "A00\n"
-                + "0 0\n"
-                + "000\n";
+        String blackZero = Color.paint(Color.ANSI_BLACK, "0");
+        String blackA = Color.paint(Color.ANSI_BLACK, "A");
+        String expected = blackA + blackZero + blackZero + "\n" +
+                blackZero + " " + blackZero + "\n" +
+                blackZero + blackZero + blackZero + "\n";
         Player player = new Player("ATuBo", map.getSite(0), DUMMY_MONEY);
         assertThat(map.display(), is(expected));
     }
 
     @Test
     public void test_display_property(){
-        String expected = "020\n"
-                + "0 0\n"
-                + "000\n";
+        String blackZero = Color.paint(Color.ANSI_BLACK, "0");
+        String blackTwo = Color.paint(Color.ANSI_BLACK, "2");
+        String expected = blackZero + blackTwo + blackZero + "\n" +
+                blackZero + " " + blackZero + "\n" +
+                blackZero + blackZero + blackZero + "\n";
 
         map.setSite(1, new Property(new House(200)));
         assertThat(map.display(), is(expected));

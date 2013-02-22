@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Site {
     protected String type;
-    private List<Player> players = new ArrayList();
+    protected List<Player> players = new ArrayList();
     protected int index;
     protected Map map;
     private BlockTool blockTool;
@@ -17,7 +17,7 @@ public class Site {
         scanner = new Scanner(System.in);
     }
 
-    private boolean hasPlayer() {
+    protected boolean hasPlayer() {
         return players.size() != 0;
     }
 
@@ -43,7 +43,7 @@ public class Site {
 
     public String display() {
         if (hasPlayer()) return players.get(players.size() -1).display();
-        return type;
+        return Color.paint(Color.ANSI_BLACK, type);
     }
 
     public void setIndex(int index) {

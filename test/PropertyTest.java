@@ -37,7 +37,8 @@ public class PropertyTest {
         Property property = new Property(new Land(200));
 
         // When and then
-        assertThat(property.display(), is("0"));
+        String blackZero = Color.paint(Color.ANSI_BLACK, "0");
+        assertThat(property.display(), is(blackZero));
     }
 
     @Test
@@ -46,6 +47,7 @@ public class PropertyTest {
         Property property = new Property(new Cabin(200));
 
         // When and then
-        assertThat(property.display(), is("1"));
+        String blackOne = Color.paint(Color.ANSI_BLACK, "1");
+        assertThat(property.display(), is(blackOne));
     }
 }

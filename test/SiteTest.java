@@ -28,14 +28,16 @@ public class SiteTest {
 
     @Test
     public void should_display_0_for_simple_map_site() {
-        assertThat(map.getSite(0).display(), is("0"));
+        String blackZero = Color.paint(Color.ANSI_BLACK, "0");
+        assertThat(map.getSite(0).display(), is(blackZero));
     }
 
     @Test
     public void should_display_player_if_there_is_player() {
         Site site = map.getSite(0);
         Player player = new Player("ATuBo", site, DUMMY_MONEY);
-        assertThat(site.display(), is("A"));
+        String blackA = Color.paint(Color.ANSI_BLACK, "A");
+        assertThat(site.display(), is(blackA));
     }
 
     @Test
@@ -43,7 +45,8 @@ public class SiteTest {
         Site site = map.getSite(0);
         Player player = new Player("ATuBo", site, DUMMY_MONEY);
         player.forward(1);
-        assertThat(site.display(), is("0"));
+        String blackZero = Color.paint(Color.ANSI_BLACK, "0");
+        assertThat(site.display(), is(blackZero));
     }
 
     @Test
@@ -52,7 +55,8 @@ public class SiteTest {
         PointMineSite pointMineSite = new PointMineSite(80);
 
         // When and Then
-        assertThat(pointMineSite.display(), is("$"));
+        String blackDollar = Color.paint(Color.ANSI_BLACK, "$");
+        assertThat(pointMineSite.display(), is(blackDollar));
     }
 
     @Test
@@ -61,7 +65,8 @@ public class SiteTest {
         GiftHouseSite giftHouseSite = new GiftHouseSite();
 
         // When and Then
-        assertThat(giftHouseSite.display(), is("G"));
+        String blackG = Color.paint(Color.ANSI_BLACK, "G");
+        assertThat(giftHouseSite.display(), is(blackG));
     }
 
     @Test
@@ -70,7 +75,8 @@ public class SiteTest {
         MagicHouseSite magicHouseSite = new MagicHouseSite();
 
         // When and Then
-        assertThat(magicHouseSite.display(), is("M"));
+        String blackM = Color.paint(Color.ANSI_BLACK, "M");
+        assertThat(magicHouseSite.display(), is(blackM));
     }
 
     @Test
@@ -79,7 +85,8 @@ public class SiteTest {
         StartingSite startingSite = new StartingSite();
 
         // When and Then
-        assertThat(startingSite.display(), is("S"));
+        String blackS = Color.paint(Color.ANSI_BLACK, "S");
+        assertThat(startingSite.display(), is(blackS));
     }
 
     @Test
@@ -88,7 +95,8 @@ public class SiteTest {
         Site property = new Property(new Land(200));
 
         // When and then
-        assertThat(property.display(), is("0"));
+        String blackZero = Color.paint(Color.ANSI_BLACK, "0");
+        assertThat(property.display(), is(blackZero));
     }
 
     @Test
@@ -97,7 +105,8 @@ public class SiteTest {
         Site property = new Property(new Cabin(200));
 
         // When and then
-        assertThat(property.display(), is("1"));
+        String blackOne = Color.paint(Color.ANSI_BLACK, "1");
+        assertThat(property.display(), is(blackOne));
     }
 
     @Test
@@ -106,6 +115,19 @@ public class SiteTest {
         Site site = new Property(new House(200));
 
         // When and then
-        assertThat(site.display(), is("2"));
+        String blackTwo = Color.paint(Color.ANSI_BLACK, "2");
+        assertThat(site.display(), is(blackTwo));
+    }
+
+    @Test
+    public void should_house_display_red_2_on_map_if_owner_is_red_colored(){
+        // Given
+        Property property = new Property(new House(200));
+        Player player = new Player("Atubo", Color.ANSI_RED, null, 5000);
+        property.setOwner(player);
+
+        // When and then
+        String redTwo = Color.paint(Color.ANSI_RED, "2");
+        assertThat(property.display(), is(redTwo));
     }
 }

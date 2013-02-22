@@ -5,9 +5,11 @@ import java.util.Scanner;
 public class Player {
     private final int MAX_TOO_NUMBER = 10;
     private String name;
+    private String color;
     private int money;
     private Site site;
     private static final String[] names = new String[]{"QianFuRen", "ATuBo", "SunXiaoMei", "JinBeiBei"};
+    private static final String[] colors= new String[]{Color.ANSI_RED, Color.ANSI_GREEN, Color.ANSI_BLUE, Color.ANSI_PURPLE};
     private boolean isBroke = false;
     private int points;
     private List<Tool> tools = new ArrayList<Tool>();
@@ -18,19 +20,29 @@ public class Player {
     private boolean isActive;
     private Scanner scanner;
 
-    public Player(String name, Site site, int money) {
+    public Player(String name, String color, Site site, int money) {
         this.name = name;
         this.money = money;
+        this.color = color;
         if (site != null) setPlayerOnSite(site);
 
         scanner = new Scanner(System.in);
-        // TODO
-        isActive = true;
+        isActive = false;
+    }
+
+    public Player(String name, Site site, int money) {
+        this.name = name;
+        this.money = money;
+        this.color = Color.ANSI_BLACK;
+        if (site != null) setPlayerOnSite(site);
+
+        scanner = new Scanner(System.in);
+        isActive = false;
     }
 
     public static Player createPlayer(char playerChar, Site site, int money) {
         int index = Integer.valueOf(String.valueOf(playerChar));
-        return new Player(names[index - 1], site, money);
+        return new Player(names[index - 1], colors[index - 1], site, money);
     }
 
     public static int playerSize() {
@@ -44,7 +56,7 @@ public class Player {
         stopping();
     }
 
-    private void becomeActive() {
+    public void becomeActive() {
         isActive = true;
     }
 
@@ -62,7 +74,7 @@ public class Player {
     }
 
     private String prompt(String description){
-        System.out.print(description);
+        System.out.print(Color.paint(getColor(), description));
         return scanner.next();
     }
 
@@ -104,7 +116,7 @@ public class Player {
     }
 
     public String display() {
-        return getFirstCharacterOfName();
+        return Color.paint(getColor(), getFirstCharacterOfName());
     }
 
     private String getFirstCharacterOfName() {
@@ -416,5 +428,9 @@ public class Player {
 
     public void becomeInactive() {
         isActive = false;
+    }
+
+    public String getColor() {
+        return color;
     }
 }

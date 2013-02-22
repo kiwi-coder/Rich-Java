@@ -199,6 +199,7 @@ public class Player {
 
     public void sellTool(int toolCode) {
         Tool tool = findTool(toolCode);
+        if(tool == null) return;
         tools.remove(tool);
         earnPoints(tool.getPoint());
     }
@@ -301,9 +302,10 @@ public class Player {
     }
 
     public void useTool(int toolCode, int distance) {
-        Tool tool = findTool(toolCode);
         Site siteToPlaceBombTool = getSiteToPlaceTool(distance);
 
+        Tool tool = findTool(toolCode);
+        if(tool == null) return;
         tool.usedOnSite(siteToPlaceBombTool);
         removeTool(tool);
     }
@@ -315,7 +317,7 @@ public class Player {
             }
         }
 
-        throw new ToolNotFoundException();
+        return null;
     }
 
     public void setInjured(boolean isInjured) {
@@ -351,6 +353,7 @@ public class Player {
 
     public void sellPropertyByIndex(int siteIndex) {
         Property propertyToSell = findPropertyByIndex(siteIndex);
+        if(propertyToSell == null) return;
         sellProperty(propertyToSell);
     }
 
@@ -359,7 +362,8 @@ public class Player {
             if (siteIndex == property.getIndex())
                 return property;
         }
-        throw new PropertyNotFoundException();
+
+        return null;
     }
 
     public String query() {

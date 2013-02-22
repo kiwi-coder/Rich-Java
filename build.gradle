@@ -18,6 +18,7 @@ repositories {
 dependencies {
 	testCompile 'junit:junit:4.10'
 	testCompile 'com.github.stefanbirkner:system-rules:1.2.0'
+    compile 'org.fusesource.jansi:jansi:1.9'
 }
 
 tasks.withType(Compile) {

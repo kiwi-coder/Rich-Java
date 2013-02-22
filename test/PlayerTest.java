@@ -628,7 +628,7 @@ public class PlayerTest {
 
 
         // Then
-        String expectedString = "是否购买该处空地，300 元（Y/N）?\n";
+        String expectedString = "是否购买该处空地，300 元（Y/N）?" + TestHelper.newLine();
         assertEquals(expectedString, systemOutMock.getLog());
     }
 
@@ -684,7 +684,7 @@ public class PlayerTest {
         player.stopping();
 
         // Then
-        String expectedString = "是否升级该处地产，300 元（Y/N）?\n";
+        String expectedString = "是否升级该处地产，300 元（Y/N）?" + TestHelper.newLine();
         assertEquals(expectedString, systemOutMock.getLog());
     }
 
@@ -765,7 +765,7 @@ public class PlayerTest {
         // Then
         assertThat(player.getMoney(), is(5000));
         assertThat(other.getMoney(), is(5000));
-        String expectedString = "福神附身，可免过路费\n";
+        String expectedString = "福神附身，可免过路费" + TestHelper.newLine();
         assertEquals(expectedString, systemOutMock.getLog());
     }
 
@@ -801,7 +801,7 @@ public class PlayerTest {
         player.stopping();
 
         // Then
-        String expectedString = "欢迎光临道具屋， 请选择您所需要的道具：\n";
+        String expectedString = "欢迎光临道具屋， 请选择您所需要的道具：" + TestHelper.newLine();
         assertEquals(expectedString, systemOutMock.getLog());
     }
 
@@ -860,8 +860,8 @@ public class PlayerTest {
 
         // Then
         assertThat(player.getPoints(), is(40));
-        String greetings = "欢迎光临道具屋， 请选择您所需要的道具：\n";
-        String expectedString = greetings + "您当前剩余的点数为 40， 不足以购买路障道具\n" + greetings;
+        String greetings = "欢迎光临道具屋， 请选择您所需要的道具：" + TestHelper.newLine();
+        String expectedString = greetings + "您当前剩余的点数为 40， 不足以购买路障道具" + TestHelper.newLine() + greetings;
         assertEquals(expectedString, systemOutMock.getLog());
     }
 
@@ -900,7 +900,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void test_player_stopping_on_point_mine_and_get_points(){
+    public void test_player_stopping_on_point_mine_and_get_points() {
         // Given
         PointMineSite pointMineSite = new PointMineSite(40);
         map.setSite(3, pointMineSite);

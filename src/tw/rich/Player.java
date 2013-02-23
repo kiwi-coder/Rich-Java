@@ -17,13 +17,17 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Player {
-    private final int MAX_TOO_NUMBER = 10;
+    public static final int MAX_TOOL_NUMBER = 10;
     private String name;
     private String color;
     private int money;
     private Site site;
     private static final String[] names = new String[]{"QianFuRen", "ATuBo", "SunXiaoMei", "JinBeiBei"};
-    private static final String[] colors = new String[]{Color.ANSI_RED, Color.ANSI_GREEN, Color.ANSI_BLUE, Color.ANSI_PURPLE};
+    private static final String[] colors = new String[]{
+            Color.ANSI_RED,
+            Color.ANSI_GREEN,
+            Color.ANSI_BLUE,
+            Color.ANSI_PURPLE};
     private boolean isBroke = false;
     private int points;
     private List<Tool> tools = new ArrayList<Tool>();
@@ -163,15 +167,15 @@ public class Player {
         return site;
     }
 
-    public boolean isPropertyUpgradable(PropertyLevel propertyLevel) {
-        return isAffordable(propertyLevel.getPrice()) && !(propertyLevel instanceof Skyscraper);
+    public boolean canUpgradeProperty(PropertyLevel propertyLevel) {
+        return canAfford(propertyLevel.getPrice()) && !(propertyLevel instanceof Skyscraper);
     }
 
     private void payMoney(int price) {
         money -= price;
     }
 
-    private boolean isAffordable(int price) {
+    private boolean canAfford(int price) {
         return money >= price;
     }
 
@@ -203,7 +207,7 @@ public class Player {
     public void buyTool(int toolCode) {
         Tool tool = Tool.makeTool(toolCode);
         if (!canAffordTool(tool)) throw new PointsException();
-        if (tools.size() >= MAX_TOO_NUMBER) throw new ToolException();
+        if (tools.size() >= MAX_TOOL_NUMBER) throw new ToolException();
         buyTool(tool);
     }
 
@@ -277,12 +281,11 @@ public class Player {
     }
 
     public void upgradeProperty(Property property) {
-        if (isPropertyUpgradable(property.getLevel())) {
+        if (canUpgradeProperty(property.getLevel())) {
             payMoney(property.getPrice());
             property.upgrade();
         }
     }
-
 
     private void sellProperty(Property property) {
         if (property.getOwner() == this) {
@@ -293,7 +296,7 @@ public class Player {
     }
 
     public void buyProperty(Property property) {
-        if (isAffordable(property.getPrice())) {
+        if (canAfford(property.getPrice())) {
             payMoney(property.getPrice());
             property.setOwner(this);
         }
@@ -304,7 +307,7 @@ public class Player {
 
         int tollFee = property.getTollFee();
 
-        if (!isAffordable(tollFee)) {
+        if (!canAfford(tollFee)) {
             tollFee = money;
             broke();
         }
@@ -316,28 +319,32 @@ public class Player {
         earnPoints(pointMineSite.getPoint());
     }
 
-    private Site getSiteToPlaceTool(int distance) {
-        Site siteToPlaceTool = site;
+    private Site findSiteInDistance(int distance) {
+        Site siteInDistance = site;
 
         if (distance > 0) {
             while (distance-- > 0) {
-                siteToPlaceTool = siteToPlaceTool.nextSite();
+                siteInDistance = siteInDistance.nextSite();
             }
         } else if (distance < 0) {
             while (distance++ < 0) {
-                siteToPlaceTool = siteToPlaceTool.previousSite();
+                siteInDistance = siteInDistance.previousSite();
             }
         }
 
-        return siteToPlaceTool;
+        return siteInDistance;
     }
 
     public void useTool(int toolCode, int distance) {
-        Site siteToPlaceBombTool = getSiteToPlaceTool(distance);
-
+        Site siteToPlaceTool = findSiteInDistance(distance);
         Tool tool = findTool(toolCode);
+
         if (tool == null) return;
-        tool.usedOnSite(siteToPlaceBombTool);
+        useToolOnSite(siteToPlaceTool, tool);
+    }
+
+    private void useToolOnSite(Site siteToPlaceTool, Tool tool) {
+        tool.usedOnSite(siteToPlaceTool);
         removeTool(tool);
     }
 

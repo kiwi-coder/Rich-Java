@@ -1,12 +1,12 @@
 package tw.rich.site.property;
 
 public class Skyscraper extends PropertyLevel {
-    public static final String SKYSCRAPER_TYPE_CODE = "3";
+    public static final String TYPE_CODE = "3";
     private static final double TOLL_FEE_RATE = 4.0;
     private static final double SALE_PRICE_RATE = 8.0;
 
     public Skyscraper(int price) {
-        super(SKYSCRAPER_TYPE_CODE);
+        super(TYPE_CODE);
         this.setPrice(price);
     }
 

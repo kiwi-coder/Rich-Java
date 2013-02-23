@@ -412,8 +412,8 @@ public class Player {
         String result = String.format(format,
                 getMoney(),
                 getPoints(),
-                countProperty(Land.LAND_TYPE_CODE), countProperty(Cabin.CABIN_TYPE_CODE),
-                countProperty(House.HOUSE_TYPE_CODE), countProperty(Skyscraper.SKYSCRAPER_TYPE_CODE),
+                countProperty(Land.TYPE_CODE), countProperty(Cabin.TYPE_CODE),
+                countProperty(House.TYPE_CODE), countProperty(Skyscraper.TYPE_CODE),
                 countTool(BlockTool.TOOL_CODE), countTool(BombTool.TOOL_CODE),
                 countTool(RobotTool.TOOL_CODE));
 

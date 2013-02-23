@@ -59,8 +59,8 @@ public class Property extends Site {
     }
 
     public Command giveCommand(Player player) {
-        // TODO: 感觉这里需要重构, 但是不知道怎么弄.
-        super.giveCommand(player);
+        Command command = super.giveCommand(player);
+        if(!player.isActive()) return command;
 
         String description;
         String commandSuffix;
@@ -81,8 +81,7 @@ public class Property extends Site {
                 System.out.println("福神附身，可免过路费");
         }
 
-        Command command = Command.makeCommand(answer + commandSuffix, player);
-        return command;
+        return Command.makeCommand(answer + commandSuffix, player);
     }
 
     public String display() {

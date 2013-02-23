@@ -1,12 +1,12 @@
 package tw.rich.site.property;
 
 public class Cabin extends PropertyLevel {
-    public static final String CABIN_TYPE_CODE = "1";
+    public static final String TYPE_CODE = "1";
     private static final double TOLL_FEE_RATE = 1.0;
     private static final double SALE_PRICE_RATE = 4.0;
 
     public Cabin(int price) {
-        super(CABIN_TYPE_CODE);
+        super(TYPE_CODE);
         this.setPrice(price);
     }
 

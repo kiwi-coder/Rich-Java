@@ -171,7 +171,7 @@ public class PlayerTest {
         // Then
         assertFalse(property.hasOwner());
         assertThat(player.getMoney(), is(6200));
-        assertThat(player.countProperty(Cabin.CABIN_TYPE_CODE), is(0));
+        assertThat(player.countProperty(Cabin.TYPE_CODE), is(0));
         assertThat(property.getLevel(), instanceOf(Land.class));
     }
 
@@ -464,6 +464,24 @@ public class PlayerTest {
     public void test_player_stepping_on_bomb_at_gift_house_site_and_sent_to_hospital() {
         // Given
         map.setSite(3, new GiftHouseSite());
+        map.getSite(3).setBombTool(new BombTool());
+        map.setSite(5, new HospitalSite());
+
+        player.setSite(map.getSite(3));
+
+        // When
+        player.becomeActive();
+        player.stopping();
+
+        // Then
+        assertThat(player.getSite(), is(map.getSite(5)));
+        assertFalse(player.isMovable());
+    }
+
+    @Test
+    public void test_player_stepping_on_bomb_at_property_site_and_sent_to_hospital() {
+        // Given
+        map.setSite(3, new Property(new Land(300)));
         map.getSite(3).setBombTool(new BombTool());
         map.setSite(5, new HospitalSite());
 
@@ -788,7 +806,7 @@ public class PlayerTest {
         player.stopping();
 
         // Then
-        assertThat(property.getType(), is(Cabin.CABIN_TYPE_CODE));
+        assertThat(property.getType(), is(Cabin.TYPE_CODE));
     }
 
     @Test
@@ -807,7 +825,7 @@ public class PlayerTest {
         player.stopping();
 
         // Then
-        assertThat(property.getType(), is(Land.LAND_TYPE_CODE));
+        assertThat(property.getType(), is(Land.TYPE_CODE));
     }
 
     @Test

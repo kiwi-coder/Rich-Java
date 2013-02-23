@@ -414,8 +414,8 @@ public class Player {
                 getPoints(),
                 countProperty(Land.LAND_TYPE_CODE), countProperty(Cabin.CABIN_TYPE_CODE),
                 countProperty(House.HOUSE_TYPE_CODE), countProperty(Skyscraper.SKYSCRAPER_TYPE_CODE),
-                countTool(BlockTool.BLOCK_TOOL_CODE), countTool(BombTool.BOMB_TOOL_CODE),
-                countTool(RobotTool.ROBOT_TOOL_CODE));
+                countTool(BlockTool.TOOL_CODE), countTool(BombTool.TOOL_CODE),
+                countTool(RobotTool.TOOL_CODE));
 
         return result;
     }

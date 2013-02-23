@@ -14,6 +14,6 @@ public class BlockCommand extends Command {
 
     @Override
     public void execute() {
-        player.useTool(BlockTool.BLOCK_TOOL_CODE, distance);
+        player.useTool(BlockTool.TOOL_CODE, distance);
     }
 }

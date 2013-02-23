@@ -18,8 +18,8 @@ public class Site {
     protected List<Player> players = new ArrayList();
     protected int index;
     protected Map map;
-    private BlockTool blockTool;
-    private BombTool bombTool;
+    protected BlockTool blockTool;
+    protected BombTool bombTool;
     private Scanner scanner;
 
     public Site(String type) {
@@ -54,6 +54,9 @@ public class Site {
 
     public String display() {
         if (hasPlayer()) return players.get(players.size() - 1).display();
+        if (hasBlockTool()) return blockTool.display();
+        if (hasBombTool()) return bombTool.display();
+
         return Color.paint(Color.ANSI_BLACK, type);
     }
 

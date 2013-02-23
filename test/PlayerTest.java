@@ -188,7 +188,7 @@ public class PlayerTest {
     @Test
     public void should_success_buy_block_tool_when_player_has_enough_points() {
         player.setPoints(500);
-        player.buyTool(BlockTool.BLOCK_TOOL_CODE);
+        player.buyTool(BlockTool.TOOL_CODE);
         assertThat(player.getToolsNumber(), is(1));
         assertThat(player.getPoints(), is(450));
     }
@@ -196,27 +196,27 @@ public class PlayerTest {
     @Test(expected = PointsException.class)
     public void should_throw_exception_when_player_not_has_enough_points() {
         player.setPoints(0);
-        player.buyTool(RobotTool.ROBOT_TOOL_CODE);
+        player.buyTool(RobotTool.TOOL_CODE);
     }
 
     @Test(expected = ToolException.class)
     public void should_throw_exception_when_player_already_has_10_tools_and_cannot_buy_another() {
         for (int i = 0; i < 10; i++) player.addTool(new BombTool());
         player.setPoints(500);
-        player.buyTool(BombTool.BOMB_TOOL_CODE);
+        player.buyTool(BombTool.TOOL_CODE);
     }
 
     @Test
     public void should_success_sell_tool_when_player_has_enough_points() {
         player.addTool(new BombTool());
-        player.sellTool(BombTool.BOMB_TOOL_CODE);
+        player.sellTool(BombTool.TOOL_CODE);
         assertThat(player.getPoints(), is(50));
         assertThat(player.getToolsNumber(), is(0));
     }
 
     /*@Test(expected = tw.rich.exception.ToolNotFoundException.class)
     public void should_failed_sell_tool_when_player_do_not_have_that_kind_of_tool() {
-        player.sellTool(tw.rich.tool.BombTool.BOMB_TOOL_CODE);
+        player.sellTool(tw.rich.tool.BombTool.TOOL_CODE);
     }*/
 
     @Test
@@ -224,7 +224,7 @@ public class PlayerTest {
         for (int i = 0; i < 3; i++) player.addTool(new BombTool());
         player.addTool(new BlockTool());
         player.addTool(new RobotTool());
-        assertThat(player.countTool(BombTool.BOMB_TOOL_CODE), is(3));
+        assertThat(player.countTool(BombTool.TOOL_CODE), is(3));
     }
 
     @Test
@@ -299,11 +299,11 @@ public class PlayerTest {
         player.setSite(map.getSite(0));
 
         // When
-        player.useTool(BlockTool.BLOCK_TOOL_CODE, 1);
+        player.useTool(BlockTool.TOOL_CODE, 1);
 
         // Then
         assertTrue(map.getSite(1).hasBlockTool());
-        assertThat(player.countTool(BlockTool.BLOCK_TOOL_CODE), is(0));
+        assertThat(player.countTool(BlockTool.TOOL_CODE), is(0));
     }
 
     @Test
@@ -313,11 +313,11 @@ public class PlayerTest {
         player.setSite(map.getSite(LAST_SITE_INDEX));
 
         // When
-        player.useTool(BlockTool.BLOCK_TOOL_CODE, 1);
+        player.useTool(BlockTool.TOOL_CODE, 1);
 
         // Then
         assertTrue(map.getSite(0).hasBlockTool());
-        assertThat(player.countTool(BlockTool.BLOCK_TOOL_CODE), is(0));
+        assertThat(player.countTool(BlockTool.TOOL_CODE), is(0));
     }
 
     @Test
@@ -327,11 +327,11 @@ public class PlayerTest {
         player.setSite(map.getSite(1));
 
         // When
-        player.useTool(BlockTool.BLOCK_TOOL_CODE, -1);
+        player.useTool(BlockTool.TOOL_CODE, -1);
 
         // Then
         assertTrue(map.getSite(0).hasBlockTool());
-        assertThat(player.countTool(BlockTool.BLOCK_TOOL_CODE), is(0));
+        assertThat(player.countTool(BlockTool.TOOL_CODE), is(0));
     }
 
     @Test
@@ -341,11 +341,11 @@ public class PlayerTest {
         player.setSite(map.getSite(0));
 
         // When
-        player.useTool(BlockTool.BLOCK_TOOL_CODE, -1);
+        player.useTool(BlockTool.TOOL_CODE, -1);
 
         // Then
         assertTrue(map.getSite(LAST_SITE_INDEX).hasBlockTool());
-        assertThat(player.countTool(BlockTool.BLOCK_TOOL_CODE), is(0));
+        assertThat(player.countTool(BlockTool.TOOL_CODE), is(0));
     }
 
     @Test
@@ -355,11 +355,11 @@ public class PlayerTest {
         player.setSite(map.getSite(1));
 
         // When
-        player.useTool(BlockTool.BLOCK_TOOL_CODE, 0);
+        player.useTool(BlockTool.TOOL_CODE, 0);
 
         // Then
         assertTrue(map.getSite(1).hasBlockTool());
-        assertThat(player.countTool(BlockTool.BLOCK_TOOL_CODE), is(0));
+        assertThat(player.countTool(BlockTool.TOOL_CODE), is(0));
     }
 
     @Test
@@ -382,11 +382,11 @@ public class PlayerTest {
         player.setSite(map.getSite(1));
 
         // When
-        player.useTool(BombTool.BOMB_TOOL_CODE, 1);
+        player.useTool(BombTool.TOOL_CODE, 1);
 
         // Then
         assertTrue(map.getSite(2).hasBombTool());
-        assertThat(player.countTool(BombTool.BOMB_TOOL_CODE), is(0));
+        assertThat(player.countTool(BombTool.TOOL_CODE), is(0));
     }
 
     @Test
@@ -445,12 +445,12 @@ public class PlayerTest {
         map.getSite(4).setBombTool(new BombTool());
 
         // When
-        player.useTool(RobotTool.ROBOT_TOOL_CODE, 0);
+        player.useTool(RobotTool.TOOL_CODE, 0);
 
         // Then
         assertFalse(map.getSite(3).hasBlockTool());
         assertFalse(map.getSite(4).hasBombTool());
-        assertThat(player.countTool(RobotTool.ROBOT_TOOL_CODE), is(0));
+        assertThat(player.countTool(RobotTool.TOOL_CODE), is(0));
     }
 
     @Test
@@ -570,7 +570,7 @@ public class PlayerTest {
 
         // Then
         assertThat(player.getPoints(), is(550));
-        assertThat(player.countTool(BlockTool.BLOCK_TOOL_CODE), is(0));
+        assertThat(player.countTool(BlockTool.TOOL_CODE), is(0));
     }
 
     @Test

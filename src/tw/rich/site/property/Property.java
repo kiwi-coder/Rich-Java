@@ -88,6 +88,9 @@ public class Property extends Site {
 
     public String display() {
         if (hasPlayer()) return players.get(players.size() - 1).display();
+        if (hasBlockTool()) return blockTool.display();
+        if (hasBombTool()) return bombTool.display();
+
         String color;
         if (hasOwner()) color = owner.getColor();
         else color = Color.ANSI_BLACK;

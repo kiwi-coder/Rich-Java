@@ -11,6 +11,6 @@ public class RobotCommand extends Command {
 
     @Override
     public void execute() {
-        player.useTool(RobotTool.ROBOT_TOOL_CODE, RobotTool.ROBOT_USAGE_DISTANCE);
+        player.useTool(RobotTool.TOOL_CODE, RobotTool.USAGE_DISTANCE);
     }
 }

@@ -1,23 +1,24 @@
 package tw.rich.tool;
 
+import tw.rich.Color;
 import tw.rich.site.Site;
 
 public class BlockTool extends Tool {
-    public static final int BLOCK_TOOL_CODE = 1;
-    public static final int BLOCK_TOOL_POINT = 50;
+    public static final int TOOL_CODE = 1;
+    public static final int TOOL_POINT = 50;
     private static final String CHINESE_NAME = "路障";
 
     public String display() {
-        return "#";
+        return Color.paint(Color.ANSI_BLACK, "#");
     }
 
     public int getPoint() {
-        return BLOCK_TOOL_POINT;
+        return TOOL_POINT;
     }
 
     @Override
     public int getToolCode() {
-        return BLOCK_TOOL_CODE;
+        return TOOL_CODE;
     }
 
     public void usedOnSite(Site siteToHaveBlockTool) {

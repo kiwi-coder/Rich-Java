@@ -8,6 +8,8 @@ import tw.rich.site.property.Cabin;
 import tw.rich.site.property.House;
 import tw.rich.site.property.Land;
 import tw.rich.site.property.Property;
+import tw.rich.tool.BlockTool;
+import tw.rich.tool.BombTool;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -137,5 +139,27 @@ public class SiteTest {
         // When and then
         String redTwo = Color.paint(Color.ANSI_RED, "2");
         assertThat(property.display(), is(redTwo));
+    }
+
+    @Test
+    public void should_site_display_black_pound_when_block_tool_is_on(){
+        // Given
+        Property property = new Property(new House(200));
+        property.setBlockTool(new BlockTool());
+
+        // When and then
+        String blackPound = Color.paint(Color.ANSI_BLACK, "#");
+        assertThat(property.display(), is(blackPound));
+    }
+
+    @Test
+    public void should_site_display_black_at_when_bomb_tool_is_on(){
+        // Given
+        Property property = new Property(new House(200));
+        property.setBombTool(new BombTool());
+
+        // When and then
+        String blackAt = Color.paint(Color.ANSI_BLACK, "@");
+        assertThat(property.display(), is(blackAt));
     }
 }

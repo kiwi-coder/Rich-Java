@@ -1,4 +1,5 @@
 import org.junit.Test;
+import tw.rich.Color;
 import tw.rich.tool.BlockTool;
 import tw.rich.tool.BombTool;
 import tw.rich.tool.RobotTool;
@@ -10,7 +11,8 @@ public class PointTest {
     @Test
     public void should_display_sharp_for_block_tool() {
         BlockTool blockTool = new BlockTool();
-        assertThat(blockTool.display(), is("#"));
+        String blackPound = Color.paint(Color.ANSI_BLACK, "#");
+        assertThat(blockTool.display(), is(blackPound));
     }
 
     @Test
@@ -34,7 +36,8 @@ public class PointTest {
     @Test
     public void should_display_at_symbol_for_bomb_tool() {
         BombTool bombTool = new BombTool();
-        assertThat(bombTool.display(), is("@"));
+        String blackAt = Color.paint(Color.ANSI_BLACK, "@");
+        assertThat(bombTool.display(), is(blackAt));
     }
 
     @Test

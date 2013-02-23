@@ -14,6 +14,6 @@ public class BombCommand extends Command {
 
     @Override
     public void execute() {
-        player.useTool(BombTool.BOMB_TOOL_CODE, distance);
+        player.useTool(BombTool.TOOL_CODE, distance);
     }
 }

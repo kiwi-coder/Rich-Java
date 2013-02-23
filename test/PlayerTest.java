@@ -233,7 +233,7 @@ public class PlayerTest {
         player.setMoney(5000);
 
         // When
-        player.chooseGift(MoneyGift.MONEY_GIFT_CODE);
+        player.chooseGift(MoneyGift.GIFT_CODE);
 
         // Then
         assertThat(player.getMoney(), is(7000));
@@ -245,7 +245,7 @@ public class PlayerTest {
         player.setPoints(200);
 
         // When
-        player.chooseGift(PointGift.POINT_GIFT_CODE);
+        player.chooseGift(PointGift.GIFT_CODE);
 
         // Then
         assertThat(player.getPoints(), is(400));
@@ -257,7 +257,7 @@ public class PlayerTest {
         player.setGodOfLuck(null);
 
         // When
-        player.chooseGift(GodOfLuckGift.GOD_OF_LUCK_GIFT_CODE);
+        player.chooseGift(GodOfLuckGift.GIFT_CODE);
 
         // Then
         assertTrue(player.hasGodOfLuck());

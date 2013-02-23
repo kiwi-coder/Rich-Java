@@ -7,11 +7,11 @@ public abstract class Gift {
 
     public static Gift makeGift(int giftCode) {
         switch (giftCode) {
-            case MoneyGift.MONEY_GIFT_CODE:
+            case MoneyGift.GIFT_CODE:
                 return new MoneyGift();
-            case PointGift.POINT_GIFT_CODE:
+            case PointGift.GIFT_CODE:
                 return new PointGift();
-            case GodOfLuckGift.GOD_OF_LUCK_GIFT_CODE:
+            case GodOfLuckGift.GIFT_CODE:
                 return new GodOfLuckGift();
             default:
                 return new NothingGift();

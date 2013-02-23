@@ -1,5 +1,13 @@
 import org.junit.Before;
 import org.junit.Test;
+import tw.rich.Color;
+import tw.rich.Map;
+import tw.rich.Player;
+import tw.rich.site.*;
+import tw.rich.site.property.Cabin;
+import tw.rich.site.property.House;
+import tw.rich.site.property.Land;
+import tw.rich.site.property.Property;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -90,7 +98,7 @@ public class SiteTest {
     }
 
     @Test
-    public void should_land_display_0_on_map(){
+    public void should_land_display_0_on_map() {
         // Given
         Site property = new Property(new Land(200));
 
@@ -100,7 +108,7 @@ public class SiteTest {
     }
 
     @Test
-    public void should_cabin_display_1_on_map(){
+    public void should_cabin_display_1_on_map() {
         // Given
         Site property = new Property(new Cabin(200));
 
@@ -110,7 +118,7 @@ public class SiteTest {
     }
 
     @Test
-    public void should_house_display_2_on_map(){
+    public void should_house_display_2_on_map() {
         // Given
         Site site = new Property(new House(200));
 
@@ -120,7 +128,7 @@ public class SiteTest {
     }
 
     @Test
-    public void should_house_display_red_2_on_map_if_owner_is_red_colored(){
+    public void should_house_display_red_2_on_map_if_owner_is_red_colored() {
         // Given
         Property property = new Property(new House(200));
         Player player = new Player("Atubo", Color.ANSI_RED, null, 5000);

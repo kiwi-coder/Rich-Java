@@ -1,4 +1,7 @@
 import org.junit.Test;
+import tw.rich.tool.BlockTool;
+import tw.rich.tool.BombTool;
+import tw.rich.tool.RobotTool;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;

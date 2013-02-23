@@ -26,6 +26,6 @@ tasks.withType(Compile) {
 }
 
 task rich(dependsOn: 'jar', type: JavaExec) {
-	main = 'Rich'
+	main = 'tw.rich.Rich'
 	classpath = files(new File(libsDir, archivesBaseName + ".jar"))
 }

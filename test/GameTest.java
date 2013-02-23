@@ -4,6 +4,8 @@ import org.junit.Test;
 import org.junit.contrib.java.lang.system.StandardErrorStreamLog;
 import org.junit.contrib.java.lang.system.StandardOutputStreamLog;
 import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
+import tw.rich.Game;
+import tw.rich.Player;
 
 import java.util.List;
 

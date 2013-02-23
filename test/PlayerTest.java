@@ -3,6 +3,18 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.StandardOutputStreamLog;
 import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
+import tw.rich.*;
+import tw.rich.command.Command;
+import tw.rich.exception.PointsException;
+import tw.rich.exception.ToolException;
+import tw.rich.gift.GodOfLuckGift;
+import tw.rich.gift.MoneyGift;
+import tw.rich.gift.PointGift;
+import tw.rich.site.*;
+import tw.rich.site.property.*;
+import tw.rich.tool.BlockTool;
+import tw.rich.tool.BombTool;
+import tw.rich.tool.RobotTool;
 
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
@@ -202,9 +214,9 @@ public class PlayerTest {
         assertThat(player.getToolsNumber(), is(0));
     }
 
-    /*@Test(expected = ToolNotFoundException.class)
+    /*@Test(expected = tw.rich.exception.ToolNotFoundException.class)
     public void should_failed_sell_tool_when_player_do_not_have_that_kind_of_tool() {
-        player.sellTool(BombTool.BOMB_TOOL_CODE);
+        player.sellTool(tw.rich.tool.BombTool.BOMB_TOOL_CODE);
     }*/
 
     @Test

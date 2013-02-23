@@ -1,5 +1,10 @@
 import org.junit.Before;
 import org.junit.Test;
+import tw.rich.Color;
+import tw.rich.Map;
+import tw.rich.Player;
+import tw.rich.site.property.House;
+import tw.rich.site.property.Property;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -39,7 +44,7 @@ public class MapTest {
     }
 
     @Test
-    public void test_display_property(){
+    public void test_display_property() {
         String blackZero = Color.paint(Color.ANSI_BLACK, "0");
         String blackTwo = Color.paint(Color.ANSI_BLACK, "2");
         String expected = blackZero + blackTwo + blackZero + "\n" +

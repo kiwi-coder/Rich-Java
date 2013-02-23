@@ -1,5 +1,9 @@
 import org.junit.Before;
 import org.junit.Test;
+import tw.rich.Color;
+import tw.rich.site.property.Cabin;
+import tw.rich.site.property.Land;
+import tw.rich.site.property.Property;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;

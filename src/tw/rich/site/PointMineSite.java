@@ -5,11 +5,11 @@ import tw.rich.command.Command;
 import tw.rich.command.MineCommand;
 
 public class PointMineSite extends Site {
-    private static final String POINT_MINE_TYPE_CODE = "$";
+    private static final String TYPE_CODE = "$";
     private int point;
 
     public PointMineSite(int point) {
-        super(POINT_MINE_TYPE_CODE);
+        super(TYPE_CODE);
         this.point = point;
     }
 
@@ -18,7 +18,8 @@ public class PointMineSite extends Site {
     }
 
     public Command giveCommand(Player player) {
-        super.giveCommand(player);
+        Command command = super.giveCommand(player);
+        if(!player.isActive()) return command;
 
         return new MineCommand(player);
     }

@@ -407,6 +407,78 @@ public class PlayerTest {
     }
 
     @Test
+    public void test_player_stepping_on_bomb_at_tool_house_and_sent_to_hospital() {
+        // Given
+        map.setSite(3, new ToolHouseSite());
+        map.getSite(3).setBombTool(new BombTool());
+        map.setSite(5, new HospitalSite());
+
+        player.setSite(map.getSite(3));
+
+        // When
+        player.becomeActive();
+        player.stopping();
+
+        // Then
+        assertThat(player.getSite(), is(map.getSite(5)));
+        assertFalse(player.isMovable());
+    }
+
+    @Test
+    public void test_player_stepping_on_bomb_at_starting_site_and_sent_to_hospital() {
+        // Given
+        map.setSite(3, new StartingSite());
+        map.getSite(3).setBombTool(new BombTool());
+        map.setSite(5, new HospitalSite());
+
+        player.setSite(map.getSite(3));
+
+        // When
+        player.becomeActive();
+        player.stopping();
+
+        // Then
+        assertThat(player.getSite(), is(map.getSite(5)));
+        assertFalse(player.isMovable());
+    }
+
+    @Test
+    public void test_player_stepping_on_bomb_at_point_mine_site_and_sent_to_hospital() {
+        // Given
+        map.setSite(3, new PointMineSite(40));
+        map.getSite(3).setBombTool(new BombTool());
+        map.setSite(5, new HospitalSite());
+
+        player.setSite(map.getSite(3));
+
+        // When
+        player.becomeActive();
+        player.stopping();
+
+        // Then
+        assertThat(player.getSite(), is(map.getSite(5)));
+        assertFalse(player.isMovable());
+    }
+
+    @Test
+    public void test_player_stepping_on_bomb_at_gift_house_site_and_sent_to_hospital() {
+        // Given
+        map.setSite(3, new GiftHouseSite());
+        map.getSite(3).setBombTool(new BombTool());
+        map.setSite(5, new HospitalSite());
+
+        player.setSite(map.getSite(3));
+
+        // When
+        player.becomeActive();
+        player.stopping();
+
+        // Then
+        assertThat(player.getSite(), is(map.getSite(5)));
+        assertFalse(player.isMovable());
+    }
+
+    @Test
     public void should_not_player_be_movable_one_round_after_sent_to_hospital() {
         // Given
         map.setSite(5, new HospitalSite());

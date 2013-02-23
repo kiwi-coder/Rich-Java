@@ -96,6 +96,7 @@ public class Map {
 
     public void setSite(int index, Site site) {
         site.setIndex(index);
+        site.setMap(this);
         sites.set(index, site);
     }
 }

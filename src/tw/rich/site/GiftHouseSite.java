@@ -4,20 +4,20 @@ import tw.rich.Player;
 import tw.rich.command.Command;
 
 public class GiftHouseSite extends Site {
-    private static final String GIFT_HOUSE_TYPE_CODE = "G";
+    private static final String TYPE_CODE = "G";
 
     public GiftHouseSite() {
-        super(GIFT_HOUSE_TYPE_CODE);
+        super(TYPE_CODE);
     }
 
     public Command giveCommand(Player player) {
-        super.giveCommand(player);
+        Command command = super.giveCommand(player);
+        if(!player.isActive()) return command;
 
         String greeting = "欢迎光临礼品屋，请选择一件您 喜欢的礼品：";
         String answer = prompt(greeting);
         String commandPrefix = Command.CHOOSE_GIFT_COMMAND_PREFIX;
 
-        Command command = Command.makeCommand(commandPrefix + answer, player);
-        return command;
+        return Command.makeCommand(commandPrefix + answer, player);
     }
 }

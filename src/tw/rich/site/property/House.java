@@ -1,7 +1,5 @@
 package tw.rich.site.property;
 
-import tw.rich.site.PropertyLevel;
-
 public class House extends PropertyLevel {
     public static final String HOUSE_TYPE_CODE = "2";
     private static final double TOLL_FEE_RATE = 2.0;

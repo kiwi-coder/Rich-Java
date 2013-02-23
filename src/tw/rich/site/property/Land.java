@@ -1,7 +1,5 @@
 package tw.rich.site.property;
 
-import tw.rich.site.PropertyLevel;
-
 public class Land extends PropertyLevel {
     public static final String LAND_TYPE_CODE = "0";
     private static final double TOLL_FEE_RATE = 0.5;

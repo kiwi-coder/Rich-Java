@@ -3,7 +3,6 @@ package tw.rich.site.property;
 import tw.rich.Color;
 import tw.rich.Player;
 import tw.rich.command.Command;
-import tw.rich.site.PropertyLevel;
 import tw.rich.site.Site;
 
 public class Property extends Site {

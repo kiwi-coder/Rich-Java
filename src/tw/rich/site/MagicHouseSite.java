@@ -1,9 +1,9 @@
 package tw.rich.site;
 
 public class MagicHouseSite extends Site {
-    private static final String MAGIC_HOUSE_TYPE = "M";
+    private static final String TYPE_CODE = "M";
 
     public MagicHouseSite() {
-        super(MAGIC_HOUSE_TYPE);
+        super(TYPE_CODE);
     }
 }

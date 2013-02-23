@@ -1,7 +1,5 @@
 package tw.rich.site.property;
 
-import tw.rich.site.PropertyLevel;
-
 public class Skyscraper extends PropertyLevel {
     public static final String SKYSCRAPER_TYPE_CODE = "3";
     private static final double TOLL_FEE_RATE = 4.0;

@@ -1,4 +1,4 @@
-package tw.rich.site;
+package tw.rich.site.property;
 
 public abstract class PropertyLevel {
     private int price;

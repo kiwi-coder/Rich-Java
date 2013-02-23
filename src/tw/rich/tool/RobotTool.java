@@ -10,6 +10,7 @@ public class RobotTool extends Tool {
     public static final int USAGE_DISTANCE = 0;
 
     public String display() {
+        /*TODO: This func should be made private..., no need to display robot tool*/
         return " ";
     }
 

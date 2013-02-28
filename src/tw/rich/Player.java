@@ -404,22 +404,6 @@ public class Player {
         return null;
     }
 
-    public String query() {
-        String format = "资金：%d 元\n" +
-                "点数：%d 点\n" +
-                "地产：空地 %d 处；茅屋 %d 处；洋房 %d 处；摩天楼 %d 处。\n" +
-                "道具：路障 %d 个；炸弹 %d 个；机器娃娃 %d 个\n";
-        String result = String.format(format,
-                getMoney(),
-                getPoints(),
-                countProperty(Land.TYPE_CODE), countProperty(Cabin.TYPE_CODE),
-                countProperty(House.TYPE_CODE), countProperty(Skyscraper.TYPE_CODE),
-                countTool(BlockTool.TOOL_CODE), countTool(BombTool.TOOL_CODE),
-                countTool(RobotTool.TOOL_CODE));
-
-        return result;
-    }
-
     public int countProperty(String propertyType) {
         int result = 0;
 

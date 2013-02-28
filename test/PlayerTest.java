@@ -597,6 +597,20 @@ public class PlayerTest {
     }
 
     @Test
+    public void test_player_executing_block_command_outside_of_the_allowed_range() {
+        // Given
+        player.setSite(map.getSite(0));
+        player.addTool(new BlockTool());
+        Command command = Command.makeCommand("block 11", player);
+
+        // When
+        player.executeCommand(command);
+
+        // Then
+        assertFalse(map.getSite(3).hasBlockTool());
+    }
+
+    @Test
     public void test_player_executing_bomb_command() {
         // Given
         player.setSite(map.getSite(0));
@@ -608,6 +622,20 @@ public class PlayerTest {
 
         // Then
         assertTrue(map.getSite(3).hasBombTool());
+    }
+
+    @Test
+    public void test_player_executing_bomb_command_outside_of_the_allowed_range() {
+        // Given
+        player.setSite(map.getSite(0));
+        player.addTool(new BombTool());
+        Command command = Command.makeCommand("bomb 11", player);
+
+        // When
+        player.executeCommand(command);
+
+        // Then
+        assertFalse(map.getSite(3).hasBombTool());
     }
 
     @Test

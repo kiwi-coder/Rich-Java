@@ -3,6 +3,8 @@ package tw.rich.command;
 import tw.rich.Player;
 import tw.rich.tool.BlockTool;
 
+import static java.lang.Math.abs;
+
 public class BlockCommand extends Command {
     private int distance;
 
@@ -14,6 +16,8 @@ public class BlockCommand extends Command {
 
     @Override
     public void execute() {
-        player.useTool(BlockTool.TOOL_CODE, distance);
+        if (abs(distance) <= BlockTool.RANGE) {
+            player.useTool(BlockTool.TOOL_CODE, distance);
+        }
     }
 }

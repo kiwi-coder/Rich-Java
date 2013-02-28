@@ -142,7 +142,7 @@ public class SiteTest {
     }
 
     @Test
-    public void should_site_display_black_pound_when_block_tool_is_on(){
+    public void should_site_display_black_pound_when_block_tool_is_on() {
         // Given
         Property property = new Property(new House(200));
         property.setBlockTool(new BlockTool());
@@ -153,7 +153,7 @@ public class SiteTest {
     }
 
     @Test
-    public void should_site_display_black_at_when_bomb_tool_is_on(){
+    public void should_site_display_black_at_when_bomb_tool_is_on() {
         // Given
         Property property = new Property(new House(200));
         property.setBombTool(new BombTool());

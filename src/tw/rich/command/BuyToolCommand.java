@@ -16,7 +16,7 @@ public class BuyToolCommand extends Command {
     public void execute() {
         Tool tool = Tool.makeTool(toolCode);
 
-        if(player.getToolsNumber() >= Player.MAX_TOOL_NUMBER) return;
+        if (player.getToolsNumber() >= Player.MAX_TOOL_NUMBER) return;
 
         if (player.canAffordTool(tool)) {
             player.buyTool(tool);

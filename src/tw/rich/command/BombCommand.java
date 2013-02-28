@@ -3,6 +3,8 @@ package tw.rich.command;
 import tw.rich.Player;
 import tw.rich.tool.BombTool;
 
+import static java.lang.Math.abs;
+
 public class BombCommand extends Command {
     private int distance;
 
@@ -14,6 +16,8 @@ public class BombCommand extends Command {
 
     @Override
     public void execute() {
-        player.useTool(BombTool.TOOL_CODE, distance);
+        if (abs(distance) <= BombTool.RANGE) {
+            player.useTool(BombTool.TOOL_CODE, distance);
+        }
     }
 }

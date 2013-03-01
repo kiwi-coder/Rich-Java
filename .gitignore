@@ -3,5 +3,5 @@ out
 build
 lib
 *.iws
-tw.rich.Rich-Java.ipr
-tw.rich.Rich-Java.iml
+Rich-Java.ipr
+Rich-Java.iml
